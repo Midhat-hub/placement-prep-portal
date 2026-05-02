@@ -1,0 +1,1788 @@
+[
+  {
+    "subject": "OS",
+    "question": "What is an operating system?",
+    "options": [
+      "interface between the hardware and application programs",
+      "collection of programs that manages hardware resources",
+      "system service provider to the application programs",
+      "all of the mentioned"
+    ],
+    "answer": "all of the mentioned",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "What is the main function of the command interpreter?",
+    "options": [
+      "to provide the interface between the API and application program",
+      "to handle the files in the operating system",
+      "to get and execute the next user-specified command",
+      "none of the mentioned"
+    ],
+    "answer": "to get and execute the next user-specified command",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "Which of the following is/are CPU scheduling algorithms?",
+    "options": [
+      "Priority",
+      "Round Robin",
+      "Shortest Job First",
+      "All of the mentioned"
+    ],
+    "answer": "All of the mentioned",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "To access the services of the operating system, the interface is provided by the ______.",
+    "options": [
+      "Library",
+      "System calls",
+      "Assembly instructions",
+      "API"
+    ],
+    "answer": "System calls",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "CPU scheduling is the basis of ______.",
+    "options": [
+      "multiprogramming operating systems",
+      "larger memory sized systems",
+      "multiprocessor systems",
+      "none of the mentioned"
+    ],
+    "answer": "multiprogramming operating systems",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "Which one of the following is not true?",
+    "options": [
+      "kernel remains in the memory during the entire computer session",
+      "kernel is made of various modules which can not be loaded in running operating system",
+      "kernel is the first part of the operating system to load into memory during booting",
+      "kernel is the program that constitutes the central core of the operating system"
+    ],
+    "answer": "kernel is made of various modules which can not be loaded in running operating system",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "Which one of the following errors will be handled by the operating system?",
+    "options": [
+      "lack of paper in printer",
+      "connection failure in the network",
+      "power failure",
+      "all of the mentioned"
+    ],
+    "answer": "all of the mentioned",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "Where is the operating system placed in the memory?",
+    "options": [
+      "either low or high memory (depending on interrupt vector)",
+      "in the low memory",
+      "in the high memory",
+      "none of the mentioned"
+    ],
+    "answer": "either low or high memory (depending on interrupt vector)",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "If a process fails, most operating systems write the error information to a ______.",
+    "options": [
+      "new file",
+      "another running process",
+      "log file",
+      "none of the mentioned"
+    ],
+    "answer": "log file",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "Which one of the following is not a real time operating system?",
+    "options": [
+      "RTLinux",
+      "Palm OS",
+      "QNX",
+      "VxWorks"
+    ],
+    "answer": "Palm OS",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "What does OS X have?",
+    "options": [
+      "monolithic kernel with modules",
+      "microkernel",
+      "monolithic kernel",
+      "hybrid kernel"
+    ],
+    "answer": "hybrid kernel",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "OS",
+    "question": "In an operating system, each process has its own ______.",
+    "options": [
+      "open files",
+      "pending alarms and signals",
+      "address space and global variables",
+      "all of the mentioned"
+    ],
+    "answer": "all of the mentioned",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "In a time-share operating system, when time slot completes, process moves to ______.",
+    "options": [
+      "Suspended state",
+      "Terminated state",
+      "Ready state",
+      "Blocked state"
+    ],
+    "answer": "Ready state",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "Cascading termination refers to termination of child processes if parent terminates ______.",
+    "options": [
+      "Normally or abnormally",
+      "Abnormally",
+      "Normally",
+      "None of the mentioned"
+    ],
+    "answer": "Normally or abnormally",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "A blocked process after I/O completion moves to ______.",
+    "options": [
+      "Terminated state",
+      "Suspended state",
+      "Running state",
+      "Ready state"
+    ],
+    "answer": "Ready state",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "Transient operating system code is code that ______.",
+    "options": [
+      "stays in memory always",
+      "never enters memory",
+      "comes and goes as needed",
+      "is not accessible"
+    ],
+    "answer": "comes and goes as needed",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "Dispatcher in process scheduler is responsible for ______.",
+    "options": [
+      "assigning ready processes to waiting queue",
+      "assigning running processes to blocked queue",
+      "assigning ready processes to CPU",
+      "all of the mentioned"
+    ],
+    "answer": "assigning ready processes to CPU",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "FCFS algorithm is troublesome for ______.",
+    "options": [
+      "operating systems",
+      "multiprocessor systems",
+      "time sharing systems",
+      "multiprogramming systems"
+    ],
+    "answer": "time sharing systems",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "For effective OS, deadlock checking should occur ______.",
+    "options": [
+      "every time resource request is made at fixed intervals",
+      "at fixed intervals",
+      "every time resource request is made",
+      "none"
+    ],
+    "answer": "every time resource request is made",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "OS",
+    "question": "Deadlock avoidance algorithm examines ______.",
+    "options": [
+      "operating system",
+      "resources",
+      "system storage state",
+      "resource allocation state"
+    ],
+    "answer": "resource allocation state",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "Swapping ______ be done when a process has pending I/O operations.",
+    "options": ["must never", "maybe", "can", "must"],
+    "answer": "must never",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "The main memory accommodates ______.",
+    "options": ["cpu", "user processes", "operating system", "all of the mentioned"],
+    "answer": "all of the mentioned",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "The operating system is responsible for ______.",
+    "options": [
+      "bad-block recovery",
+      "booting from disk",
+      "disk initialization",
+      "all of the mentioned"
+    ],
+    "answer": "all of the mentioned",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "Operating system protection occurs because ______.",
+    "options": [
+      "CPU addresses are checked against relocation and limit registers",
+      "they have a protection algorithm",
+      "they are in different memory spaces",
+      "they are in different logical addresses"
+    ],
+    "answer": "CPU addresses are checked against relocation and limit registers",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "OS",
+    "question": "Using transient code ______ the size of the operating system during execution.",
+    "options": ["maintains", "changes", "increases", "decreases"],
+    "answer": "decreases",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "Operating system maintains a ______ table tracking frame allocation.",
+    "options": ["memory", "mapping", "page", "frame"],
+    "answer": "frame",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "Dynamic loading can be implemented ______.",
+    "options": [
+      "OS support essential",
+      "hardware support required",
+      "user programs can implement without special support",
+      "both hardware and OS support essential"
+    ],
+    "answer": "user programs can implement without special support",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "OS",
+    "question": "The ______ provides uniform device access interface to I/O subsystem.",
+    "options": ["Device drivers", "I/O systems", "Devices", "Buses"],
+    "answer": "Device drivers",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "In real-time operating systems ______.",
+    "options": [
+      "process scheduling only once",
+      "all processes same priority",
+      "kernel not required",
+      "task must be serviced within deadline"
+    ],
+    "answer": "task must be serviced within deadline",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "Hard real-time OS has ______ jitter than soft real-time OS.",
+    "options": ["equal", "more", "less", "none"],
+    "answer": "less",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "Interrupt latency in real-time OS should be ______.",
+    "options": ["zero", "minimal", "maximum", "depends"],
+    "answer": "minimal",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "Which is a real-time operating system?",
+    "options": ["Windows CE", "RTLinux", "VxWorks", "All of the mentioned"],
+    "answer": "All of the mentioned",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "If scheduler assigns static priority, process priority will ______.",
+    "options": [
+      "depend on OS",
+      "change",
+      "remain unchanged",
+      "none"
+    ],
+    "answer": "remain unchanged",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "Host-based IDS characteristics include ______.",
+    "options": [
+      "logs analyzed for intrusion",
+      "OS logs audit information",
+      "logs include logins and executions",
+      "All of the mentioned"
+    ],
+    "answer": "All of the mentioned",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "Stack-based IDS ______.",
+    "options": [
+      "interprets packet series",
+      "models network usage noise",
+      "integrated with TCP/IP stack",
+      "OS logs audit information"
+    ],
+    "answer": "integrated with TCP/IP stack",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "OS",
+    "question": "If working-set size exceeds available frames ______.",
+    "options": [
+      "OS suspends a process",
+      "system crashes",
+      "process crashes",
+      "memory overflows"
+    ],
+    "answer": "OS suspends a process",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "OS",
+    "question": "Information about all files is kept in ______.",
+    "options": [
+      "operating system",
+      "separate directory structure",
+      "swap space",
+      "none"
+    ],
+    "answer": "separate directory structure",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "Small table containing information about open files is called ______.",
+    "options": [
+      "file table",
+      "directory table",
+      "open-file table",
+      "system table"
+    ],
+    "answer": "open-file table",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "In single-level directory ______.",
+    "options": [
+      "all files in same directory",
+      "files in different directories",
+      "depends on OS",
+      "none"
+    ],
+    "answer": "all files in same directory",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OS",
+    "question": "Operating system ______ links while traversing directory trees to preserve acyclic structure.",
+    "options": ["deletes", "considers", "ignores", "none"],
+    "answer": "ignores",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OS",
+    "question": "Which system call creates a new process in Unix?",
+    "options": ["create", "fork", "new", "none"],
+    "answer": "fork",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "What is a computer network?",
+    "options": [
+      "A device used to display information on a computer screen",
+      "A collection of interconnected computers and devices that can communicate and share resources",
+      "A type of software used to create documents",
+      "The physical casing that protects a computer"
+    ],
+    "answer": "A collection of interconnected computers and devices that can communicate and share resources",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "What is Internet?",
+    "options": [
+      "A network of interconnected local area networks",
+      "A collection of unrelated computers",
+      "Interconnection of wide area networks",
+      "A single network"
+    ],
+    "answer": "A network of interconnected local area networks",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Bluetooth is an example of which network?",
+    "options": [
+      "Wide area network",
+      "Virtual private network",
+      "Local area network",
+      "Personal area network"
+    ],
+    "answer": "Personal area network",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Which network is built on top of another network?",
+    "options": [
+      "Overlay network",
+      "Prime network",
+      "Prior network",
+      "Chief network"
+    ],
+    "answer": "Overlay network",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "CN",
+    "question": "What is the full form of OSI?",
+    "options": [
+      "Optical Service Implementation",
+      "Open Service Internet",
+      "Open System Interconnection",
+      "Operating System Interface"
+    ],
+    "answer": "Open System Interconnection",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "A collection of computers appearing as a single coherent system is called?",
+    "options": [
+      "Mail system",
+      "Networking system",
+      "Computer network",
+      "Distributed system"
+    ],
+    "answer": "Distributed system",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "CN",
+    "question": "How many layers are in OSI model?",
+    "options": ["7", "5", "4", "6"],
+    "answer": "7",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "What are nodes in a network?",
+    "options": [
+      "Computer routing data",
+      "Computer terminating data",
+      "Computer originating data",
+      "All of the mentioned"
+    ],
+    "answer": "All of the mentioned",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Which is not a function of network layer?",
+    "options": [
+      "Congestion control",
+      "Error control",
+      "Routing",
+      "Inter-networking"
+    ],
+    "answer": "Error control",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "CN",
+    "question": "Sharing a single channel among multiple signals is called?",
+    "options": [
+      "Multiplexing",
+      "Phase modulation",
+      "Analog modulation",
+      "Digital modulation"
+    ],
+    "answer": "Multiplexing",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Device forwarding packets between networks is called?",
+    "options": ["Firewall", "Bridge", "Hub", "Router"],
+    "answer": "Router",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Endpoint of inter-process communication across a network is called?",
+    "options": ["Port", "Machine", "Socket", "Pipe"],
+    "answer": "Socket",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "CN",
+    "question": "Two devices become part of network when?",
+    "options": [
+      "PIDs are same",
+      "Processes exchange information",
+      "One active one inactive",
+      "Same process running"
+    ],
+    "answer": "Processes exchange information",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Data link layer takes packets from which layer?",
+    "options": [
+      "Transport layer",
+      "Application layer",
+      "Network layer",
+      "Physical layer"
+    ],
+    "answer": "Network layer",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "CN",
+    "question": "Which is not a network edge device?",
+    "options": ["Switch", "PC", "Smartphones", "Servers"],
+    "answer": "Switch",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "CN",
+    "question": "Network sharing communication channel among all machines is?",
+    "options": [
+      "Anycast network",
+      "Multicast network",
+      "Unicast network",
+      "Broadcast network"
+    ],
+    "answer": "Broadcast network",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Which topology requires multipoint connection?",
+    "options": ["Ring", "Bus", "Star", "Mesh"],
+    "answer": "Bus",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "CN",
+    "question": "DNS is maintained by?",
+    "options": [
+      "Single server",
+      "Single computer",
+      "Distributed database system",
+      "None"
+    ],
+    "answer": "Distributed database system",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "In IDS/IPS, a signature refers to?",
+    "options": [
+      "Normal network behavior",
+      "User authorization",
+      "Electronic signature",
+      "Attack-definition file"
+    ],
+    "answer": "Attack-definition file",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "CN",
+    "question": "Gigabit Ethernet includes?",
+    "options": [
+      "1000 BASE-LX",
+      "1000 BASE-CX",
+      "1000 BASE-SX",
+      "All of the mentioned"
+    ],
+    "answer": "All of the mentioned",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "CN",
+    "question": "Network extending private network across public network is?",
+    "options": [
+      "Virtual private network",
+      "Local area network",
+      "Storage area network",
+      "Enterprise private network"
+    ],
+    "answer": "Virtual private network",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Which layer provides process-to-process delivery?",
+    "options": [
+      "Session layer",
+      "Data link layer",
+      "Transport layer",
+      "Network layer"
+    ],
+    "answer": "Transport layer",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Each packet in virtual circuit network contains?",
+    "options": [
+      "Only source address",
+      "Only destination address",
+      "Full address",
+      "Short VC number"
+    ],
+    "answer": "Short VC number",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "CN",
+    "question": "Communication system within a building is called?",
+    "options": ["MAN", "LAN", "PAN", "WAN"],
+    "answer": "LAN",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "First computer network was?",
+    "options": ["ASAPNET", "ARPANET", "CNNET", "NSFNET"],
+    "answer": "ARPANET",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Internet network layer protocol is?",
+    "options": [
+      "HTTP",
+      "FTP",
+      "Ethernet",
+      "Internet Protocol"
+    ],
+    "answer": "Internet Protocol",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Topology requiring central controller is?",
+    "options": ["Ring", "Bus", "Star", "Mesh"],
+    "answer": "Star",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "LAN users share programs using?",
+    "options": [
+      "File server",
+      "Network",
+      "Communication server",
+      "Print server"
+    ],
+    "answer": "File server",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "CN",
+    "question": "Communication between keyboard and computer is?",
+    "options": ["Half-duplex", "Full-duplex", "Simplex", "Automatic"],
+    "answer": "Simplex",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Which layer provides services to user?",
+    "options": [
+      "Physical layer",
+      "Presentation layer",
+      "Session layer",
+      "Application layer"
+    ],
+    "answer": "Application layer",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Connection needed to join internet?",
+    "options": [
+      "Internet society",
+      "Internet service provider",
+      "Different computer",
+      "Internet architecture board"
+    ],
+    "answer": "Internet service provider",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Protocol used to login remotely?",
+    "options": ["SMTP", "HTTP", "FTP", "Telnet"],
+    "answer": "Telnet",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "CN",
+    "question": "Attack making resource unavailable is?",
+    "options": [
+      "Botnet process",
+      "Worm attack",
+      "Virus attack",
+      "Denial-of-service attack"
+    ],
+    "answer": "Denial-of-service attack",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "What is the full form of DBMS?",
+    "options": [
+      "Data of Binary Management System",
+      "Database Management System",
+      "Database Management Service",
+      "Data Backup Management System"
+    ],
+    "answer": "Database Management System",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "What is a database?",
+    "options": [
+      "Organized collection of information that cannot be accessed",
+      "Collection of data without organizing",
+      "Organized collection of data that can be accessed, updated and managed",
+      "Organized collection of data that cannot be updated"
+    ],
+    "answer": "Organized collection of data that can be accessed, updated and managed",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "What is DBMS?",
+    "options": [
+      "Collection of queries",
+      "High-level language",
+      "Programming language",
+      "Stores, modifies and retrieves data"
+    ],
+    "answer": "Stores, modifies and retrieves data",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Who created the first DBMS?",
+    "options": [
+      "Edgar Frank Codd",
+      "Charles Bachman",
+      "Charles Babbage",
+      "Sharon B. Codd"
+    ],
+    "answer": "Charles Bachman",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Which type of data can be stored in a database?",
+    "options": [
+      "Image oriented data",
+      "Text files",
+      "Audio or video data",
+      "All of the above"
+    ],
+    "answer": "All of the above",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "In which format is data stored in DBMS?",
+    "options": ["Image", "Text", "Table", "Graph"],
+    "answer": "Table",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Which of the following is not a type of database?",
+    "options": [
+      "Hierarchical",
+      "Network",
+      "Distributed",
+      "Decentralized"
+    ],
+    "answer": "Decentralized",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Which is not an example of DBMS?",
+    "options": ["MySQL", "Microsoft Access", "IBM DB2", "Google"],
+    "answer": "Google",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Which is not a feature of DBMS?",
+    "options": [
+      "Minimum redundancy",
+      "High security",
+      "Single-user access only",
+      "ACID support"
+    ],
+    "answer": "Single-user access only",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Which is a feature of database?",
+    "options": [
+      "No backup",
+      "User interface provided",
+      "Lack of authentication",
+      "Store data in multiple locations"
+    ],
+    "answer": "User interface provided",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Which is not a function of database?",
+    "options": [
+      "Managing stored data",
+      "Manipulating data",
+      "Security for stored data",
+      "Analyzing code"
+    ],
+    "answer": "Analyzing code",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Which is a function of DBMS?",
+    "options": [
+      "Storing data",
+      "Multi-user access control",
+      "Data integrity",
+      "All of the above"
+    ],
+    "answer": "All of the above",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Which is a component of DBMS?",
+    "options": [
+      "Data",
+      "Data languages",
+      "Data manager",
+      "All of the above"
+    ],
+    "answer": "All of the above",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Set of entities with same attributes is called?",
+    "options": [
+      "Relation set",
+      "Tuples",
+      "Entity set",
+      "ER model"
+    ],
+    "answer": "Entity set",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Information about data is called?",
+    "options": [
+      "Hyper data",
+      "Tera data",
+      "Meta data",
+      "Relations"
+    ],
+    "answer": "Meta data",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "An RDBMS consists of?",
+    "options": [
+      "Collection of records",
+      "Collection of keys",
+      "Collection of tables",
+      "Collection of fields"
+    ],
+    "answer": "Collection of tables",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Integrity ensuring referenced values exist is called?",
+    "options": [
+      "Referential",
+      "Primary",
+      "Referencing",
+      "Specific"
+    ],
+    "answer": "Referential",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Most important hardware for DBMS operation?",
+    "options": [
+      "Microphone",
+      "High-speed large capacity disk",
+      "Video display",
+      "Printer"
+    ],
+    "answer": "High-speed large capacity disk",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "DBMS acts as interface between ______.",
+    "options": [
+      "Data and DBMS",
+      "Application and SQL",
+      "Database application and database",
+      "User and software"
+    ],
+    "answer": "Database application and database",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Language used to insert, delete and modify tuples?",
+    "options": ["TCL", "DCL", "DDL", "DML"],
+    "answer": "DML",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Set of attributes uniquely identifying record is?",
+    "options": [
+      "Primary key",
+      "Foreign key",
+      "Super key",
+      "Candidate key"
+    ],
+    "answer": "Super key",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Command used to remove a relation from SQL?",
+    "options": ["Drop table", "Delete", "Purge", "Remove"],
+    "answer": "Drop table",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Weak entity must be associated with?",
+    "options": [
+      "Neighbour set",
+      "Strong entity set",
+      "Owner set",
+      "Identifying set"
+    ],
+    "answer": "Owner set",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Correct command to delete all values from relation teaches?",
+    "options": [
+      "Delete from teaches;",
+      "Delete from teaches where Id='Null';",
+      "Remove table teaches;",
+      "Drop table teaches;"
+    ],
+    "answer": "Delete from teaches;",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Procedural query language is?",
+    "options": [
+      "Domain relational calculus",
+      "Tuple relational calculus",
+      "Relational algebra",
+      "Query language"
+    ],
+    "answer": "Relational algebra",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Which join does not preserve non-matched tuples?",
+    "options": [
+      "Left outer join",
+      "Inner join",
+      "Natural join",
+      "Right outer join"
+    ],
+    "answer": "Inner join",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Which normal form represents single entity information?",
+    "options": ["4NF", "2NF", "5NF", "3NF"],
+    "answer": "3NF",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Top level of DB hierarchy contains?",
+    "options": [
+      "Schemas, Catalogs",
+      "Schemas, Environment",
+      "Environment, Schemas",
+      "Catalogs, Schemas"
+    ],
+    "answer": "Catalogs, Schemas",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "DBMS",
+    "question": "_______ indicates the maximum number of entities involved in a relationship.",
+    "options": [
+      "Greater Entity Count",
+      "Minimum cardinality",
+      "Maximum cardinality",
+      "ERD"
+    ],
+    "answer": "Maximum cardinality",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "User IDs can be added or removed using which fixed role?",
+    "options": [
+      "db_sysadmin",
+      "db_accessadmin",
+      "db_securityadmin",
+      "db_setupadmin"
+    ],
+    "answer": "db_securityadmin",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Why is the SQL query with GROUP BY dept_name selecting ID erroneous?",
+    "options": [
+      "Dept_id should not be used",
+      "Group by clause invalid",
+      "Avg(salary) should not be selected",
+      "None"
+    ],
+    "answer": "None",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Traditional filing cabinet storage is an example of which DB model?",
+    "options": [
+      "Object-oriented DBMS",
+      "Relational DBMS",
+      "Network DBMS",
+      "Hierarchical DBMS"
+    ],
+    "answer": "Hierarchical DBMS",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "After grouping, SQL applies predicates in which clause?",
+    "options": ["Where", "Having", "Group by", "With"],
+    "answer": "Having",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Which is not a utility of DBMS?",
+    "options": [
+      "Backup",
+      "Data Loading",
+      "Process Organization",
+      "File organization"
+    ],
+    "answer": "Process Organization",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Foreign key combined with primary key creates?",
+    "options": [
+      "Network model",
+      "Parent-child relationship",
+      "One-to-many relationship",
+      "All of the mentioned"
+    ],
+    "answer": "All of the mentioned",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Which technology maintains transactional integrity?",
+    "options": [
+      "Pointers",
+      "Cursors",
+      "Locks",
+      "Triggers"
+    ],
+    "answer": "Locks",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Spreadsheet files produced are ______.",
+    "options": [
+      "Used directly by DBMS",
+      "Stored as ASCII text",
+      "All of the mentioned",
+      "None"
+    ],
+    "answer": "All of the mentioned",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Delete from r where P; command does what?",
+    "options": [
+      "Clears entries",
+      "Deletes relation",
+      "Deletes particular tuple",
+      "All of the mentioned"
+    ],
+    "answer": "Deletes particular tuple",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Which resembles CREATE VIEW?",
+    "options": [
+      "Create table as",
+      "Create view as",
+      "Create table like",
+      "With data"
+    ],
+    "answer": "Create table as",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "DBMS",
+    "question": "SQL view is updatable when ______.",
+    "options": [
+      "Select clause has only attributes",
+      "From clause has one relation",
+      "No group by or having clause",
+      "All of the mentioned"
+    ],
+    "answer": "All of the mentioned",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "DBMS",
+    "question": "ROLLUP operator is used to ______.",
+    "options": [
+      "Find subtotal groups",
+      "Create grand totals",
+      "Compute subtotals right to left",
+      "Create cross-tab report"
+    ],
+    "answer": "Compute subtotals right to left",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Best way to represent attributes in large DB?",
+    "options": [
+      "Dot representation",
+      "Concatenation",
+      "Relational-and",
+      "All of the mentioned"
+    ],
+    "answer": "All of the mentioned",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Subset of SQL used to manipulate structures including tables?",
+    "options": [
+      "Data Described Language",
+      "Data Retrieval Language",
+      "Data Manipulation Language",
+      "Data Definition Language"
+    ],
+    "answer": "Data Definition Language",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Function constructing histograms using buckets?",
+    "options": ["Ntil()", "Newtil()", "Rank()", "All of the mentioned"],
+    "answer": "Ntil()",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "DBMS",
+    "question": "SQL command issuing multiple CREATE statements in one transaction?",
+    "options": [
+      "CREATE CLUSTER",
+      "CREATE PACKAGE",
+      "CREATE SCHEMA",
+      "All of the mentioned"
+    ],
+    "answer": "CREATE SCHEMA",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Key required when encryption is applied to data?",
+    "options": [
+      "Primary key",
+      "Authorized key",
+      "Encryption key",
+      "Decryption key"
+    ],
+    "answer": "Decryption key",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Viewing cross-tab with fixed attribute value is called?",
+    "options": [
+      "Dicing",
+      "Pivoting",
+      "Slicing",
+      "Pivoting and Dicing"
+    ],
+    "answer": "Slicing",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Adequate normal form for designing RDBMS?",
+    "options": ["4NF", "3NF", "2NF", "5NF"],
+    "answer": "3NF",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "RAID level offering best write performance for log storage?",
+    "options": [
+      "RAID level 0",
+      "RAID level 1",
+      "RAID level 2",
+      "RAID level 3"
+    ],
+    "answer": "RAID level 0",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Tuple relational calculus query form is?",
+    "options": [
+      "{ }{P(t) | t }",
+      "{t | P(t)}",
+      "t | P() | t",
+      "All of the mentioned"
+    ],
+    "answer": "{t | P(t)}",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Oldest database model is?",
+    "options": [
+      "Network",
+      "Physical",
+      "Hierarchical",
+      "Relational"
+    ],
+    "answer": "Hierarchical",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "After role privileges revoke, SCOTT can still query table because?",
+    "options": [
+      "Revoke causes error",
+      "Privilege removed from role",
+      "SCOTT retains role privilege",
+      "SCOTT cannot query"
+    ],
+    "answer": "SCOTT retains role privilege",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Top-to-bottom relationship among items is?",
+    "options": [
+      "Relational schema",
+      "Network schema",
+      "Hierarchical schema",
+      "All of the mentioned"
+    ],
+    "answer": "Hierarchical schema",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Component minimizing disk-memory block transfers?",
+    "options": [
+      "Secondary storage",
+      "Storage",
+      "Catalog",
+      "Buffer"
+    ],
+    "answer": "Buffer",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "DBMS",
+    "question": "If data stored in two places, result is?",
+    "options": [
+      "Storage wasted & inconsistency",
+      "Easier access",
+      "Only inconsistency",
+      "Only storage waste"
+    ],
+    "answer": "Storage wasted & inconsistency",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "DBMS",
+    "question": "Logical design and snapshot at a given time is called?",
+    "options": [
+      "Instance & Relation",
+      "Relation & Schema",
+      "Domain & Schema",
+      "Schema & Instance"
+    ],
+    "answer": "Schema & Instance",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OOP",
+    "question": "Who invented OOP?",
+    "options": ["Andrea Ferro", "Adele Goldberg", "Alan Kay", "Dennis Ritchie"],
+    "answer": "Alan Kay",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Which is not a feature of OOP?",
+    "options": ["Efficient Code", "Code reusability", "Modularity", "Duplicate data"],
+    "answer": "Duplicate data",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "First purely object-oriented programming language?",
+    "options": ["Kotlin", "SmallTalk", "Java", "C++"],
+    "answer": "SmallTalk",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "When did OOP first appear?",
+    "options": ["1980s", "1995", "1970s", "1993"],
+    "answer": "1970s",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Which feature indicates code reusability?",
+    "options": ["Abstraction", "Polymorphism", "Encapsulation", "Inheritance"],
+    "answer": "Inheritance",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Which header file is required for OOP in C++?",
+    "options": [
+      "No header required",
+      "stdlib.h",
+      "iostream.h",
+      "stdio.h"
+    ],
+    "answer": "No header required",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OOP",
+    "question": "Why is Java partially OOP?",
+    "options": [
+      "Allows code outside classes",
+      "Supports primitive data types",
+      "Does not support pointers",
+      "Does not support all inheritance types"
+    ],
+    "answer": "Supports primitive data types",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OOP",
+    "question": "Which is not an OOP concept?",
+    "options": [
+      "Data hiding",
+      "Message passing",
+      "Platform independent",
+      "Data binding"
+    ],
+    "answer": "Platform independent",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Correct syntax of inheritance in C++?",
+    "options": [
+      "class base : access derived {}",
+      "class derived : access base {}",
+      "class derived : base {}",
+      "class base : derived {}"
+    ],
+    "answer": "class derived : access base {}",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OOP",
+    "question": "Feature shown when derived class extends base class?",
+    "options": [
+      "Encapsulation",
+      "Inheritance",
+      "Polymorphism",
+      "Abstraction"
+    ],
+    "answer": "Inheritance",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Interaction between objects is called?",
+    "options": [
+      "Message reading",
+      "Message Passing",
+      "Data transfer",
+      "Data Binding"
+    ],
+    "answer": "Message Passing",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Pure OOP language must follow?",
+    "options": [
+      "At least one feature",
+      "Only 3 features",
+      "All OOP rules",
+      "Three or more features"
+    ],
+    "answer": "All OOP rules",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OOP",
+    "question": "Number of access specifiers in C++?",
+    "options": ["4", "3", "2", "1"],
+    "answer": "3",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Most significant feature used in multilevel inheritance?",
+    "options": [
+      "Code efficiency",
+      "Code readability",
+      "Flexibility",
+      "Code reusability"
+    ],
+    "answer": "Code reusability",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "What is encapsulation?",
+    "options": [
+      "Combining data and functions into single unit",
+      "Combining functions only",
+      "Combining data only",
+      "Combining unrelated data"
+    ],
+    "answer": "Combining data and functions into single unit",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Which statement about polymorphism is false?",
+    "options": [
+      "Redefines functionality",
+      "Always increases overhead",
+      "OOP feature",
+      "Improves readability"
+    ],
+    "answer": "Always increases overhead",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OOP",
+    "question": "Abstraction means?",
+    "options": [
+      "Hide implementation and show features",
+      "Hide important data",
+      "Hide implementation only",
+      "Show only data"
+    ],
+    "answer": "Hide implementation and show features",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Constructor should be defined in which access specifier?",
+    "options": ["Any", "Private", "Public", "Protected"],
+    "answer": "Public",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Copy constructor is used to?",
+    "options": [
+      "Copy object for primitive type",
+      "Type casting",
+      "Pass object to function",
+      "Pass object to class"
+    ],
+    "answer": "Pass object to function",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OOP",
+    "question": "Correct constructor syntax?",
+    "options": ["-classname()", "classname()", "()classname", "~classname()"],
+    "answer": "classname()",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Destructor when object passed by reference?",
+    "options": [
+      "Called at function end",
+      "Called explicitly",
+      "Not called",
+      "Called when out of scope"
+    ],
+    "answer": "Called when out of scope",
+    "difficulty": "hard"
+  },
+  {
+    "subject": "OOP",
+    "question": "Default access specifier for data members?",
+    "options": ["Protected", "Private", "Public", "Default"],
+    "answer": "Private",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Data members accessed using?",
+    "options": [
+      "Dot, arrow or direct call",
+      "Dot operator",
+      "Arrow operator",
+      "Dot or arrow as required"
+    ],
+    "answer": "Dot or arrow as required",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Keyword used to allocate array of objects in Java?",
+    "options": ["allocate", "arr", "new", "create"],
+    "answer": "new",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Operator used to free memory in C++?",
+    "options": ["Unallocate", "Free()", "Collect", "delete"],
+    "answer": "delete",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Which is not property of object?",
+    "options": ["Properties", "Names", "Identity", "Attributes"],
+    "answer": "Names",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OOP",
+    "question": "Members not accessible in derived class?",
+    "options": ["All", "Protected", "Private", "Public"],
+    "answer": "Private",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Inheritance means?",
+    "options": [
+      "Using data/functions of base class",
+      "Using built-in functions",
+      "Rewriting code",
+      "Copying code"
+    ],
+    "answer": "Using data/functions of base class",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Keyword for virtual function?",
+    "options": ["virt", "virtually", "virtual", "anonymous"],
+    "answer": "virtual",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Memory for objects is allocated in?",
+    "options": ["Cache", "ROM", "HDD", "RAM"],
+    "answer": "RAM",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Function overriding represents?",
+    "options": [
+      "Same name in derived class only",
+      "Same name different signature",
+      "Same name in base and derived class",
+      "Same name in base only"
+    ],
+    "answer": "Same name in base and derived class",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OOP",
+    "question": "Feature exhibited by function overriding?",
+    "options": [
+      "Polymorphism",
+      "Encapsulation",
+      "Abstraction",
+      "Inheritance"
+    ],
+    "answer": "Polymorphism",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Keyword for static variables?",
+    "options": ["const", "common", "static", "stat"],
+    "answer": "static",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Correct syntax for pointer to object?",
+    "options": [
+      "*className objectName;",
+      "className* objectName;",
+      "className objectName();",
+      "className objectName;"
+    ],
+    "answer": "className* objectName;",
+    "difficulty": "medium"
+  },
+  {
+    "subject": "OOP",
+    "question": "Class instance cannot be created for?",
+    "options": [
+      "Parent class",
+      "Abstract class",
+      "Anonymous class",
+      "Nested class"
+    ],
+    "answer": "Abstract class",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Feature enabling predefined operator customization?",
+    "options": [
+      "Function Overloading",
+      "Function Overriding",
+      "Operator Overloading",
+      "Operator Overriding"
+    ],
+    "answer": "Operator Overloading",
+    "difficulty": "easy"
+  },
+  {
+    "subject": "OOP",
+    "question": "Feature implemented using encapsulation?",
+    "options": [
+      "Polymorphism",
+      "Overloading",
+      "Inheritance",
+      "Abstraction"
+    ],
+    "answer": "Abstraction",
+    "difficulty": "medium"
+  }
+
+
+]

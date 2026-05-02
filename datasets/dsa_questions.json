@@ -1,0 +1,779 @@
+[
+  {
+    "topic": "Arrays",
+    "difficulty": "easy",
+    "question": "What is the time complexity of accessing an array element?",
+    "options": ["O(1)", "O(n)", "O(log n)", "O(n log n)"],
+    "answer": "O(1)"
+  },
+  {
+    "topic": "Arrays",
+    "difficulty": "medium",
+    "question": "Which algorithm is used to find maximum subarray sum?",
+    "options": ["Merge Sort", "Kadane's Algorithm", "Binary Search", "DFS"],
+    "answer": "Kadane's Algorithm"
+  },
+  {
+    "topic": "Trees",
+    "difficulty": "easy",
+    "question": "Binary tree maximum nodes at level L?",
+    "options": ["2^L", "2^(L-1)", "L^2", "2L"],
+    "answer": "2^L"
+  },
+  {
+    "topic": "Graphs",
+    "difficulty": "medium",
+    "question": "Which algorithm finds shortest path?",
+    "options": ["DFS", "BFS", "Dijkstra", "Prim"],
+    "answer": "Dijkstra"
+  },
+  {
+    "topic": "DP",
+    "difficulty": "hard",
+    "question": "Which problem is classic DP?",
+    "options": ["Knapsack", "Sorting", "Binary Search", "Hashing"],
+    "answer": "Knapsack"
+  },
+  {
+    "topic": "Data Structures Basics",
+    "difficulty": "easy",
+    "question": "What is the primary purpose of a data structure?",
+    "options": [
+      "To style web pages",
+      "To store and organize data for efficient access and modification",
+      "To compile code",
+      "To encrypt data"
+    ],
+    "answer": "To store and organize data for efficient access and modification"
+  },
+  {
+    "topic": "Data Structures Basics",
+    "difficulty": "easy",
+    "question": "Which of the following is a linear data structure?",
+    "options": ["Graph", "Tree", "Array", "Heap"],
+    "answer": "Array"
+  },
+  {
+    "topic": "Queue",
+    "difficulty": "easy",
+    "question": "Which data structure uses FIFO order?",
+    "options": ["Queue", "Stack", "Tree", "Hash table"],
+    "answer": "Queue"
+  },
+  {
+    "topic": "Stack",
+    "difficulty": "easy",
+    "question": "Which data structure uses LIFO order?",
+    "options": ["Queue", "Stack", "Graph", "Trie"],
+    "answer": "Stack"
+  },
+  {
+    "topic": "Queue",
+    "difficulty": "medium",
+    "question": "Which operation does not belong to basic queue operations?",
+    "options": ["Enqueue", "Dequeue", "Front/Peek", "PushBack"],
+    "answer": "PushBack"
+  },
+  {
+    "topic": "Arrays",
+    "difficulty": "easy",
+    "question": "What is the time complexity to access an element by index in an array?",
+    "options": ["O(1)", "O(n)", "O(log n)", "O(n log n)"],
+    "answer": "O(1)"
+  },
+  {
+    "topic": "Stack",
+    "difficulty": "easy",
+    "question": "Which data structure is best for implementing recursion explicitly?",
+    "options": ["Queue", "Array", "Stack", "Graph"],
+    "answer": "Stack"
+  },
+  {
+    "topic": "Linked List",
+    "difficulty": "medium",
+    "question": "Which of these is NOT a characteristic of linked lists?",
+    "options": [
+      "Dynamic size",
+      "Constant-time random access by index",
+      "Efficient insertion/deletion",
+      "Node pointers"
+    ],
+    "answer": "Constant-time random access by index"
+  },
+  {
+    "topic": "Linked List",
+    "difficulty": "easy",
+    "question": "What is the drawback of singly linked list compared to arrays?",
+    "options": [
+      "Fixed size",
+      "No dynamic memory",
+      "Poor insertion performance",
+      "No direct/random access"
+    ],
+    "answer": "No direct/random access"
+  },
+  {
+    "topic": "Arrays",
+    "difficulty": "easy",
+    "question": "Which is an advantage of arrays over linked lists?",
+    "options": [
+      "Constant-time index access",
+      "Dynamic memory efficiency",
+      "Constant-time insertion",
+      "Easier node allocation"
+    ],
+    "answer": "Constant-time index access"
+  },
+  {
+    "topic": "Queue",
+    "difficulty": "medium",
+    "question": "What is a circular queue useful for?",
+    "options": [
+      "LIFO operations",
+      "Efficient array space reuse",
+      "Random access",
+      "Tree traversal"
+    ],
+    "answer": "Efficient array space reuse"
+  },
+  {
+    "topic": "Stack",
+    "difficulty": "easy",
+    "question": "Which operation in a stack is used to implement function calls?",
+    "options": ["Dequeue", "Peek", "Push and pop", "Enqueue"],
+    "answer": "Push and pop"
+  },
+  {
+    "topic": "Stack",
+    "difficulty": "easy",
+    "question": "Time complexity to push/pop from stack implemented using linked list?",
+    "options": ["O(1)", "O(n)", "O(log n)", "O(n log n)"],
+    "answer": "O(1)"
+  },
+  {
+    "topic": "Priority Queue",
+    "difficulty": "easy",
+    "question": "Which queue variant supports priority-based removal?",
+    "options": ["Circular queue", "Simple queue", "Deque", "Priority queue"],
+    "answer": "Priority queue"
+  },
+  {
+    "topic": "Deque",
+    "difficulty": "easy",
+    "question": "A deque allows insertion and deletion at?",
+    "options": ["Only front", "Both front and rear", "Only rear", "Neither"],
+    "answer": "Both front and rear"
+  },
+  {
+    "topic": "Stack",
+    "difficulty": "easy",
+    "question": "Which data structure is used to check balanced parentheses?",
+    "options": ["Stack", "Queue", "Hash table", "Heap"],
+    "answer": "Stack"
+  },
+  {
+    "topic": "Stack",
+    "difficulty": "medium",
+    "question": "Which operation does NOT belong to stack ADT?",
+    "options": ["Push", "Pop", "RandomAccess", "Top"],
+    "answer": "RandomAccess"
+  },
+  {
+    "topic": "Stack",
+    "difficulty": "medium",
+    "question": "Which of these can be implemented using two stacks?",
+    "options": ["Binary search tree", "Queue", "Hash table", "Heap"],
+    "answer": "Queue"
+  },
+  {
+    "topic": "Trees",
+    "difficulty": "easy",
+    "question": "In a binary tree, each node can have at most how many children?",
+    "options": ["1", "3", "2", "4"],
+    "answer": "2"
+  },
+  {
+    "topic": "BST",
+    "difficulty": "easy",
+    "question": "Which traversal gives sorted order in BST?",
+    "options": ["Pre-order", "In-order", "Post-order", "Level-order"],
+    "answer": "In-order"
+  },
+  {
+    "topic": "BST",
+    "difficulty": "easy",
+    "question": "What property defines a BST?",
+    "options": [
+      "Left < Root < Right",
+      "Every node has two children",
+      "All leaves same depth",
+      "Root stores maximum"
+    ],
+    "answer": "Left < Root < Right"
+  },
+  {
+    "topic": "Trees",
+    "difficulty": "medium",
+    "question": "Height of a tree with single node?",
+    "options": ["0", "2", "Undefined", "1"],
+    "answer": "0"
+  },
+  {
+    "topic": "AVL Tree",
+    "difficulty": "medium",
+    "question": "Which tree is self balancing?",
+    "options": ["Binary tree", "AVL tree", "Heap", "Trie"],
+    "answer": "AVL tree"
+  },
+  {
+    "topic": "Trees",
+    "difficulty": "medium",
+    "question": "Which traversal is used to delete a tree safely?",
+    "options": ["In-order", "Pre-order", "Post-order", "Level-order"],
+    "answer": "Post-order"
+  },
+  {
+    "topic": "Heap",
+    "difficulty": "easy",
+    "question": "Which structure is most suitable to implement priority queue?",
+    "options": ["Heap", "Linked list", "BST", "Hash table"],
+    "answer": "Heap"
+  },
+   {
+    "topic": "Heap",
+    "difficulty": "easy",
+    "question": "What is the heap property for a max-heap?",
+    "options": ["Parent <= children", "Parent >= children", "In-order property", "Level-order sorted"],
+    "answer": "Parent >= children"
+  },
+  {
+    "topic": "Heap",
+    "difficulty": "medium",
+    "question": "Time complexity to extract maximum from a binary heap?",
+    "options": ["O(log n)", "O(1)", "O(n)", "O(n log n)"],
+    "answer": "O(log n)"
+  },
+  {
+    "topic": "Heap",
+    "difficulty": "easy",
+    "question": "How is a binary heap commonly stored?",
+    "options": ["Linked nodes", "Hash table", "Array", "Balanced BST"],
+    "answer": "Array"
+  },
+  {
+    "topic": "Sorting",
+    "difficulty": "easy",
+    "question": "Which sorting algorithm uses heap?",
+    "options": ["Insertion sort", "Bubble sort", "Counting sort", "Heap sort"],
+    "answer": "Heap sort"
+  },
+  {
+    "topic": "Heap",
+    "difficulty": "hard",
+    "question": "Worst-case complexity to build heap from unsorted array?",
+    "options": ["O(n)", "O(n log n)", "O(n²)", "O(log n)"],
+    "answer": "O(n)"
+  },
+  {
+    "topic": "Hashing",
+    "difficulty": "easy",
+    "question": "What does a hash function do?",
+    "options": ["Sorts keys", "Compresses data", "Maps keys to indices", "Encrypts keys"],
+    "answer": "Maps keys to indices"
+  },
+  {
+    "topic": "Hashing",
+    "difficulty": "medium",
+    "question": "Common collision resolution method?",
+    "options": ["Binary search", "Chaining or open addressing", "Heapifying", "Merge sort"],
+    "answer": "Chaining or open addressing"
+  },
+  {
+    "topic": "Hashing",
+    "difficulty": "easy",
+    "question": "Average time complexity of hash table operations?",
+    "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+    "answer": "O(1)"
+  },
+  {
+    "topic": "Hashing",
+    "difficulty": "medium",
+    "question": "Typical load factor threshold for resizing hash table?",
+    "options": ["0", "Negative", "10", "Around 0.7"],
+    "answer": "Around 0.7"
+  },
+  {
+    "topic": "Hashing",
+    "difficulty": "medium",
+    "question": "Which is NOT a collision resolution technique?",
+    "options": ["Linear probing", "Binary probing", "Quadratic probing", "Separate chaining"],
+    "answer": "Binary probing"
+  },
+  {
+    "topic": "Graphs",
+    "difficulty": "easy",
+    "question": "Best representation for sparse graph?",
+    "options": ["Adjacency list", "Adjacency matrix", "Heap", "Trie"],
+    "answer": "Adjacency list"
+  },
+  {
+    "topic": "Graphs",
+    "difficulty": "easy",
+    "question": "Which traversal uses queue?",
+    "options": ["DFS", "BFS", "Dijkstra", "Kruskal"],
+    "answer": "BFS"
+  },
+  {
+    "topic": "Graphs",
+    "difficulty": "medium",
+    "question": "Time complexity of BFS?",
+    "options": ["O(V²)", "O(E²)", "O(V + E)", "O(log V)"],
+    "answer": "O(V + E)"
+  },
+  {
+    "topic": "Graphs",
+    "difficulty": "medium",
+    "question": "Shortest path algorithm (non-negative weights)?",
+    "options": ["Prim", "Kruskal", "Bellman-Ford", "Dijkstra"],
+    "answer": "Dijkstra"
+  },
+  {
+    "topic": "Graphs",
+    "difficulty": "medium",
+    "question": "Which algorithm computes MST?",
+    "options": ["Dijkstra", "Kruskal or Prim", "BFS", "Floyd"],
+    "answer": "Kruskal or Prim"
+  },
+  {
+    "topic": "Sorting",
+    "difficulty": "medium",
+    "question": "Average complexity of quicksort?",
+    "options": ["O(n²)", "O(n log² n)", "O(n log n)", "O(log n)"],
+    "answer": "O(n log n)"
+  },
+  {
+    "topic": "Sorting",
+    "difficulty": "medium",
+    "question": "Which sorting algorithm is stable?",
+    "options": ["Quick sort", "Merge sort", "Heap sort", "Selection sort"],
+    "answer": "Merge sort"
+  },
+  {
+    "topic": "Searching",
+    "difficulty": "easy",
+    "question": "Which search works on sorted arrays?",
+    "options": ["Binary search", "Linear search", "Hash search", "Heap search"],
+    "answer": "Binary search"
+  },
+  {
+    "topic": "Searching",
+    "difficulty": "easy",
+    "question": "Worst-case complexity of binary search?",
+    "options": ["O(n)", "O(n log n)", "O(log² n)", "O(log n)"],
+    "answer": "O(log n)"
+  },
+  {
+    "topic": "Sorting",
+    "difficulty": "medium",
+    "question": "Best sorting algorithm for nearly sorted data?",
+    "options": ["Heap sort", "Insertion sort", "Merge sort", "Quick sort"],
+    "answer": "Insertion sort"
+  },
+  {
+    "topic": "Complexity",
+    "difficulty": "easy",
+    "question": "Big-O notation describes?",
+    "options": ["Upper bound growth", "Exact runtime", "Memory address", "Network latency"],
+    "answer": "Upper bound growth"
+  },
+  {
+    "topic": "Complexity",
+    "difficulty": "hard",
+    "question": "If algorithm is O(n log n), doubling input size changes time?",
+    "options": ["Double only", "Quadruple", "Slightly more than double", "No change"],
+    "answer": "Slightly more than double"
+  },
+  {
+    "topic": "Complexity",
+    "difficulty": "easy",
+    "question": "Extra memory used by algorithm is called?",
+    "options": ["Time complexity", "Space complexity", "Stability", "Throughput"],
+    "answer": "Space complexity"
+  },
+  {
+    "topic": "Complexity",
+    "difficulty": "medium",
+    "question": "Amortized analysis measures?",
+    "options": ["Average cost per operation", "Worst case", "Memory leaks", "Compiler optimizations"],
+    "answer": "Average cost per operation"
+  },
+  {
+    "topic": "Complexity",
+    "difficulty": "easy",
+    "question": "Which grows fastest?",
+    "options": ["O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+    "answer": "O(2ⁿ)"
+  },
+    {
+    "topic": "Trie",
+    "difficulty": "easy",
+    "question": "Which data structure is efficient for prefix-based string searches?",
+    "options": ["Trie", "Heap", "Stack", "Queue"],
+    "answer": "Trie"
+  },
+  {
+    "topic": "Hashing",
+    "difficulty": "easy",
+    "question": "Which C++ container provides unique keys with fast lookup?",
+    "options": ["vector", "unordered_set", "list", "deque"],
+    "answer": "unordered_set"
+  },
+  {
+    "topic": "Trees",
+    "difficulty": "medium",
+    "question": "Which map type maintains sorted order of keys?",
+    "options": ["unordered_map", "hash_map", "tree-based map", "array map"],
+    "answer": "tree-based map"
+  },
+  {
+    "topic": "Set",
+    "difficulty": "easy",
+    "question": "Typical use-case of set data structure?",
+    "options": ["Storing duplicates", "LIFO operations", "Priority scheduling", "Maintaining unique elements"],
+    "answer": "Maintaining unique elements"
+  },
+  {
+    "topic": "Hashing",
+    "difficulty": "medium",
+    "question": "Which operation is typically fastest in a hash set?",
+    "options": ["Sorted iteration", "Membership test", "Worst-case lookup", "Ordered traversal"],
+    "answer": "Membership test"
+  },
+  {
+    "topic": "Stack",
+    "difficulty": "easy",
+    "question": "Which structure helps implement undo functionality?",
+    "options": ["Stack", "Queue", "Hash table", "Trie"],
+    "answer": "Stack"
+  },
+  {
+    "topic": "Segment Tree",
+    "difficulty": "hard",
+    "question": "Which technique speeds up repeated range sum queries?",
+    "options": ["Linear scan", "Unsorted list", "Heap", "Prefix sum / Segment tree"],
+    "answer": "Prefix sum / Segment tree"
+  },
+  {
+    "topic": "Fenwick Tree",
+    "difficulty": "medium",
+    "question": "Fenwick Tree is mainly used for?",
+    "options": ["Sorting", "Prefix sums", "Graph traversal", "Memory allocation"],
+    "answer": "Prefix sums"
+  },
+  {
+    "topic": "Segment Tree",
+    "difficulty": "medium",
+    "question": "Which structure supports efficient range minimum queries?",
+    "options": ["Heap", "Hash map", "Segment tree", "Trie"],
+    "answer": "Segment tree"
+  },
+  {
+    "topic": "Balanced BST",
+    "difficulty": "hard",
+    "question": "Which structure supports order statistics?",
+    "options": ["Order-statistic tree", "Unordered map", "Binary heap", "Linked list"],
+    "answer": "Order-statistic tree"
+  },
+  {
+    "topic": "Optimization",
+    "difficulty": "medium",
+    "question": "Which approach reduces memory copying for large arrays?",
+    "options": ["Duplicate data", "References/pointers", "Recursion copy", "Nested loops"],
+    "answer": "References/pointers"
+  },
+  {
+    "topic": "Graphs",
+    "difficulty": "medium",
+    "question": "When is adjacency matrix preferred?",
+    "options": ["Always", "Sparse graphs", "Dense graphs", "Only DAGs"],
+    "answer": "Dense graphs"
+  },
+  {
+    "topic": "Cache",
+    "difficulty": "hard",
+    "question": "Which pattern implements LRU cache efficiently?",
+    "options": ["Hash map + DLL", "Single list", "Trie", "Heap"],
+    "answer": "Hash map + DLL"
+  },
+  {
+    "topic": "Union Find",
+    "difficulty": "hard",
+    "question": "Amortized complexity of Union-Find with optimizations?",
+    "options": ["O(n)", "O(log n)", "O(n log n)", "α(n)"],
+    "answer": "α(n)"
+  },
+  {
+    "topic": "Priority Queue",
+    "difficulty": "medium",
+    "question": "Best structure for event-driven simulation?",
+    "options": ["Queue", "Priority queue", "Stack", "Trie"],
+    "answer": "Priority queue"
+  },
+  {
+    "topic": "Graphs",
+    "difficulty": "medium",
+    "question": "Cycle detection in directed graph uses?",
+    "options": ["DFS recursion stack", "BFS only", "Heap", "Trie"],
+    "answer": "DFS recursion stack"
+  },
+  {
+    "topic": "Linked List",
+    "difficulty": "medium",
+    "question": "Best structure for frequent middle insertion?",
+    "options": ["Array", "Hash set", "Doubly linked list", "Heap"],
+    "answer": "Doubly linked list"
+  },
+  {
+    "topic": "Memory Optimization",
+    "difficulty": "medium",
+    "question": "Which improves memory locality?",
+    "options": ["Pointer structures", "Contiguous arrays", "Hash pointer chasing", "Dynamic trie"],
+    "answer": "Contiguous arrays"
+  },
+  {
+    "topic": "External Memory",
+    "difficulty": "hard",
+    "question": "For large datasets not fitting RAM, which structure is important?",
+    "options": ["External memory structures", "More pointers", "Only arrays", "In-memory graphs"],
+    "answer": "External memory structures"
+  },
+  {
+    "topic": "Design",
+    "difficulty": "easy",
+    "question": "Best practice for choosing data structure?",
+    "options": ["Pick complex", "Default container", "Match access patterns", "Avoid profiling"],
+    "answer": "Match access patterns"
+  },
+  {
+    "topic": "Graphs",
+    "difficulty": "easy",
+    "question": "Which structure is used for BFS?",
+    "options": ["Queue", "Stack", "Heap", "Trie"],
+    "answer": "Queue"
+  },
+  {
+    "topic": "DFS",
+    "difficulty": "easy",
+    "question": "Which traversal uses stack?",
+    "options": ["BFS", "Level order", "DFS", "Dijkstra"],
+    "answer": "DFS"
+  },
+  {
+    "topic": "Heap",
+    "difficulty": "easy",
+    "question": "Left child index in array heap?",
+    "options": ["i+1", "2i+1", "i/2", "2i"],
+    "answer": "2i+1"
+  },
+  {
+    "topic": "Deque",
+    "difficulty": "medium",
+    "question": "Which supports O(1) insertion at both ends?",
+    "options": ["Stack", "Priority queue", "Heap", "Deque"],
+    "answer": "Deque"
+  },
+  {
+    "topic": "Algorithm Design",
+    "difficulty": "easy",
+    "question": "Which technique divides into subproblems and combines?",
+    "options": ["Divide & Conquer", "Greedy", "Backtracking", "Brute force"],
+    "answer": "Divide & Conquer"
+  },
+   {
+    "topic": "Stack",
+    "difficulty": "easy",
+    "question": "Which structure is used internally by recursion calls?",
+    "options": ["Queue", "Heap", "Call stack", "Hash map"],
+    "answer": "Call stack"
+  },
+  {
+    "topic": "Trie",
+    "difficulty": "medium",
+    "question": "Which data structure is most suitable for autocomplete suggestions?",
+    "options": ["Heap", "Trie", "Stack", "Array"],
+    "answer": "Trie"
+  },
+  {
+    "topic": "Searching",
+    "difficulty": "easy",
+    "question": "Which searching algorithm has O(n) worst-case time complexity?",
+    "options": ["Linear search", "Binary search", "Hash search", "Jump search"],
+    "answer": "Linear search"
+  },
+  {
+    "topic": "Union Find",
+    "difficulty": "medium",
+    "question": "Which data structure supports dynamic connectivity queries?",
+    "options": ["Heap", "Trie", "Hash table", "Disjoint Set"],
+    "answer": "Disjoint Set"
+  },
+  {
+    "topic": "B-Tree",
+    "difficulty": "medium",
+    "question": "Which tree structure is commonly used in databases and file systems?",
+    "options": ["AVL tree", "Red-Black tree", "B-Tree", "Binary heap"],
+    "answer": "B-Tree"
+  },
+  {
+    "topic": "Backtracking",
+    "difficulty": "easy",
+    "question": "Which algorithm technique is used in N-Queens problem?",
+    "options": ["Greedy", "Backtracking", "Divide & Conquer", "Hashing"],
+    "answer": "Backtracking"
+  },
+  {
+    "topic": "Stack",
+    "difficulty": "easy",
+    "question": "Which structure is ideal for implementing browser back button?",
+    "options": ["Stack", "Queue", "Heap", "Graph"],
+    "answer": "Stack"
+  },
+  {
+    "topic": "AVL Tree",
+    "difficulty": "medium",
+    "question": "Which tree guarantees O(log n) height in worst case?",
+    "options": ["Binary tree", "Heap", "AVL tree", "Trie"],
+    "answer": "AVL tree"
+  },
+  {
+    "topic": "Suffix Tree",
+    "difficulty": "hard",
+    "question": "Which structure allows efficient substring search?",
+    "options": ["Heap", "Stack", "Queue", "Suffix tree"],
+    "answer": "Suffix tree"
+  },
+  {
+    "topic": "Dynamic Programming",
+    "difficulty": "easy",
+    "question": "Which technique avoids repeated computations?",
+    "options": ["Memoization", "Hashing", "Sorting", "Binary search"],
+    "answer": "Memoization"
+  },
+  {
+    "topic": "Topological Sort",
+    "difficulty": "medium",
+    "question": "Which traversal is used in topological sorting?",
+    "options": ["BFS only", "DFS post-order", "Heap traversal", "Binary search"],
+    "answer": "DFS post-order"
+  },
+  {
+    "topic": "Union Find",
+    "difficulty": "medium",
+    "question": "Which structure helps detect cycles in undirected graph?",
+    "options": ["Heap", "Stack", "Union-Find", "Trie"],
+    "answer": "Union-Find"
+  },
+  {
+    "topic": "Graphs",
+    "difficulty": "hard",
+    "question": "Which algorithm detects strongly connected components?",
+    "options": ["Kosaraju", "Binary search", "Heapify", "Insertion sort"],
+    "answer": "Kosaraju"
+  },
+  {
+    "topic": "Two Pointers",
+    "difficulty": "easy",
+    "question": "Which technique is used in sliding window problems?",
+    "options": ["Heap", "Tree traversal", "Binary search", "Two pointers"],
+    "answer": "Two pointers"
+  },
+  {
+    "topic": "Hashing",
+    "difficulty": "medium",
+    "question": "Which structure is used in compiler symbol tables?",
+    "options": ["Stack", "Hash table", "Heap", "Trie"],
+    "answer": "Hash table"
+  },
+  {
+    "topic": "Heap",
+    "difficulty": "hard",
+    "question": "Which structure is best for median finder in data stream?",
+    "options": ["Two heaps", "Stack", "Queue", "Linked list"],
+    "answer": "Two heaps"
+  },
+  {
+    "topic": "Segment Tree",
+    "difficulty": "hard",
+    "question": "Which tree is used for range updates and queries?",
+    "options": ["AVL tree", "Binary heap", "Segment tree", "Trie"],
+    "answer": "Segment tree"
+  },
+  {
+    "topic": "Hashing",
+    "difficulty": "medium",
+    "question": "Which structure preserves insertion order with O(1) operations?",
+    "options": ["Stack", "LinkedHashMap", "Heap", "BST"],
+    "answer": "LinkedHashMap"
+  },
+  {
+    "topic": "Graphs",
+    "difficulty": "medium",
+    "question": "Which representation consumes more space for sparse graphs?",
+    "options": ["Adjacency list", "Edge list", "CSR", "Adjacency matrix"],
+    "answer": "Adjacency matrix"
+  },
+  {
+    "topic": "Priority Queue",
+    "difficulty": "medium",
+    "question": "Which structure is ideal for scheduler ordered by deadline?",
+    "options": ["Min-heap", "Stack", "Linked list", "Trie"],
+    "answer": "Min-heap"
+  },
+  {
+    "topic": "Fenwick Tree",
+    "difficulty": "hard",
+    "question": "Which structure efficiently handles prefix XOR/sum?",
+    "options": ["Stack", "Hash set", "Fenwick tree", "Heap"],
+    "answer": "Fenwick tree"
+  },
+  {
+    "topic": "Red-Black Tree",
+    "difficulty": "hard",
+    "question": "Which balancing technique is used in Red-Black Trees?",
+    "options": ["Path compression", "Color + rotations", "Heapify", "Linear probing"],
+    "answer": "Color + rotations"
+  },
+  {
+    "topic": "Trie",
+    "difficulty": "medium",
+    "question": "Which structure is used in network routing tables?",
+    "options": ["Heap", "Stack", "DLL", "Trie"],
+    "answer": "Trie"
+  },
+  {
+    "topic": "Backtracking",
+    "difficulty": "easy",
+    "question": "Which technique explores all possibilities and prunes invalid ones?",
+    "options": ["Backtracking", "Binary search", "Heap sort", "Linear scan"],
+    "answer": "Backtracking"
+  },
+  {
+    "topic": "Balanced BST",
+    "difficulty": "medium",
+    "question": "Which structure provides consistent O(log n) operations?",
+    "options": ["Unbalanced BST", "Hash table", "Balanced BST", "Array"],
+    "answer": "Balanced BST"
+  },
+  {
+    "topic": "System Design",
+    "difficulty": "easy",
+    "question": "Which principle is most important when selecting data structure?",
+    "options": [
+      "Choose newest structure",
+      "Analyze time-space tradeoffs",
+      "Minimize code length",
+      "Avoid benchmarking"
+    ],
+    "answer": "Analyze time-space tradeoffs"
+  }
+]

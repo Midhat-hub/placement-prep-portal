@@ -1,0 +1,626 @@
+[
+  {
+    "category": "logical",
+    "question": "Find the odd one out from the numbers: 14, 28, 35, 46, 56, 84",
+    "options": [
+      "56",
+      "84",
+      "35",
+      "46"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Find odd one out from jumbled words: LNUAIMMIU, ELEST, OPERPC, NMKOYE, INCKLE",
+    "options": [
+      "NMKOYE",
+      "OPERPC",
+      "INCKLE",
+      "ELEST"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Find the odd one out: BEK, CFL, MPS, GJP",
+    "options": [
+      "BEK",
+      "CFL",
+      "MPS",
+      "GJP"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Find the odd one out: M, S, T, O",
+    "options": [
+      "M",
+      "S",
+      "T",
+      "O"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "If CODE is written as DPEF, how is DEFENCE written?",
+    "options": [
+      "KWMCJFL",
+      "ELDFSAP",
+      "EFGFODF",
+      "HRAOSCV"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Code question: Which number represents 'work'?",
+    "options": [
+      "5",
+      "3",
+      "6",
+      "4"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Color coding problem about bulb light color",
+    "options": [
+      "Blue",
+      "Red",
+      "Yellow",
+      "Black"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Alphabet arrangement problem with PRODUCT",
+    "options": [
+      "T",
+      "R",
+      "U",
+      "P"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Milly relation reasoning problem",
+    "options": [
+      "Nephew",
+      "Son",
+      "Brother",
+      "Sister"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Symbol relation K$T&M question",
+    "options": [
+      "M is brother of T",
+      "T is son of K",
+      "M is father of T",
+      "K is mother of M"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Analogy BFNM : EIQP :: RBGJ : ?",
+    "options": [
+      "GHJK",
+      "WXYZ",
+      "UEJM",
+      "ABCD"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Analogy Hardworking : Determined :: Happy : ?",
+    "options": [
+      "Sad",
+      "Upbeat",
+      "Lovely",
+      "Hilarious"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Number analogy 343 : 7 :: 512 : ?",
+    "options": [
+      "9",
+      "6",
+      "8",
+      "2"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Series completion 61, 52, 63, 94, 46, ?",
+    "options": [
+      "81",
+      "18",
+      "49",
+      "35"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Wrong number in series 0,1,1,2,3,5,8,13,20,34",
+    "options": [
+      "8",
+      "20",
+      "13",
+      "34"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Series completion 6,12,36,144,720, ?",
+    "options": [
+      "4320",
+      "2843",
+      "8249",
+      "6825"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Bulb fuse puzzle",
+    "options": [
+      "9",
+      "8",
+      "12",
+      "5"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Odd one out: GOM, NSR, BJH, EMK",
+    "options": [
+      "GOM",
+      "NSR",
+      "BJH",
+      "EMK"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Bird cage escape puzzle",
+    "options": [
+      "8",
+      "9",
+      "3",
+      "7"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "logical",
+    "question": "Missing Fibonacci number 8,13,21,34,55,?,144",
+    "options": [
+      "55",
+      "13",
+      "89",
+      "21"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "arithmetic",
+    "question": "Die rolled seven times most likely outcome?",
+    "options": [
+      "Three green four red",
+      "Four green three red",
+      "Five green two red",
+      "Six green one red"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "arithmetic",
+    "question": "Number of solutions for x1+x2+x3 ≤ 11 (positive integers)",
+    "options": [
+      "182",
+      "364",
+      "78",
+      "440"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "arithmetic",
+    "question": "Find xyz given exponential relations",
+    "options": [
+      "-1",
+      "1/pqr",
+      "1",
+      "pqr"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "arithmetic",
+    "question": "Units digit of (35)^87 + (93)^46",
+    "options": [
+      "4",
+      "2",
+      "6",
+      "None"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "arithmetic",
+    "question": "Smallest number leaving remainder 7 when divided by 20,42,76",
+    "options": [
+      "3047",
+      "6047",
+      "7987",
+      "63847"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "arithmetic",
+    "question": "Missing number sequence 2,12,60,240,720,1440,...",
+    "options": [
+      "2880",
+      "1440",
+      "720",
+      "0"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "arithmetic",
+    "question": "Strings of 5 digits with digit sum 7",
+    "options": [
+      "66",
+      "330",
+      "495",
+      "99"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "arithmetic",
+    "question": "Numbers divisible by 3 or 5 from 1–1000",
+    "options": [
+      "533",
+      "599",
+      "467",
+      "66"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "arithmetic",
+    "question": "DVD profit-loss cost price question",
+    "options": [
+      "1200",
+      "1450",
+      "1250",
+      "1375"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "arithmetic",
+    "question": "Which is not prime?",
+    "options": [
+      "43",
+      "57",
+      "73",
+      "101"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "quantitative",
+    "question": "Probability of drawing two clubs from 52 cards",
+    "options": [
+      "13/51",
+      "1/17",
+      "1/26",
+      "13/17"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "quantitative",
+    "question": "Chances no two boys sit together (5 girls,2 boys)",
+    "options": [
+      "1/21",
+      "4/7",
+      "2/7",
+      "5/7"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "quantitative",
+    "question": "Tree leaning distance problem",
+    "options": [
+      "21 m",
+      "25 m",
+      "16 m",
+      "12 m"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "quantitative",
+    "question": "Descending order fractions",
+    "options": [
+      "5/8;9/13;11/17",
+      "5/8;11/17;9/13",
+      "9/13;11/17;5/8",
+      "11/17;9/13;5/8"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "quantitative",
+    "question": "Boat speed problem",
+    "options": [
+      "3 km/hr",
+      "8 km/hr",
+      "11 km/hr",
+      "16 km/hr"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "quantitative",
+    "question": "Rhombus-square area ratio",
+    "options": [
+      "3:10",
+      "2:3",
+      "10:3",
+      "3:2"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "quantitative",
+    "question": "Simple interest comparison problem",
+    "options": [
+      "2900",
+      "3000",
+      "3100",
+      "2800"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "quantitative",
+    "question": "Room painting cost problem",
+    "options": [
+      "410",
+      "84",
+      "840",
+      "168"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "quantitative",
+    "question": "Cistern capacity problem",
+    "options": [
+      "1200",
+      "600",
+      "1000",
+      "500"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "quantitative",
+    "question": "Handshake problem",
+    "options": [
+      "870",
+      "435",
+      "30!",
+      "29!+1"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "verbal",
+    "question": "Arrange healthy eating paragraph",
+    "options": [
+      "E A B C D",
+      "A B C D E",
+      "A B D C E",
+      "E D B C A"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "verbal",
+    "question": "Humor used to criticize or mock",
+    "options": [
+      "Satire",
+      "Sarcasm",
+      "Hyperbole",
+      "Irony"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "verbal",
+    "question": "Disagreement or lack of harmony",
+    "options": [
+      "Concord",
+      "Discord",
+      "Synergy",
+      "Tranquility"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "verbal",
+    "question": "Sentence completion: Because she was running late",
+    "options": [
+      "walked slowly",
+      "stopped for coffee",
+      "hurried",
+      "missed intentionally"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "verbal",
+    "question": "Synonym of aperient",
+    "options": [
+      "sweet",
+      "bitter",
+      "giddy",
+      "laxative"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "verbal",
+    "question": "Antonym of phony",
+    "options": [
+      "intelligent",
+      "optimistic",
+      "genuine",
+      "pretentious"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "verbal",
+    "question": "Correct article usage sentence",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "no article"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "verbal",
+    "question": "Analogy DOCTOR : MEDICINE",
+    "options": [
+      "Lawyer:Law",
+      "Chef:Ingredients",
+      "Teacher:Lesson",
+      "Engineer:Design"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "verbal",
+    "question": "Analogy BEE : HONEY",
+    "options": [
+      "Bird:Nest",
+      "Cow:Milk",
+      "Tree:Leaf",
+      "Fish:Water"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "verbal",
+    "question": "Closest meaning: enjoyed immensely",
+    "options": [
+      "terrible",
+      "horrible",
+      "terrific",
+      "terrifying"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "verbal",
+    "question": "Opposite of coherent",
+    "options": [
+      "sticky",
+      "well-connected",
+      "rambling",
+      "friendly"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "verbal",
+    "question": "Idiom: put all eggs in one basket",
+    "options": [
+      "risk everything",
+      "cautious",
+      "gather opportunities",
+      "take everything"
+    ],
+    "answer": "N/A",
+    "difficulty": "medium"
+  }
+]

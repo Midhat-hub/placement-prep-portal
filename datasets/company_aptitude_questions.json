@@ -1,0 +1,265 @@
+[
+  {
+    "company": "Deloitte",
+    "question": "If a positive integer n is divisible by 7 leaving remainder 3, which expression gives remainder 1 when divided by 7?",
+    "options": ["n+6", "n+5", "n+3", "n-5"],
+    "answer": "n+5",
+    "difficulty": "easy",
+    "topic": "modulus"
+  },
+  {
+    "company": "Deloitte",
+    "question": "What is the remainder when N = 1521 × 1523 × 1525 is divided by 12?",
+    "options": ["7", "3", "11", "5"],
+    "answer": "3",
+    "difficulty": "medium",
+    "topic": "number_system"
+  },
+  {
+    "company": "Deloitte",
+    "question": "What is the number of digits in 3^50?",
+    "options": ["23", "46", "24", "47"],
+    "answer": "24",
+    "difficulty": "medium",
+    "topic": "logarithms"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Two numbers are decreased by 20% and 25% respectively. If their initial ratio was 1:2, what is the new ratio?",
+    "options": ["8 : 15", "9 : 16", "11 : 18", "10 : 17"],
+    "answer": "8 : 15",
+    "difficulty": "medium",
+    "topic": "percentage"
+  },
+  {
+    "company": "Deloitte",
+    "question": "A started a business with ₹25000. B joined after 4 months. What should be B’s investment to equalise profits?",
+    "options": ["37500 rupees", "40000 rupees", "35000 rupees", "42500 rupees"],
+    "answer": "37500 rupees",
+    "difficulty": "medium",
+    "topic": "partnership"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Two trains moving in same direction at 40 kmph and 60 kmph cross each other in 20 seconds. Find total length of trains.",
+    "options": ["444 m", "222 m", "333 m", "111 m"],
+    "answer": "111 m",
+    "difficulty": "medium",
+    "topic": "speed_time_distance"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Area of a rectangle is 990 m². Length is 10% more than breadth. Find breadth.",
+    "options": ["33", "60", "30", "66"],
+    "answer": "30",
+    "difficulty": "medium",
+    "topic": "mensuration"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Find radius of a cone with height 7 cm and volume 81 cm³.",
+    "options": ["3.99 cm", "3.32 cm", "4.09 cm", "2.67 cm"],
+    "answer": "3.32 cm",
+    "difficulty": "hard",
+    "topic": "mensuration"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Which is a correct trigonometric identity?",
+    "options": [
+      "Tan²A = sec²A + 1",
+      "1 + tan²A = sec²A",
+      "Cos²A + sin²A = 0",
+      "Cot²A = cosec²A - 1"
+    ],
+    "answer": "1 + tan²A = sec²A",
+    "difficulty": "easy",
+    "topic": "trigonometry"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Find the odd one out.",
+    "options": ["HML", "JCA", "KDB", "YRP"],
+    "answer": "JCA",
+    "difficulty": "easy",
+    "topic": "logical_reasoning"
+  },
+  {
+    "company": "Deloitte",
+    "question": "A number divided successively by 5, 7 and 9 leaves remainders 2, 4 and 6 respectively. What are remainders when order is reversed?",
+    "options": ["7, 2, 1", "7, 4, 3", "5, 4, 3", "5, 2, 1"],
+    "answer": "5, 2, 1",
+    "difficulty": "hard",
+    "topic": "number_system"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Find number of factors of 1001 excluding multiples of 1001.",
+    "options": ["5", "7", "6", "8"],
+    "answer": "7",
+    "difficulty": "medium",
+    "topic": "factors"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Average runs of 3 players is 120 in ratio 2:3:1. If lowest scorer hits 100 next match, new average?",
+    "options": ["130.25", "133.33", "131.11", "120.50"],
+    "answer": "131.11",
+    "difficulty": "hard",
+    "topic": "averages"
+  },
+  {
+    "company": "Deloitte",
+    "question": "1/4 of a tank holds 175 liters. What fraction is filled if tank contains 420 liters?",
+    "options": ["4/7", "3/10", "4/10", "3/5"],
+    "answer": "3/5",
+    "difficulty": "easy",
+    "topic": "ratio"
+  },
+  {
+    "company": "Deloitte",
+    "question": "What percentage of numbers from 51 to 100 have squares ending in digit 1?",
+    "options": ["10%", "1%", "25%", "20%"],
+    "answer": "20%",
+    "difficulty": "medium",
+    "topic": "number_system"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Find average of prime numbers between 100 and 200.",
+    "options": ["140.33", "141.33", "142.33", "143.33"],
+    "answer": "141.33",
+    "difficulty": "hard",
+    "topic": "prime_numbers"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Find value of log(8)^(1/3) / log(4)^2.",
+    "options": ["1 / 3", "1 / 6", "1 / 4", "1 / 8"],
+    "answer": "1 / 6",
+    "difficulty": "hard",
+    "topic": "logarithms"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Solve log(a − 13) + 3log2 = log(3a + 1).",
+    "options": ["25", "21", "24", "20"],
+    "answer": "21",
+    "difficulty": "hard",
+    "topic": "logarithms"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Sum of ages of 3 friends after 6 months is 90 in ratio 5:6:7. Find ages before training.",
+    "options": [
+      "25 years 6 months, 30 years 6 months, 35 years 6 months",
+      "24 years, 29 years, 34 years",
+      "24 years 6 months, 29 years 6 months, 34 years 6 months",
+      "25 years, 30 years, 35 years"
+    ],
+    "answer": "24 years 6 months, 29 years 6 months, 34 years 6 months",
+    "difficulty": "medium",
+    "topic": "ages"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Cost price is 80% of selling price. Find profit percentage.",
+    "options": ["50%", "33.33%", "25%", "20%"],
+    "answer": "25%",
+    "difficulty": "easy",
+    "topic": "profit_loss"
+  },
+  {
+    "company": "Deloitte",
+    "question": "A number increases by 20% every 10 days. Find percentage increase after 40 days.",
+    "options": ["107.36%", "105.36%", "109.56%", "111.56%"],
+    "answer": "107.36%",
+    "difficulty": "medium",
+    "topic": "percentage_growth"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Find single discount equivalent to successive discounts of 50%, 50% and 50%.",
+    "options": ["87.5%", "85%", "125%", "150%"],
+    "answer": "87.5%",
+    "difficulty": "easy",
+    "topic": "discount"
+  },
+  {
+    "company": "Deloitte",
+    "question": "A, B and C invested in ratio 2:3:4 with 2-month gaps. A invested after 3 months. Find profit sharing ratio after 12 months.",
+    "options": ["21 : 18 : 20", "18 : 21 : 20", "12 : 21 : 20", "21 : 20 : 18"],
+    "answer": "21 : 18 : 20",
+    "difficulty": "hard",
+    "topic": "partnership"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Two pipes together fill tank in 5 minutes. First pipe is 4 times efficient as second. Time taken by second pipe alone?",
+    "options": ["25 minutes", "8 minutes", "16 minutes", "20 minutes"],
+    "answer": "25 minutes",
+    "difficulty": "medium",
+    "topic": "time_and_work"
+  },
+  {
+    "company": "Deloitte",
+    "question": "A invested ₹12000 initially, B invested ₹30000 after 6 months. A retired after 8 months. Find profit ratio after 1 year.",
+    "options": ["3 : 14", "8 : 15", "7 : 12", "9 : 16"],
+    "answer": "3 : 14",
+    "difficulty": "hard",
+    "topic": "partnership"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Three pipes fill tank in 8, 9 and 10 minutes. Time taken by first and third pipe together?",
+    "options": ["4.44 minutes", "2.22 minutes", "6.66 minutes", "8.88 minutes"],
+    "answer": "4.44 minutes",
+    "difficulty": "medium",
+    "topic": "time_and_work"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Train travels 1260 km in 6 hours. Find time to cross 3 km station if train length is 245 m.",
+    "options": ["55.63 seconds", "66.63 seconds", "44.63 seconds", "65.63 seconds"],
+    "answer": "55.63 seconds",
+    "difficulty": "hard",
+    "topic": "speed_time_distance"
+  },
+  {
+    "company": "Deloitte",
+    "question": "From 4 vowels and 8 consonants, how many words using 2 vowels and 3 consonants?",
+    "options": ["46800", "25200", "10080", "16480"],
+    "answer": "25200",
+    "difficulty": "medium",
+    "topic": "permutation_combination"
+  },
+  {
+    "company": "Deloitte",
+    "question": "Two fishes observe lighthouse at angles 30° and 45°. Lighthouse height is 200 m. Find distance between fishes.",
+    "options": ["200 (1 + √3) m", "400 (1 + √3) m", "400√3 m", "200√3 m"],
+    "answer": "200 (1 + √3) m",
+    "difficulty": "hard",
+    "topic": "trigonometry"
+  },
+  {
+    "company": "Deloitte",
+    "question": "What is joint probability of two independent events M and N?",
+    "options": [
+      "P(M) * P(N) + P(M * N)",
+      "P(M) + P(N)",
+      "P(M) + P(N) - P(M * N)",
+      "P(M) * P(N)"
+    ],
+    "answer": "P(M) * P(N)",
+    "difficulty": "easy",
+    "topic": "probability"
+  },
+  {
+    "company": "Deloitte",
+    "question": "How many new words can be formed using letters of 'AMBITION' starting with A?",
+    "options": ["7!", "8! * 2!", "8! / 2!", "7! / 2!"],
+    "answer": "7! / 2!",
+    "difficulty": "medium",
+    "topic": "permutation_combination"
+  }
+]
