@@ -7,7 +7,9 @@ export default function MockList() {
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("mockTests")) || [];
-    setTests(data);
+    const now = new Date();
+    const previous = data.filter((t) => t.end && new Date(t.end) <= now);
+    setTests(previous);
   }, []);
 
   const startTest = (test) => {
@@ -16,19 +18,6 @@ export default function MockList() {
   navigate("/test");
 };
 
-  const deleteTest = (id) => {
-  const confirmDelete = window.confirm("Are you sure you want to delete this test?");
-  
-  if (!confirmDelete) return;
-
-  const existing = JSON.parse(localStorage.getItem("mockTests")) || [];
-
-  const updated = existing.filter((test) => test.id !== id);
-
-  localStorage.setItem("mockTests", JSON.stringify(updated));
-
-  setTests(updated); // update UI
-};
 
   return (
     <div style={{ padding: "20px" }}>
@@ -58,20 +47,6 @@ export default function MockList() {
           >
             Start Test
           </button>
-
-          <button
-  onClick={() => deleteTest(test.id)}
-  style={{
-    marginLeft: "10px",
-    padding: "8px 15px",
-    backgroundColor: "red",
-    color: "white",
-    border: "none",
-    cursor: "pointer"
-  }}
->
-  Delete
-</button>
         </div>
       ))}
     </div>

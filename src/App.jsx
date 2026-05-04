@@ -29,6 +29,8 @@ import CreateMock from "./pages/mocktest/CreateMock";
 import PracticeTest from "./pages/mocktest/PracticeTest";
 import TestPage from "./pages/mocktest/TestPage";
 import MockList from "./pages/mocktest/MockList";
+import UpcomingMocks from "./pages/mocktest/UpcomingMocks";
+import PreviousMocks from "./pages/mocktest/PreviousMocks";
 
 import "./styles/theme.css"
 
@@ -89,6 +91,8 @@ padding:"20px"
 {/* Mock Test */}
 <Route path="/mocktest" element={<MockTestHome />} />
 <Route path="/create-mock" element={<CreateMock />} />
+<Route path="/mocktest/upcoming" element={<UpcomingMocks />} />
+<Route path="/mocktest/previous" element={<PreviousMocks />} />
 <Route path="/practice-test" element={<PracticeTest />} />
 <Route path="/test" element={<TestPage />} />
 <Route path="/mock-list" element={<MockList />} />

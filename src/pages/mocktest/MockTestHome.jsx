@@ -2,6 +2,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function MockTestHome() {
   const navigate = useNavigate();
+  const tests = JSON.parse(localStorage.getItem("mockTests")) || [];
+  const now = new Date();
+  const upcoming = tests.filter((t) => t.end && new Date(t.end) > now);
+  const previous = tests.filter((t) => t.end && new Date(t.end) <= now);
 
   return (
     <div style={{ padding: "20px" }}>
@@ -15,11 +19,16 @@ export default function MockTestHome() {
       }}>
 
         <div style={cardStyle} onClick={() => navigate("/create-mock")}>
-          <h3>TPC Organized Upcoming Mocks</h3>
+          <h3>Create Mock test</h3>
+        </div>
+        <div style={cardStyle} onClick={() => navigate("/mocktest/upcoming")}>
+          <h3>TPC Organized Upcoming Mock Tests</h3>
+          <p style={{ marginTop: "10px", fontSize: "18px", fontWeight: "600" }}>{upcoming.length} upcoming</p>
         </div>
 
         <div style={cardStyle} onClick={() => navigate("/mock-list")}>
           <h3>Previous TPC Mocks</h3>
+          <p style={{ marginTop: "10px", color: "#666" }}>View all previous mocks</p>
         </div>
 
         <div style={cardStyle} onClick={() => navigate("/practice-test")}>

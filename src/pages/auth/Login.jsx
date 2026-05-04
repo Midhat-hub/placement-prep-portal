@@ -47,11 +47,6 @@ return(
 
 <h3>Your placement preparation starts here.</h3>
 
-<p>
-Practice aptitude, solve coding problems,
-and analyze your resume to prepare
-for upcoming placements.
-</p>
 
 </div>
 
