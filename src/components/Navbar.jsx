@@ -52,7 +52,10 @@ onClick={()=>navigate("/resume")}
 </button>
 
 
-<button className="nav-item disabled">
+<button
+className={`nav-item ${isActive("/mocktest") ? "active" : ""}`}
+onClick={()=>navigate("/mocktest")}
+>
 <span className="icon">📝</span>
 {open && <span>Mock Test</span>}
 </button>

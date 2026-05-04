@@ -23,6 +23,13 @@ import CodingPage from "./pages/practice/CodingPage"
 import CompanyList from "@/pages/practice/CompanyList"
 import CompanyPage from "@/pages/practice/CompanyPage"
 
+//Mock test
+import MockTestHome from "./pages/mocktest/MockTestHome";
+import CreateMock from "./pages/mocktest/CreateMock";
+import PracticeTest from "./pages/mocktest/PracticeTest";
+import TestPage from "./pages/mocktest/TestPage";
+import MockList from "./pages/mocktest/MockList";
+
 import "./styles/theme.css"
 
 function App(){
@@ -78,6 +85,13 @@ padding:"20px"
 <Route path="/practice/company/:company" element={<CompanyPage />} />
 <Route path="/practice/coding/:company" element={<CodingLinksPage />} />
 <Route path="/practice/company/:company/aptitude" element={<CompanyAptitudeTable />} />
+
+{/* Mock Test */}
+<Route path="/mocktest" element={<MockTestHome />} />
+<Route path="/create-mock" element={<CreateMock />} />
+<Route path="/practice-test" element={<PracticeTest />} />
+<Route path="/test" element={<TestPage />} />
+<Route path="/mock-list" element={<MockList />} />
 
 </Routes>
 
