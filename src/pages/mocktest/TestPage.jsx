@@ -1,184 +1,394 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
+import {
+  doc,
+  getDoc,
+  setDoc,
+  Timestamp
+} from "firebase/firestore";
+
+import { auth, db } from "@/firebase/firebase";
 export default function TestPage() {
-  const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState({});
-  const [score, setScore] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(0);
-  const [timerEnded, setTimerEnded] = useState(false);
+
+  const { mockId } = useParams();
+
   const navigate = useNavigate();
 
-  // LOAD QUESTIONS + SET TIME
+  const [loading, setLoading] =
+    useState(true);
+
+  const [mock, setMock] =
+    useState(null);
+
+  const [questions, setQuestions] =
+    useState([]);
+
+  const [answers, setAnswers] =
+    useState({});
+
+  const [score, setScore] =
+    useState(null);
+
+  const [timeLeft, setTimeLeft] =
+    useState(0);
+
+  // LOAD MOCK
+
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("mockQuestions"));
-    const testData = JSON.parse(localStorage.getItem("currentTest"));
 
-    setQuestions(data || []);
+    const loadMock =
+      async () => {
 
-    // ✅ FINAL TIMER LOGIC
-    let calculatedTime = 25 * 60; // default 25 minutes in seconds
+      try {
 
-    if (testData) {
-      if (testData.time) {
-        const testTimeInSeconds = testData.time * 60;
+        const snap =
+          await getDoc(
+            doc(
+              db,
+              "mockTests",
+              mockId
+            )
+          );
 
-        // If test has start and end times (upcoming/previous mock)
-        if (testData.start && testData.end) {
-          const now = new Date().getTime();
-          const endTime = new Date(testData.end).getTime();
-          const isPrevious = now >= endTime;
+        if (!snap.exists()) {
 
-          if (isPrevious) {
-            // For previous mocks, use full test time
-            calculatedTime = testTimeInSeconds;
-          } else {
-            // For upcoming mocks, use minimum of test time and available duration
-            const startTime = new Date(testData.start).getTime();
-            const durationInSeconds = (endTime - startTime) / 1000;
-            calculatedTime = Math.min(testTimeInSeconds, durationInSeconds);
-          }
-        } else {
-          // Practice test
-          calculatedTime = testTimeInSeconds;
+          alert(
+            "Mock not found"
+          );
+
+          navigate("/mocktest");
+
+          return;
+
         }
-      }
-    }
 
-    setTimeLeft(calculatedTime);
-  }, []);
+        const data =
+          snap.data();
+
+        setMock(data);
+
+        setQuestions(
+          data.questions || []
+        );
+
+        setTimeLeft(
+          (data.duration || 30) * 60
+        );
+
+      }
+      catch (error) {
+
+        console.error(error);
+
+        alert(
+          "Failed to load test"
+        );
+
+      }
+
+      setLoading(false);
+
+    };
+
+    loadMock();
+
+  }, [mockId]);
 
   // TIMER
+
   useEffect(() => {
-    if (timeLeft <= 0 && timeLeft !== 0) {
-      setTimerEnded(true);
-      handleSubmit();
+
+    if (
+      loading ||
+      score !== null
+    )
       return;
+
+    if (timeLeft <= 0) {
+
+      submitTest();
+
+      return;
+
     }
 
-    if (timeLeft === 0) return;
+    const timer =
+      setInterval(() => {
 
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
-    }, 1000);
+        setTimeLeft(
+          (prev) => prev - 1
+        );
 
-    return () => clearInterval(timer);
-  }, [timeLeft]);
+      }, 1000);
+
+    return () =>
+      clearInterval(timer);
+
+  }, [
+    timeLeft,
+    loading,
+    score
+  ]);
 
   // FORMAT TIME
+
   const formatTime = () => {
-    const min = Math.floor(timeLeft / 60);
-    const sec = timeLeft % 60;
-    return `${min}:${sec < 10 ? "0" : ""}${sec}`;
+
+    const mins =
+      Math.floor(
+        timeLeft / 60
+      );
+
+    const secs =
+      timeLeft % 60;
+
+    return `${mins}:${
+      secs < 10
+        ? "0"
+        : ""
+    }${secs}`;
+
   };
 
-  // STORE ANSWERS
-  const handleSelect = (qIndex, optionValue) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [qIndex]: optionValue,
-    }));
-  };
+  // SELECT ANSWER
 
-  // SUBMIT TEST
-  const handleSubmit = () => {
-    if (score !== null) return;
+  const selectAnswer =
+    (
+      questionIndex,
+      option
+    ) => {
 
-    let marks = 0;
+      setAnswers(
+        (prev) => ({
+          ...prev,
+          [questionIndex]:
+            option
+        })
+      );
 
-    questions.forEach((q, i) => {
-      const userAns = answers[i];
-      const correctAns = q.answer;
+    };
 
-      if (
-        userAns &&
-        correctAns &&
-        userAns.toString().trim().toLowerCase() ===
-          correctAns.toString().trim().toLowerCase()
-      ) {
-        marks++;
-      }
-    });
+  // SUBMIT
+
+const submitTest = async () => {
+
+  let marks = 0;
+
+  questions.forEach((q, index) => {
+
+    const userAnswer =
+      answers[index];
+
+    if (
+      userAnswer === q.answer
+    ) {
+      marks++;
+    }
+
+  });
+
+  try {
+
+    const user =
+      auth.currentUser;
+
+    if (user) {
+
+      await setDoc(
+
+        doc(
+          db,
+          "user_progress",
+          user.uid,
+          "mock_tests",
+          mockId
+        ),
+
+        {
+          mockId,
+
+          title:
+            mock.title,
+
+          score:
+            marks,
+
+          totalQuestions:
+            questions.length,
+
+          percentage:
+            Math.round(
+              (
+                marks /
+                questions.length
+              ) * 100
+            ),
+
+          answers,
+
+          submittedAt:
+            Timestamp.now()
+        }
+
+      );
+
+    }
 
     setScore(marks);
-  };
+
+  }
+  catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Failed to save result"
+    );
+
+  }
+
+};
+
+  if (loading) {
+
+    return (
+      <h2>
+        Loading Test...
+      </h2>
+    );
+
+  }
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Mock Test</h2>
 
-      {/* TIMER */}
-      <h3 style={{ color: "red" }}>
-        Time Left: {formatTime()}
+    <div
+      style={{
+        padding: "20px"
+      }}
+    >
+
+      <h1>
+        {mock?.title}
+      </h1>
+
+      <h3
+        style={{
+          color: "red"
+        }}
+      >
+        Time Left:
+        {" "}
+        {formatTime()}
       </h3>
 
-      {/* QUESTIONS */}
-      {questions.map((q, i) => (
-        <div key={i} style={{ marginBottom: "20px" }}>
-          <p><b>{i + 1}. {q.question}</b></p>
+      <hr />
 
-          {q.options &&
-            q.options.map((opt, index) => (
-              <div key={index}>
-                <input
-                  type="radio"
-                  name={`q-${i}`}
-                  onChange={() => handleSelect(i, opt)}
-                />
-                {opt}
-              </div>
-            ))}
-        </div>
-      ))}
+      {questions.map(
+        (q, index) => (
 
-      {/* SUBMIT */}
-      <button
-        onClick={handleSubmit}
-        style={{ padding: "10px 20px", marginTop: "20px" }}
-      >
-        Submit Test
-      </button>
+          <div
+            key={index}
+            style={{
+              marginBottom:
+                "30px"
+            }}
+          >
 
-      {/* RESULT */}
-      {score !== null && (
-        <div>
-          <h3>
-            Your Score: {score} / {questions.length}
-          </h3>
-          {timerEnded && (
-            <div style={{
-              position: "fixed",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              backgroundColor: "white",
-              padding: "30px",
-              borderRadius: "10px",
-              boxShadow: "0 0 20px rgba(0,0,0,0.3)",
-              zIndex: 1000,
-              textAlign: "center",
-              minWidth: "300px"
-            }}>
-              <h2 style={{ color: "#ff6b6b", marginBottom: "20px" }}>⏰ Time Over!</h2>
-              <p style={{ marginBottom: "20px" }}>Your test has been submitted.</p>
-              <button
-                onClick={() => navigate("/mocktest")}
-                style={{
-                  padding: "10px 20px",
-                  backgroundColor: "#4CAF50",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                  fontSize: "16px"
-                }}
-              >
-                OK
-              </button>
-            </div>
-          )}
-        </div>
+            <h4>
+              {index + 1}.
+              {" "}
+              {q.question}
+            </h4>
+
+            {q.options?.map(
+              (
+                option,
+                optionIndex
+              ) => (
+
+                <label
+                  key={
+                    optionIndex
+                  }
+                  style={{
+                    display:
+                      "block",
+                    margin:
+                      "8px 0"
+                  }}
+                >
+
+                  <input
+                    type="radio"
+                    name={`q${index}`}
+                    checked={
+                      answers[
+                        index
+                      ] ===
+                      option
+                    }
+                    onChange={() =>
+                      selectAnswer(
+                        index,
+                        option
+                      )
+                    }
+                  />
+
+                  {" "}
+                  {option}
+
+                </label>
+
+              )
+            )}
+
+          </div>
+
+        )
       )}
+
+      {score === null ? (
+
+        <button
+          onClick={
+            submitTest
+          }
+        >
+          Submit Test
+        </button>
+
+      ) : (
+
+        <div>
+
+          <h2>
+            Score:
+            {" "}
+            {score}
+            {" / "}
+            {
+              questions.length
+            }
+          </h2>
+
+          <button
+            onClick={() =>
+              navigate(
+                "/mocktest"
+              )
+            }
+          >
+            Back
+          </button>
+
+        </div>
+
+      )}
+
     </div>
+
   );
+
 }
