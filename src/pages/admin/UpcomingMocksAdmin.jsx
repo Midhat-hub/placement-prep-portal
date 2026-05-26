@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 
 import {
   collection,
-  getDocs
+  getDocs,
+  deleteDoc,
+  doc
 } from "firebase/firestore";
 
 import { db } from "@/firebase/firebase";
 
-export default function UpcomingMocks() {
+export default function UpcomingMocksAdmin() {
 
-  const [tests, setTests] =
+  const [mocks, setMocks] =
     useState([]);
 
   const [loading, setLoading] =
@@ -18,17 +20,6 @@ export default function UpcomingMocks() {
   useEffect(() => {
 
     loadMocks();
-
-    const interval =
-      setInterval(
-        loadMocks,
-        60000
-      );
-
-    return () =>
-      clearInterval(
-        interval
-      );
 
   }, []);
 
@@ -84,7 +75,7 @@ export default function UpcomingMocks() {
             b.startTime.seconds
         );
 
-        setTests(upcoming);
+        setMocks(upcoming);
 
       }
       catch (error) {
@@ -97,43 +88,37 @@ export default function UpcomingMocks() {
 
     };
 
-  const getTimeRemaining =
-    (startTime) => {
+  const deleteMock =
+    async (id) => {
 
-      const now =
-        new Date();
-
-      const diff =
-        startTime - now;
-
-      if (diff <= 0)
-        return "Starting soon";
-
-      const days =
-        Math.floor(
-          diff /
-          (1000 * 60 * 60 * 24)
+      const confirmDelete =
+        window.confirm(
+          "Delete this mock?"
         );
 
-      const hours =
-        Math.floor(
-          (
-            diff %
-            (1000 * 60 * 60 * 24)
-          ) /
-          (1000 * 60 * 60)
+      if (
+        !confirmDelete
+      )
+        return;
+
+      try {
+
+        await deleteDoc(
+          doc(
+            db,
+            "mockTests",
+            id
+          )
         );
 
-      const mins =
-        Math.floor(
-          (
-            diff %
-            (1000 * 60 * 60)
-          ) /
-          (1000 * 60)
-        );
+        loadMocks();
 
-      return `${days}d ${hours}h ${mins}m`;
+      }
+      catch (error) {
+
+        console.error(error);
+
+      }
 
     };
 
@@ -156,11 +141,11 @@ export default function UpcomingMocks() {
     >
 
       <h1>
-        Upcoming Mock Tests
+        Upcoming Mocks
       </h1>
 
       {
-        tests.length === 0 &&
+        mocks.length === 0 &&
         (
           <p>
             No upcoming mocks.
@@ -169,11 +154,11 @@ export default function UpcomingMocks() {
       }
 
       {
-        tests.map(
-          (test) => (
+        mocks.map(
+          (mock) => (
 
             <div
-              key={test.id}
+              key={mock.id}
               style={{
                 background:
                   "#fff",
@@ -193,14 +178,14 @@ export default function UpcomingMocks() {
             >
 
               <h3>
-                {test.title}
+                {mock.title}
               </h3>
 
               <p>
                 Questions:
                 {" "}
                 {
-                  test.questionCount
+                  mock.questionCount
                 }
               </p>
 
@@ -208,7 +193,7 @@ export default function UpcomingMocks() {
                 Starts:
                 {" "}
                 {
-                  test.startTime
+                  mock.startTime
                     ?.toDate()
                     .toLocaleString()
                 }
@@ -218,28 +203,40 @@ export default function UpcomingMocks() {
                 Ends:
                 {" "}
                 {
-                  test.endTime
+                  mock.endTime
                     ?.toDate()
                     .toLocaleString()
                 }
               </p>
 
-              <p
-                style={{
-                  color:
-                    "#003b63",
-                  fontWeight:
-                    "600"
-                }}
-              >
-                Available In:
-                {" "}
-                {
-                  getTimeRemaining(
-                    test.startTime.toDate()
+              <button
+                onClick={() =>
+                  deleteMock(
+                    mock.id
                   )
                 }
-              </p>
+                style={{
+                  background:
+                    "#d32f2f",
+
+                  color:
+                    "white",
+
+                  border:
+                    "none",
+
+                  padding:
+                    "10px 15px",
+
+                  borderRadius:
+                    "6px",
+
+                  cursor:
+                    "pointer"
+                }}
+              >
+                Delete Mock
+              </button>
 
             </div>
 

@@ -10,16 +10,18 @@ function AdminDashboard() {
       icon: "📝",
       route: "/create-mock"
     },
+   {
+  title: "Upcoming Mocks",
+  icon: "📅",
+  route:
+    "/admin/upcoming-mocks"
+},
     {
-      title: "Upcoming Tests",
-      icon: "📅",
-      route: "/mocktest/upcoming"
-    },
-    {
-      title: "Previous Tests",
-      icon: "📚",
-      route: "/previous-mocks"
-    },
+  title: "Previous Mocks",
+  icon: "📚",
+  route:
+    "/admin/previous-mocks"
+},
     {
       title: "Question Bank",
       icon: "❓",

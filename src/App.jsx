@@ -37,6 +37,13 @@ import LiveMocks from "./pages/mocktest/LiveMocks";
 import PreviousMocks from "./pages/mocktest/PreviousMocks";
 import MockReview
 from "./pages/mocktest/MockReview";
+import QuestionBank
+from "./pages/admin/QuestionBank";
+
+import UpcomingMocksAdmin
+from "./pages/admin/UpcomingMocksAdmin";
+import AdminPreviousMocks
+from "./pages/admin/AdminPreviousMocks";
 import "./styles/theme.css"
 
 
@@ -46,12 +53,26 @@ const location = useLocation()
 
 // Pages where navbar should NOT appear
 const hideNavbarRoutes = [
-"/",
-"/signup",
-"/admin-login"
+   "/",
+  "/signup",
+  "/admin-login",
+  "/admin/dashboard",
+  "/question-bank",
+  "/admin/upcoming-mocks",
+  "/create-mock",
+  "/admin/previous-mocks"
+
 ]
 
-const showNavbar = !hideNavbarRoutes.includes(location.pathname)
+const isAdminPage =
+  location.pathname.startsWith("/admin") ||
+  location.pathname.startsWith("/mock-review");
+
+const showNavbar =
+  !hideNavbarRoutes.includes(
+    location.pathname
+  ) &&
+  !isAdminPage;
 
 return(
 
@@ -69,6 +90,24 @@ padding:"20px"
  {showNavbar && <Topbar />}
 
 <Routes>
+<Route
+  path="/admin/previous-mocks"
+  element={
+    <AdminPreviousMocks />
+  }
+/>
+
+  <Route
+  path="/admin/upcoming-mocks"
+  element={
+    <UpcomingMocksAdmin />
+  }
+/>
+
+  <Route
+  path="/question-bank"
+  element={<QuestionBank />}
+/>
 <Route
   path="/mock-review/:mockId"
   element={<MockReview />}
