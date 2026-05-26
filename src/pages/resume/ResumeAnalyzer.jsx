@@ -1,96 +1,143 @@
-import { useState } from "react";
+import React, { useState } from 'react';
+import axios from 'axios';
+import '../../index.css';
+import ResumeUploader from './ResumeUploader.jsx';
+import AnalysisResults from './AnalysisResults.jsx';
+import { auth } from '../../firebase/firebase';
 
-function ResumeAnalyzer(){
+// API base URL - can be configured via Vite environment variable
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
-const [file,setFile] = useState(null);
-const [result,setResult] = useState(null);
+function ResumeAnalyzer() {
+  const [file, setFile] = useState(null);
+  const [jobDescription, setJobDescription] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [results, setResults] = useState(null);
 
-const handleUpload = async () => {
+  const handleFileSelect = (selectedFile) => {
+    setFile(selectedFile);
+    setError(null);
+  };
 
-if(!file){
-alert("Please upload a resume");
-return;
-}
+  const handleRemoveFile = () => {
+    setFile(null);
+  };
 
-const formData = new FormData();
-formData.append("file",file);
+  const handleAnalyze = async () => {
+    if (!file) {
+      setError({ message: 'Please select a resume file first' });
+      return;
+    }
 
-try{
+    setLoading(true);
+    setError(null);
+    setResults(null);
 
-const response = await fetch("http://localhost:5000/api/full-analysis",{
-method:"POST",
-body:formData
-});
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      if (jobDescription.trim()) {
+        formData.append('job_description', jobDescription.trim());
+      }
 
-const data = await response.json();
-setResult(data);
+      const headers = { 'Content-Type': 'multipart/form-data' };
+      const user = auth.currentUser;
+      console.log("currentUser before upload:", user);
+      if (user) {
+        try {
+          const idToken = await user.getIdToken();
+          headers['Authorization'] = `Bearer ${idToken}`;
+        } catch (tokenErr) {
+          console.warn('Failed to get ID token:', tokenErr);
+        }
+      }
 
-}
-catch(error){
-console.error(error);
-}
+      const response = await axios.post(`${API_BASE_URL}/full-analysis`, formData, {
+        headers,
+      });
 
-};
+      if (response.data.success) {
+        setResults(response.data);
+      } else {
+        setError({ message: response.data.error || 'Analysis failed' });
+      }
+    } catch (err) {
+      console.error('Analysis error:', err);
+      setError({
+        message: err.response?.data?.error || err.message || 'Failed to analyze resume. Please check if the backend server is running.',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
-return(
+  const handleNewAnalysis = () => {
+    setFile(null);
+    setJobDescription('');
+    setResults(null);
+    setError(null);
+  };
 
-<div className="page">
+  return (
+    <div className="App">
+      <div className="header">
+        <h1> Resume Analyzer</h1>
+        <p>Get instant AI-powered feedback on your resume</p>
+      </div>
 
-<h1 className="page-heading">
-Resume Analyzer
-</h1>
+      {!results ? (
+        <div className="container">
+          <ResumeUploader
+            file={file}
+            onFileSelect={handleFileSelect}
+            onRemoveFile={handleRemoveFile}
+          />
 
-<div className="card resume-card">
+          <div className="job-description-section">
+            <h3>Job Description (Optional)</h3>
+            <textarea
+              className="job-description-textarea"
+              placeholder="Paste a job description here to get targeted feedback..."
+              value={jobDescription}
+              onChange={(e) => setJobDescription(e.target.value)}
+            />
+          </div>
 
-{/* FILE UPLOAD */}
+          {error && (
+            <div className="error">
+              <h3>⚠️ Error</h3>
+              <p>{error.message}</p>
+            </div>
+          )}
 
-<div className="upload-box">
+          {loading ? (
+            <div className="loading">
+              <div className="spinner"></div>
+              <p>Analyzing your resume... This may take a moment.</p>
+            </div>
+          ) : (
+            <button
+              className="analyze-btn"
+              onClick={handleAnalyze}
+              disabled={!file}
+            >
+              {file ? ' Analyze Resume' : ' Select a file to analyze'}
+            </button>
+          )}
+        </div>
+      ) : (
+        <AnalysisResults
+          results={results}
+          onNewAnalysis={handleNewAnalysis}
+        />
+      )}
 
-<input
-type="file"
-accept=".pdf,.docx"
-onChange={(e)=>setFile(e.target.files[0])}
-/>
-
-</div>
-
-
-{/* ANALYZE BUTTON */}
-
-<button
-className="btn full-btn"
-onClick={handleUpload}
->
-Analyze Resume
-</button>
-
-
-{/* RESULT */}
-
-{result && (
-
-<div className="analysis-result">
-
-<h2>Analysis Result</h2>
-
-<div className="analysis-box">
-
-<pre>
-{JSON.stringify(result,null,2)}
-</pre>
-
-</div>
-
-</div>
-
-)}
-
-</div>
-
-</div>
-
-);
-
+      <div className="footer">
+        <p>Built with React & Flask | Powered by Groq</p>
+      </div>
+    </div>
+  );
 }
 
 export default ResumeAnalyzer;

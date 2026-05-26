@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
 class Config:
@@ -20,23 +19,12 @@ class Config:
     PORT = int(os.getenv('PORT', 5000))
     HOST = os.getenv('HOST', '0.0.0.0')
     
-    # LLM Provider settings (openai, gemini, or groq)
-    LLM_PROVIDER = os.getenv('LLM_PROVIDER', 'Groq')
-    
-    # OpenAI settings
-    OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '')
-    OPENAI_MODEL = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')
-    
-    # Google Gemini settings (FREE)
-    GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', '')
-    GEMINI_MODEL = os.getenv('GEMINI_MODEL', 'gemini-2.0-flash')
-    
-    # Groq settings (free alternative)
+    # Groq settings
     GROQ_API_KEY = os.getenv('GROQ_API_KEY', '')
     GROQ_MODEL = os.getenv('GROQ_MODEL', 'llama-3.3-70b-versatile')
     
-    # CORS settin
-    CORS_ORIGINS = ["*"]
+    # CORS settings
+    CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:3000').split(',')
     
     @staticmethod
     def init_app(app):
