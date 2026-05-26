@@ -44,6 +44,7 @@ import UpcomingMocksAdmin
 from "./pages/admin/UpcomingMocksAdmin";
 import AdminPreviousMocks
 from "./pages/admin/AdminPreviousMocks";
+import PracticeTestPage from "./pages/mocktest/PracticeTestPage";
 import "./styles/theme.css"
 
 
@@ -90,6 +91,10 @@ padding:"20px"
  {showNavbar && <Topbar />}
 
 <Routes>
+<Route
+  path="/practice-test-page"
+  element={<PracticeTestPage />}
+/>
 <Route
   path="/admin/previous-mocks"
   element={
