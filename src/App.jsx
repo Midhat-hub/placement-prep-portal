@@ -9,9 +9,12 @@ import Signup from "./pages/auth/Signup"
 
 // Dashboard
 import Dashboard from "./pages/dashboard/Dashboard"
+//<Route
+  //path="/resume"
+ // element={<ResumeAnalyzer />}
 
 // Resume
-import ResumeAnalyzer from "./pages/resume/ResumeAnalyzer"
+//import ResumeAnalyzer from "./pages/resume/ResumeAnalyzer"
 import CompanyAptitudeTable from "@/pages/practice/CompanyAptitudeTable"
 
 // Practice Module
@@ -92,6 +95,11 @@ padding:"20px"
 
 <Routes>
 <Route
+  path="/practice-test"
+  element={<PracticeTest />}
+/>
+
+<Route
   path="/practice-test-page"
   element={<PracticeTestPage />}
 />
@@ -145,7 +153,11 @@ element={<AdminDashboard />}
 <Route path="/dashboard" element={<Dashboard />} />
 
 {/* Resume Analyzer */}
-<Route path="/resume" element={<ResumeAnalyzer />} />
+
+<Route
+  path="/resume"
+  element={<h1>Resume Analyzer Disabled</h1>}
+/>
 
 {/* Practice Hub */}
 <Route path="/practice" element={<PracticeHome />} />

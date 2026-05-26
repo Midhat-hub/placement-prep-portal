@@ -18,6 +18,36 @@ export default function PracticeTest() {
   const [loading, setLoading] =
     useState(false);
 
+  const shuffleArray = (array) => {
+
+    const shuffled = [...array];
+
+    for (
+      let i = shuffled.length - 1;
+      i > 0;
+      i--
+    ) {
+
+      const j =
+        Math.floor(
+          Math.random() *
+          (i + 1)
+        );
+
+      [
+        shuffled[i],
+        shuffled[j]
+      ] = [
+        shuffled[j],
+        shuffled[i]
+      ];
+
+    }
+
+    return shuffled;
+
+  };
+
   const loadQuestions = () => {
 
     setLoading(true);
@@ -50,8 +80,8 @@ export default function PracticeTest() {
     }
 
     const shuffled =
-      [...questions].sort(
-        () => Math.random() - 0.5
+      shuffleArray(
+        questions
       );
 
     const selected =
@@ -63,9 +93,6 @@ export default function PracticeTest() {
         )
       );
 
-    const timerMinutes =
-      selected.length;
-
     const practiceTest = {
 
       id: Date.now(),
@@ -74,24 +101,45 @@ export default function PracticeTest() {
         `Practice Test - ${subject.toUpperCase()}`,
 
       time:
-        timerMinutes,
+        numQuestions,
 
       isPractice:
         true
 
     };
 
+    localStorage.removeItem(
+      "mockQuestions"
+    );
+
+    localStorage.removeItem(
+      "currentTest"
+    );
+
     localStorage.setItem(
       "mockQuestions",
-      JSON.stringify(selected)
+      JSON.stringify(
+        selected
+      )
     );
 
     localStorage.setItem(
       "currentTest",
-      JSON.stringify(practiceTest)
+      JSON.stringify(
+        practiceTest
+      )
     );
+    console.log("TOTAL QUESTIONS:", questions.length);
+console.log("SELECTED QUESTIONS:");
+console.log(selected.map(q => q.question));
+   navigate(
+  "/practice-test-page",
+  {
+    replace: true
+  }
+);
 
- navigate("/practice-test-page");
+window.location.reload();
 
   };
 
@@ -116,10 +164,11 @@ export default function PracticeTest() {
       >
 
         <h4>
-          Subject
+          Select Subject
         </h4>
 
         <label>
+
           <input
             type="radio"
             value="core"
@@ -132,12 +181,15 @@ export default function PracticeTest() {
               )
             }
           />
+
           Core Subjects
+
         </label>
 
         <br />
 
         <label>
+
           <input
             type="radio"
             value="dsa"
@@ -150,12 +202,15 @@ export default function PracticeTest() {
               )
             }
           />
+
           DSA
+
         </label>
 
         <br />
 
         <label>
+
           <input
             type="radio"
             value="aptitude"
@@ -168,12 +223,15 @@ export default function PracticeTest() {
               )
             }
           />
+
           Aptitude
+
         </label>
 
         <br />
 
         <label>
+
           <input
             type="radio"
             value="all"
@@ -186,7 +244,9 @@ export default function PracticeTest() {
               )
             }
           />
+
           Mixed
+
         </label>
 
       </div>
@@ -208,9 +268,12 @@ export default function PracticeTest() {
           value={numQuestions}
           onChange={(e) =>
             setNumQuestions(
-              parseInt(
-                e.target.value
-              ) || 1
+              Math.max(
+                1,
+                parseInt(
+                  e.target.value
+                ) || 1
+              )
             )
           }
         />
@@ -218,22 +281,30 @@ export default function PracticeTest() {
       </div>
 
       <p>
+
         Duration:
         {" "}
         {numQuestions}
         {" "}
-        Minutes
+        minutes
+
       </p>
 
       <button
-        onClick={loadQuestions}
-        disabled={loading}
+        onClick={
+          loadQuestions
+        }
+        disabled={
+          loading
+        }
       >
+
         {
           loading
             ? "Starting..."
             : "Start Practice Test"
         }
+
       </button>
 
     </div>
