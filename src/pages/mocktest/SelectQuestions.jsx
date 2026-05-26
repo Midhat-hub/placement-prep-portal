@@ -57,7 +57,7 @@ export default function SelectQuestions({ onNext }) {
       correctAnswer: correctAnswer,
     };
     setSelectedQuestions((prev) => [...prev, newCustom]);
-    
+
     // Reset form
     setCustomQuestion("");
     setOptionA("");
@@ -65,7 +65,7 @@ export default function SelectQuestions({ onNext }) {
     setOptionC("");
     setOptionD("");
     setCorrectAnswer("A");
-    
+
     alert("Custom MCQ added to selection!");
   };
 

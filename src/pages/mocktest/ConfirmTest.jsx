@@ -40,7 +40,7 @@ export default function ConfirmTest({
       return;
     }
 
-    
+
     const minStart = new Date(now.getTime());
     if (start < minStart) {
       alert("Invalid Begin time");

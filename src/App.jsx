@@ -28,17 +28,28 @@ import MockTestHome from "./pages/mocktest/MockTestHome";
 import CreateMock from "./pages/mocktest/CreateMock";
 import PracticeTest from "./pages/mocktest/PracticeTest";
 import TestPage from "./pages/mocktest/TestPage";
-import MockList from "./pages/mocktest/MockList";
-import UpcomingMocks from "./pages/mocktest/UpcomingMocks";
 
+import UpcomingMocks from "./pages/mocktest/UpcomingMocks";
+import AdminLogin from "./pages/auth/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+
+import LiveMocks from "./pages/mocktest/LiveMocks";
+import PreviousMocks from "./pages/mocktest/PreviousMocks";
+import MockReview
+from "./pages/mocktest/MockReview";
 import "./styles/theme.css"
+
 
 function App(){
 
 const location = useLocation()
 
 // Pages where navbar should NOT appear
-const hideNavbarRoutes = ["/", "/signup"]
+const hideNavbarRoutes = [
+"/",
+"/signup",
+"/admin-login"
+]
 
 const showNavbar = !hideNavbarRoutes.includes(location.pathname)
 
@@ -58,6 +69,29 @@ padding:"20px"
  {showNavbar && <Topbar />}
 
 <Routes>
+<Route
+  path="/mock-review/:mockId"
+  element={<MockReview />}
+/>
+
+    <Route
+  path="/mocktest/live"
+  element={<LiveMocks />}
+/>
+
+<Route
+  path="/mocktest/previous"
+  element={<PreviousMocks />}
+/>
+    <Route
+path="/admin-login"
+element={<AdminLogin />}
+/>
+
+<Route
+path="/admin/dashboard"
+element={<AdminDashboard />}
+/>
 
 {/* Auth */}
 <Route path="/" element={<Login />} />
@@ -92,8 +126,8 @@ padding:"20px"
 <Route path="/create-mock" element={<CreateMock />} />
 <Route path="/mocktest/upcoming" element={<UpcomingMocks />} />
 <Route path="/practice-test" element={<PracticeTest />} />
-<Route path="/test" element={<TestPage />} />
-<Route path="/mock-list" element={<MockList />} />
+<Route path="/test/:mockId" element={<TestPage />} />
+
 
 </Routes>
 

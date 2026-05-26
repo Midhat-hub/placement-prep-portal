@@ -1414,3 +1414,24 @@ font-size:13px;
 white-space:pre-wrap;
 
 }
+
+.admin-grid{
+  display:flex;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+.admin-card{
+  width:260px;
+  height:180px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  border-radius:16px;
+  background:white;
+  cursor:pointer;
+
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
