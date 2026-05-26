@@ -43,6 +43,7 @@ function ResumeAnalyzer() {
 
       const headers = { 'Content-Type': 'multipart/form-data' };
       const user = auth.currentUser;
+      console.log("currentUser before upload:", user);
       if (user) {
         try {
           const idToken = await user.getIdToken();
