@@ -4,9 +4,7 @@ from werkzeug.utils import secure_filename
 import os
 from config import Config
 from services.analyzer import ResumeAnalyzer
-
-import os
-print("GROQ KEY:", os.getenv("GROQ_API_KEY"))
+from services.firebase_db import verify_id_token, save_resume_summary
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -107,7 +105,7 @@ def analyze():
 
 @app.route('/api/parse', methods=['POST'])
 def parse():
-    """Quick parse to extract structured data"""
+    """Quick parse to extract structured data without LLM"""
     
     data = request.get_json()
     
@@ -117,8 +115,19 @@ def parse():
     resume_text = data['resume_text']
     
     try:
-        result = analyzer.quick_parse(resume_text)
-        return jsonify(result)
+        # Preprocess text
+        resume_text = analyzer.preprocess_resume(resume_text)
+        
+        if not resume_text:
+            return jsonify({'error': 'Resume text is empty'}), 400
+        
+        # Extract structured data
+        structured_data = analyzer.extract_structured_data(resume_text)
+        
+        return jsonify({
+            'success': True,
+            'structured_data': structured_data
+        })
         
     except Exception as e:
         return jsonify({
@@ -135,6 +144,19 @@ def full_analysis():
     
     file = request.files['file']
     job_description = request.form.get('job_description', None)
+
+    # Try to verify Firebase ID token from Authorization header (optional)
+    auth_header = request.headers.get('Authorization') or request.headers.get('authorization')
+    uid = None
+    print('Authorization header:', auth_header)
+    if auth_header and auth_header.startswith('Bearer '):
+        id_token = auth_header.split(' ', 1)[1].strip()
+        try:
+            decoded = verify_id_token(id_token)
+            uid = decoded.get('uid')
+            print('Verified UID:', uid)
+        except Exception as e:
+            print("Firebase token verification failed:", e)
     
     if file.filename == '':
         return jsonify({'error': 'No file selected'}), 400
@@ -154,9 +176,31 @@ def full_analysis():
         result = analyzer.analyze_resume(text, job_description)
         result['filename'] = filename
         
+        # If token verified and analysis succeeded, persist compact summary
+        try:
+            if uid and result.get('success'):
+                structured = result.get('analysis_json', {}) or {}
+                detailed_sections = structured.get('detailed_analysis_sections', [])
+                structured_data = result.get('structured_data', {}) or {}
+                resume_summary = {
+                    'skills': structured_data.get('skills', []) if isinstance(structured_data, dict) else [],
+                    'education': structured_data.get('education', []) if isinstance(structured_data, dict) else [],
+                    'experience': structured_data.get('experience', []) if isinstance(structured_data, dict) else [],
+                    'projects': structured_data.get('projects', []) if isinstance(structured_data, dict) else [],
+                }
+                save_resume_summary(
+                    uid,
+                    result.get('overall_score'),
+                    result.get('ats_score'),
+                    detailed_sections,
+                    resume_summary,
+                )
+        except Exception as e:
+            print("Error saving resume summary to Firestore:", e)
+
         # Clean up
         os.remove(filepath)
-        
+
         return jsonify(result)
         
     except Exception as e:
@@ -196,7 +240,7 @@ if __name__ == '__main__':
     print(f"CORS Origins: {Config.CORS_ORIGINS}")
     
     if not Config.GROQ_API_KEY:
-        print("\n⚠️  WARNING: OPENAI_API_KEY not set. Please configure it in .env file")
+        print("\n⚠️  WARNING: GROQ_API_KEY not set. Please configure it in .env file")
     
     app.run(
         host=Config.HOST,
