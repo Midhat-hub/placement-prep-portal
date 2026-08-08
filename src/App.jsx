@@ -153,11 +153,7 @@ element={<AdminDashboard />}
 <Route path="/dashboard" element={<Dashboard />} />
 
 {/* Resume Analyzer */}
-
-<Route
-  path="/resume"
-  element={<h1>Resume Analyzer Disabled</h1>}
-/>
+<Route path="/resume" element={<ResumeAnalyzer />} />
 
 {/* Practice Hub */}
 <Route path="/practice" element={<PracticeHome />} />
