@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom"
 import Topbar from "@/components/Topbar"
 import CodingLinksPage from "@/pages/practice/CodingLinksPage"
 
+
 // Auth
 import Login from "./pages/auth/Login"
 import Signup from "./pages/auth/Signup"
@@ -13,8 +14,11 @@ import Dashboard from "./pages/dashboard/Dashboard"
   //path="/resume"
  // element={<ResumeAnalyzer />}
 
+ // Chatbot
+import Chatbot from "./pages/chatbot/Chatbot"
+
 // Resume
-//import ResumeAnalyzer from "./pages/resume/ResumeAnalyzer"
+import ResumeAnalyzer from "./pages/resume/ResumeAnalyzer"
 import CompanyAptitudeTable from "@/pages/practice/CompanyAptitudeTable"
 
 // Practice Module
@@ -151,6 +155,9 @@ element={<AdminDashboard />}
 
 {/* Dashboard */}
 <Route path="/dashboard" element={<Dashboard />} />
+
+{/* AI Chatbot */}
+<Route path="/chatbot" element={<Chatbot />} />
 
 {/* Resume Analyzer */}
 <Route path="/resume" element={<ResumeAnalyzer />} />

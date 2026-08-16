@@ -5,10 +5,13 @@ import os
 from config import Config
 from services.analyzer import ResumeAnalyzer
 from services.firebase_db import verify_id_token, save_resume_summary
+from chatbot.chatbot_routes import chatbot_bp
 
 app = Flask(__name__)
 app.config.from_object(Config)
 Config.init_app(app)
+
+app.register_blueprint(chatbot_bp)
 
 # Enable CORS
 CORS(app, resources={r"/api/*": {"origins": Config.CORS_ORIGINS}})
