@@ -4,6 +4,7 @@ import os
 import json
 import re
 from config import Config
+from services.resume_prompt import RESUME_ANALYZER_SYSTEM_PROMPT, build_resume_analysis_prompt
 
 try:
     from groq import Groq
@@ -78,10 +79,8 @@ class ResumeAnalyzer:
         """Preprocess resume text for analysis.
         
         Performs the following cleaning operations:
-        - Normalizes whitespace (tabs, multiple spaces to single space)
+        - Normalizes whitespace while preserving meaningful line breaks
         - Removes extra whitespace from line beginnings/endings
-        - Collapses repeated newlines to single newline
-        - Trims text to maximum 2000 characters
         
         Args:
             text (str): Raw resume text
@@ -92,26 +91,12 @@ class ResumeAnalyzer:
         if not text:
             return ""
         
-        # Normalize spacing: replace tabs and multiple spaces with single space
         text = text.replace('\t', ' ')
-        text = ' '.join(text.split())
-        
-        # Remove extra whitespace from each line
-        lines = text.split('\n')
-        lines = [line.strip() for line in lines]
-        
-        # Remove empty lines and rejoin
+        lines = text.splitlines()
+        lines = [re.sub(r'[ ]+', ' ', line).strip() for line in lines]
         lines = [line for line in lines if line]
         text = '\n'.join(lines)
-        
-        # Collapse repeated newlines to single newline
-        while '\n\n' in text:
-            text = text.replace('\n\n', '\n')
-        
-        # Trim to max 2000 characters
-        if len(text) > 2000:
-            text = text[:2000].strip()
-        
+
         return text
 
     def extract_structured_data(self, resume_text):
@@ -124,7 +109,7 @@ class ResumeAnalyzer:
             resume_text (str): Preprocessed resume text
             
         Returns:
-            dict: JSON with keys: skills, education, experience, projects
+            dict: JSON with extracted content and authoritative section presence
         """
         # Predefined comprehensive skill list
         predefined_skills = {
@@ -146,32 +131,31 @@ class ResumeAnalyzer:
         }
         
         text_lower = resume_text.lower()
-        
-        # Section detection keywords
-        skills_keywords = r'\b(skills|technical skills|core competencies|expertise|proficiencies|technical expertise)\b'
-        education_keywords = r'\b(education|academic|degree|certification|certifications|training)\b'
-        experience_keywords = r'\b(experience|professional experience|work experience|employment|career history)\b'
-        projects_keywords = r'\b(projects|portfolio|notable projects|key projects|side projects)\b'
-        
-        # Date pattern: YYYY, MM/YYYY, MM/DD/YYYY, Month Year, etc.
-        date_pattern = r'(\d{1,2}[/-]\d{1,2}[/-]\d{2,4}|\d{1,2}[/-]\d{4}|\d{4}|\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s*\d{4})'
-        
-        # Bullet point pattern
-        bullet_pattern = r'^[\s\-•*•]\s+(.+)$'
-        
-        # Extract sections
-        def find_section_content(keyword_pattern, text):
-            """Find content between a keyword and next section heading."""
-            match = re.search(keyword_pattern, text, re.IGNORECASE)
-            if not match:
-                return ""
-            start = match.end()
-            # Find next section keyword or end of text
-            next_section = re.search(skills_keywords + '|' + education_keywords + '|' + experience_keywords + '|' + projects_keywords, 
-                                    text[start:], re.IGNORECASE)
-            end = start + next_section.start() if next_section else len(text)
-            return text[start:end]
-        
+        section_patterns = {
+            'skills': r'^\s*(skills|technical skills|core competencies|expertise|proficiencies|technical expertise)\s*$',
+            'education': r'^\s*(education|academic background|academic qualifications)\s*$',
+            'experience': r'^\s*(experience|professional experience|work experience|employment|career history)\s*$',
+            'projects': r'^\s*(projects|portfolio|notable projects|key projects|side projects)\s*$',
+            'certifications': r'^\s*(certifications|certificates)\s*$',
+            'achievements': r'^\s*(achievements|awards|honors)\s*$',
+            'leadership': r'^\s*(leadership|positions of responsibility)\s*$',
+        }
+
+        lines = resume_text.splitlines()
+        section_matches = []
+        for line_number, line in enumerate(lines):
+            for section_name, pattern in section_patterns.items():
+                if re.fullmatch(pattern, line, re.IGNORECASE):
+                    section_matches.append((line_number, section_name))
+                    break
+
+        section_presence = {section_name: False for section_name in section_patterns}
+        section_content = {section_name: '' for section_name in section_patterns}
+        for index, (line_number, section_name) in enumerate(section_matches):
+            section_presence[section_name] = True
+            next_line = section_matches[index + 1][0] if index + 1 < len(section_matches) else len(lines)
+            section_content[section_name] = '\n'.join(lines[line_number + 1:next_line])
+
         # Extract bullet points from section
         def extract_bullets(section_text):
             """Extract bullet points from section text."""
@@ -185,35 +169,20 @@ class ResumeAnalyzer:
                         bullets.append(bullet)
             return bullets
         
-        # Extract skills
-        skills_section = find_section_content(skills_keywords, text_lower)
+        # Extract skills from the complete resume, while section presence comes
+        # only from exact heading matches above.
         skills_list = []
-        
-        # Find predefined skills in resume
         for skill in predefined_skills:
             if skill in text_lower:
                 skills_list.append(skill)
-        
-        # Remove duplicates and sort
         skills_list = sorted(list(set(skills_list)))
-        
-        # Extract education
-        education_section = find_section_content(education_keywords, resume_text)
-        education_list = extract_bullets(education_section)
-        
-        # Extract experience
-        experience_section = find_section_content(experience_keywords, resume_text)
-        experience_list = extract_bullets(experience_section)
-        
-        # Extract projects
-        projects_section = find_section_content(projects_keywords, resume_text)
-        projects_list = extract_bullets(projects_section)
-        
+
         return {
             'skills': skills_list,
-            'education': education_list,
-            'experience': experience_list,
-            'projects': projects_list
+            'education': extract_bullets(section_content['education']),
+            'experience': extract_bullets(section_content['experience']),
+            'projects': extract_bullets(section_content['projects']),
+            'section_presence': section_presence,
         }
 
     def _clamp_score(self, value, default=0):
@@ -232,12 +201,21 @@ class ResumeAnalyzer:
         if cleaned.startswith("```"):
             cleaned = cleaned.replace("```json", "").replace("```", "").strip()
 
+        # Some reasoning-capable models add a short preamble around the JSON.
+        if not cleaned.startswith("{"):
+            start = cleaned.find("{")
+            end = cleaned.rfind("}")
+            if start >= 0 and end > start:
+                cleaned = cleaned[start:end + 1]
+
         return json.loads(cleaned)
 
     def _normalize_str_list(self, value, default=None):
         """Normalize a value into a list of non-empty strings."""
         if default is None:
             default = []
+        if isinstance(value, str):
+            value = [item.strip() for item in re.split(r'\n|\s*;\s*', value) if item.strip()]
         if not isinstance(value, list):
             return default
         cleaned = [str(item).strip() for item in value if str(item).strip()]
@@ -250,7 +228,8 @@ class ResumeAnalyzer:
             ('Technical Strengths', '💪'),
             ('Gaps and Weaknesses', '⚠️'),
             ('ATS and Formatting Review', '📄'),
-            ('Top Improvements', '🚀')
+            ('Top Improvements', '🚀'),
+            ('Stronger Resume Bullet', '✍️')
         ]
 
         if not isinstance(value, list):
@@ -298,18 +277,44 @@ class ResumeAnalyzer:
             return False
 
         non_empty = 0
-        total_len = 0
+        # total_len = 0
         for sec in sections:
             content = str(sec.get('content', '')).strip()
             if content:
                 non_empty += 1
-                total_len += len(content)
+                # total_len += len(content)
 
-        return non_empty >= 5 and total_len >= 1000
+        return non_empty >= 5 
+    # and total_len >= 1000
 
     def _build_structured_analysis(self, raw_data, include_job_section=False):
         """Normalize model output into a stable JSON contract."""
         data = raw_data if isinstance(raw_data, dict) else {}
+
+        # Keep compatibility with models that wrap the requested object in an
+        # envelope such as {"analysis": {...}} or {"data": {...}}.
+        expected_keys = {
+            'overall_score', 'ats_score', 'key_strengths',
+            'areas_for_improvement', 'skills_identified',
+            'suggestions_for_enhancement', 'detailed_analysis_sections'
+        }
+        if not expected_keys.intersection(data):
+            for key in ('analysis', 'resume_analysis', 'result', 'data', 'output'):
+                nested = data.get(key)
+                if isinstance(nested, dict):
+                    data = nested
+                    break
+
+        aliases = {
+            'strengths': 'key_strengths',
+            'improvements': 'areas_for_improvement',
+            'skills': 'skills_identified',
+            'suggestions': 'suggestions_for_enhancement',
+            'sections': 'detailed_analysis_sections',
+        }
+        for alias, expected in aliases.items():
+            if expected not in data and alias in data:
+                data[expected] = data[alias]
 
         detailed_sections = self._normalize_detailed_sections(
             data.get('detailed_analysis_sections', [])
@@ -381,6 +386,28 @@ class ResumeAnalyzer:
                 ])
 
         return "\n".join(lines)
+
+    def _has_invalid_structural_recommendation(self, structured, section_presence):
+        """Detect recommendations that claim an existing section is missing."""
+        texts = []
+        for field in ('areas_for_improvement', 'suggestions_for_enhancement'):
+            texts.extend(str(item).lower() for item in structured.get(field, []))
+        texts.extend(
+            str(section.get('content', '')).lower()
+            for section in structured.get('detailed_analysis_sections', [])
+        )
+        combined = ' '.join(texts)
+
+        invalid_patterns = {
+            'projects': ('add a projects section', 'add projects section', 'include a projects section'),
+            'education': ('add an education section', 'add education section', 'include an education section'),
+            'skills': ('add a skills section', 'add skills section', 'include a skills section'),
+            'experience': ('add an experience section', 'add experience section', 'include an experience section'),
+        }
+        return any(
+            section_presence.get(section) and any(pattern in combined for pattern in patterns)
+            for section, patterns in invalid_patterns.items()
+        )
     
     def analyze_resume(self, resume_text, job_description=None):
         """Analyze resume using LLM and provide feedback"""
@@ -403,73 +430,30 @@ class ResumeAnalyzer:
             
             # Extract structured data first (fast, no LLM needed)
             structured_data = self.extract_structured_data(resume_text)
+            section_presence = structured_data.get('section_presence', {})
+            structural_facts = '\n'.join(
+                f"{section.title()}: {'PRESENT' if section_presence.get(section) else 'NOT DETECTED'}"
+                for section in (
+                    'education', 'projects', 'experience', 'skills',
+                    'certifications', 'achievements', 'leadership'
+                )
+            )
+            print(f"Resume text length: {len(resume_text)} characters", flush=True)
+            print(f"Detected sections: {json.dumps(section_presence, sort_keys=True)}", flush=True)
+            print(f"LLM model: {self.model}", flush=True)
             
-            # Build a deterministic, rubric-based prompt and require strict JSON.
-            prompt = f"""You are scoring a resume with a strict rubric.
-
-Scoring rubric (must be followed exactly):
-- Formatting and readability: 20 points
-- Skills relevance and breadth: 25 points
-- Experience impact and quantification: 25 points
-- ATS keyword and structure compatibility: 20 points
-- Grammar and clarity: 10 points
-
-Rules:
-- Return ONLY valid JSON.
-- All scores are integers between 0 and 100.
-- Use specific evidence from resume content only.
-- Do not give generic advice.
-- Advice should be in second person format. Address the user directly.
-- You MUST provide exactly 6 detailed analysis sections in this exact order:
-    1) Overall Assessment 🧭
-    2) Technical Strengths 💪
-    3) Gaps and Weaknesses ⚠️
-    4) ATS and Formatting Review 📄
-    5) Top Improvements 🚀
-- For sections 1-5: write 3-5 sentences each.
-
-Resume:
-{resume_text}
-
-Return this JSON schema exactly:
-{{
-    "overall_score": number,
-    "ats_score": number,
-    "experience_level": "Entry|Mid|Senior",
-    "key_strengths": ["..."],
-    "areas_for_improvement": ["..."],
-    "skills_identified": ["..."],
-    "suggestions_for_enhancement": ["..."],
-        "detailed_analysis_sections": [
-            {{"title": "Overall Assessment", "emoji": "🧭", "content": "..."}},
-            {{"title": "Technical Strengths", "emoji": "💪", "content": "..."}},
-            {{"title": "Gaps and Weaknesses", "emoji": "⚠️", "content": "..."}},
-            {{"title": "ATS and Formatting Review", "emoji": "📄", "content": "..."}},
-            {{"title": "Top Improvements", "emoji": "🚀", "content": "..."}},
-            {{"title": "Stronger Resume Bullet", "emoji": "✍️", "content": "..."}}
-        ]
-}}
-"""
-
-            if job_description:
-                prompt += f"""
-Job Description:
-{job_description}
-
-Also include these fields in the same JSON:
-{{
-    "job_match_score": number,
-    "missing_keywords_skills": ["..."],
-    "job_match_recommendations": ["..."]
-}}
-"""
+            prompt = build_resume_analysis_prompt(
+                resume_text,
+                structural_facts,
+                job_description,
+            )
             
             request_body = {
                 "model": self.model,
                 "messages": [
                     {
                         "role": "system",
-                        "content": "You are an expert resume reviewer and career coach. Follow the rubric exactly and return valid JSON only."
+                        "content": RESUME_ANALYZER_SYSTEM_PROMPT
                     },
                     {
                         "role": "user",
@@ -478,9 +462,13 @@ Also include these fields in the same JSON:
                 ],
                 "temperature": 0,
                 "top_p": 1,
-                "max_tokens": 800,
+                "max_tokens": 3000,
                 "response_format": {"type": "json_object"}
             }
+
+            print("\n=== GROQ RESUME ANALYZER REQUEST ===", flush=True)
+            print(json.dumps(request_body, ensure_ascii=False, indent=2), flush=True)
+            print("=== END GROQ RESUME ANALYZER REQUEST ===\n", flush=True)
 
             try:
                 response = self.client.chat.completions.create(**request_body)
@@ -495,7 +483,11 @@ Also include these fields in the same JSON:
             parsed_json = self._parse_json_response(analysis_text)
             structured = self._build_structured_analysis(parsed_json, include_job_section=bool(job_description))
 
-            if not self._is_detailed_analysis_good(structured):
+            invalid_structure = self._has_invalid_structural_recommendation(
+                structured, section_presence
+            )
+            if invalid_structure:
+                # not self._is_detailed_analysis_good(structured) or 
                 retry_messages = [
                     {
                         'role': 'system',
@@ -503,7 +495,10 @@ Also include these fields in the same JSON:
                     },
                     {
                         'role': 'user',
-                        'content': prompt + '\n\nPrevious response was too vague or incomplete. Regenerate fully with all required detail.'
+                        'content': prompt + """
+
+The previous response violated a verified resume-structure constraint or failed the required detail check.
+Review the verified structural facts again. Do not recommend adding any section that is already PRESENT. Specifically check every recommendation against the verified section-presence data, and re-evaluate existing sections instead. Return the complete JSON using the exact required schema."""
                     }
                 ]
                 retry_body = {
@@ -514,6 +509,10 @@ Also include these fields in the same JSON:
                     'max_tokens': 3000,
                     'response_format': {'type': 'json_object'}
                 }
+
+                print("\n=== GROQ RESUME ANALYZER RETRY REQUEST ===", flush=True)
+                print(json.dumps(retry_body, ensure_ascii=False, indent=2), flush=True)
+                print("=== END GROQ RESUME ANALYZER RETRY REQUEST ===\n", flush=True)
 
                 try:
                     retry_response = self.client.chat.completions.create(**retry_body)
@@ -527,8 +526,16 @@ Also include these fields in the same JSON:
                     retry_json, include_job_section=bool(job_description)
                 )
 
-                if self._is_detailed_analysis_good(retry_structured):
+                retry_invalid_structure = self._has_invalid_structural_recommendation(
+                    retry_structured, section_presence
+                )
+                if self._is_detailed_analysis_good(retry_structured) and not retry_invalid_structure:
                     structured = retry_structured
+
+            final_invalid_structure = self._has_invalid_structural_recommendation(
+                structured, section_presence
+            )
+            print(f"Final structural validation passed: {not final_invalid_structure}", flush=True)
 
             formatted_analysis = self._format_analysis_text(structured, include_job_section=bool(job_description))
             
