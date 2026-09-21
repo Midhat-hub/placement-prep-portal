@@ -11,6 +11,15 @@ def build_resume_analysis_prompt(resume_text, structural_facts, job_description=
     """Build the structured resume-analysis prompt sent to the LLM."""
     prompt = f"""You are scoring a resume with a strict rubric.
 
+The attached PDF page images are the authoritative source for visual formatting analysis. Review every page in order. Do not infer visual formatting from extracted text alone.
+
+CONTENT ANALYSIS REQUIREMENTS:
+- Evaluate skills, education, experience, projects, achievements, certifications, keywords, grammar, content quality, ATS compatibility, and job-description relevance when provided.
+
+VISUAL ANALYSIS REQUIREMENTS:
+- Use the rendered page images to evaluate font consistency, font-size hierarchy, section hierarchy, alignment, margins, spacing, whitespace, text density, column layout, section organization, visual readability, tables, icons, graphics, and potential ATS formatting concerns.
+- Include concrete visual findings in the ATS and Formatting Review and the recommendations. If a visual feature is not present, do not invent one.
+
 Scoring rubric (must be followed exactly):
 - Formatting and readability: 20 points
 - Skills relevance and breadth: 25 points

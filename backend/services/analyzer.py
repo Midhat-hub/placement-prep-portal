@@ -3,6 +3,7 @@ import docx
 import os
 import json
 import re
+import base64
 from config import Config
 from services.resume_prompt import RESUME_ANALYZER_SYSTEM_PROMPT, build_resume_analysis_prompt
 
@@ -21,7 +22,7 @@ class ResumeAnalyzer:
 
         if Groq and Config.GROQ_API_KEY:
             self.client = Groq(api_key=Config.GROQ_API_KEY)
-            self.model = Config.GROQ_MODEL
+            self.model = Config.RESUME_MODEL
         else:
             print("⚠️  Groq not available. Install: pip install groq")
     
@@ -74,6 +75,40 @@ class ResumeAnalyzer:
             return self.extract_text_from_docx(file_path)
         else:
             raise Exception(f"Unsupported file format: {ext}")
+
+    def render_pdf_pages(self, file_path, scale=2.0):
+        """Render each PDF page to an in-memory PNG data URL."""
+        try:
+            rendered_pages = []
+            matrix = fitz.Matrix(scale, scale)
+            with fitz.open(file_path) as pdf_document:
+                for page_number, page in enumerate(pdf_document, start=1):
+                    pixmap = page.get_pixmap(matrix=matrix, alpha=False)
+                    image_bytes = pixmap.tobytes('png')
+                    encoded_image = base64.b64encode(image_bytes).decode('ascii')
+                    rendered_pages.append({
+                        'page_number': page_number,
+                        'image_url': f'data:image/png;base64,{encoded_image}',
+                    })
+            return rendered_pages
+        except Exception as e:
+            raise Exception(f"Error rendering PDF pages: {str(e)}")
+
+    def _build_multimodal_content(self, prompt, rendered_pages):
+        """Build ordered text and image parts for the resume model."""
+        content = [{'type': 'text', 'text': prompt}]
+        for page in rendered_pages or []:
+            content.extend([
+                {
+                    'type': 'text',
+                    'text': f"Rendered resume page {page['page_number']} (page order is significant).",
+                },
+                {
+                    'type': 'image_url',
+                    'image_url': {'url': page['image_url']},
+                },
+            ])
+        return content
 
     def preprocess_resume(self, text):
         """Preprocess resume text for analysis.
@@ -409,7 +444,7 @@ class ResumeAnalyzer:
             for section, patterns in invalid_patterns.items()
         )
     
-    def analyze_resume(self, resume_text, job_description=None):
+    def analyze_resume(self, resume_text, job_description=None, rendered_pages=None):
         """Analyze resume using LLM and provide feedback"""
         
         if not self.client:
@@ -419,7 +454,9 @@ class ResumeAnalyzer:
             }
         
         try:
-            # Preprocess resume text for optimal analysis
+            # Keep the extracted text exact for the multimodal request while
+            # using the normalized version for deterministic parsing.
+            extracted_resume_text = resume_text
             resume_text = self.preprocess_resume(resume_text)
             
             if not resume_text:
@@ -443,10 +480,12 @@ class ResumeAnalyzer:
             print(f"LLM model: {self.model}", flush=True)
             
             prompt = build_resume_analysis_prompt(
-                resume_text,
+                extracted_resume_text,
                 structural_facts,
                 job_description,
             )
+
+            user_content = self._build_multimodal_content(prompt, rendered_pages)
             
             request_body = {
                 "model": self.model,
@@ -457,7 +496,7 @@ class ResumeAnalyzer:
                     },
                     {
                         "role": "user",
-                        "content": prompt
+                        "content": user_content
                     }
                 ],
                 "temperature": 0,
@@ -467,7 +506,11 @@ class ResumeAnalyzer:
             }
 
             print("\n=== GROQ RESUME ANALYZER REQUEST ===", flush=True)
-            print(json.dumps(request_body, ensure_ascii=False, indent=2), flush=True)
+            print(json.dumps({
+                'model': self.model,
+                'page_count': len(rendered_pages or []),
+                'has_multimodal_content': bool(rendered_pages),
+            }, ensure_ascii=False, indent=2), flush=True)
             print("=== END GROQ RESUME ANALYZER REQUEST ===\n", flush=True)
 
             try:
@@ -488,6 +531,10 @@ class ResumeAnalyzer:
             )
             if invalid_structure:
                 # not self._is_detailed_analysis_good(structured) or 
+                retry_prompt = prompt + """
+
+The previous response violated a verified resume-structure constraint or failed the required detail check.
+Review the verified structural facts again. Do not recommend adding any section that is already PRESENT. Specifically check every recommendation against the verified section-presence data, and re-evaluate existing sections instead. Return the complete JSON using the exact required schema."""
                 retry_messages = [
                     {
                         'role': 'system',
@@ -495,10 +542,7 @@ class ResumeAnalyzer:
                     },
                     {
                         'role': 'user',
-                        'content': prompt + """
-
-The previous response violated a verified resume-structure constraint or failed the required detail check.
-Review the verified structural facts again. Do not recommend adding any section that is already PRESENT. Specifically check every recommendation against the verified section-presence data, and re-evaluate existing sections instead. Return the complete JSON using the exact required schema."""
+                        'content': self._build_multimodal_content(retry_prompt, rendered_pages)
                     }
                 ]
                 retry_body = {
@@ -511,7 +555,11 @@ Review the verified structural facts again. Do not recommend adding any section 
                 }
 
                 print("\n=== GROQ RESUME ANALYZER RETRY REQUEST ===", flush=True)
-                print(json.dumps(retry_body, ensure_ascii=False, indent=2), flush=True)
+                print(json.dumps({
+                    'model': self.model,
+                    'page_count': len(rendered_pages or []),
+                    'has_multimodal_content': bool(rendered_pages),
+                }, ensure_ascii=False, indent=2), flush=True)
                 print("=== END GROQ RESUME ANALYZER RETRY REQUEST ===\n", flush=True)
 
                 try:

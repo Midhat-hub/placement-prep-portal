@@ -10,7 +10,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-Resume Analyzer — Required Fixes for GPT-OSS-20B
+Resume_fixes.md
 dist
 dist-ssr
 *.local

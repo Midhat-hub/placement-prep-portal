@@ -176,7 +176,12 @@ def full_analysis():
         text = analyzer.extract_text(filepath)
         
         # Analyze
-        result = analyzer.analyze_resume(text, job_description)
+        rendered_pages = (
+            analyzer.render_pdf_pages(filepath)
+            if filename.lower().endswith('.pdf')
+            else []
+        )
+        result = analyzer.analyze_resume(text, job_description, rendered_pages)
         result['filename'] = filename
         
         # If token verified and analysis succeeded, persist compact summary
