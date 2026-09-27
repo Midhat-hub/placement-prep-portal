@@ -37,7 +37,7 @@ async function run(){
   await uploadDataset("./datasets/company_aptitude_questions.json", "company_prep/company_aptitude/items");
 
   await uploadDataset("./datasets/deloitte_coding_links.json", "company_prep/deloitte/items");
-
+await uploadDataset("./datasets/coding_questions.json", "coding_questions");
 }
 
 run();

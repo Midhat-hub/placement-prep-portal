@@ -1,34 +1,35 @@
-import Navbar from "@/components/Navbar"
-import { Routes, Route, useLocation } from "react-router-dom"
-import Topbar from "@/components/Topbar"
-import CodingLinksPage from "@/pages/practice/CodingLinksPage"
-
+import Navbar from "@/components/Navbar";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Topbar from "@/components/Topbar";
+import CodingLinksPage from "@/pages/practice/CodingLinksPage";
 
 // Auth
-import Login from "./pages/auth/Login"
-import Signup from "./pages/auth/Signup"
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Signup";
 
 // Dashboard
-import Dashboard from "./pages/dashboard/Dashboard"
+import Dashboard from "./pages/dashboard/Dashboard";
 //<Route
-  //path="/resume"
- // element={<ResumeAnalyzer />}
+//path="/resume"
+// element={<ResumeAnalyzer />}
 
- // Chatbot
-import Chatbot from "./pages/chatbot/Chatbot"
+// Chatbot
+import Chatbot from "./pages/chatbot/Chatbot";
 
 // Resume
-import ResumeAnalyzer from "./pages/resume/ResumeAnalyzer"
-import CompanyAptitudeTable from "@/pages/practice/CompanyAptitudeTable"
+import ResumeAnalyzer from "./pages/resume/ResumeAnalyzer";
+import CompanyAptitudeTable from "@/pages/practice/CompanyAptitudeTable";
 
 // Practice Module
-import PracticeHome from "./pages/practice/PracticeHome"
-import CategoryPage from "./pages/practice/CategoryPage"
-import QuestionTable from "./pages/practice/QuestionTable"
-import QuestionPage from "./pages/practice/QuestionPage"
-import CodingPage from "./pages/practice/CodingPage"
-import CompanyList from "@/pages/practice/CompanyList"
-import CompanyPage from "@/pages/practice/CompanyPage"
+import PracticeHome from "./pages/practice/PracticeHome";
+import CategoryPage from "./pages/practice/CategoryPage";
+import QuestionTable from "./pages/practice/QuestionTable";
+import QuestionPage from "./pages/practice/QuestionPage";
+import CodingPage from "./pages/practice/CodingPage";
+import CompanyList from "@/pages/practice/CompanyList";
+import CompanyPage from "@/pages/practice/CompanyPage";
+import DSACodingPage from "./pages/practice/DSACodingPage";
+import CodingIDEPage from "./pages/practice/CodingIDEPage";
 
 //Mock test
 import MockTestHome from "./pages/mocktest/MockTestHome";
@@ -42,160 +43,129 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 
 import LiveMocks from "./pages/mocktest/LiveMocks";
 import PreviousMocks from "./pages/mocktest/PreviousMocks";
-import MockReview
-from "./pages/mocktest/MockReview";
-import QuestionBank
-from "./pages/admin/QuestionBank";
+import MockReview from "./pages/mocktest/MockReview";
+import QuestionBank from "./pages/admin/QuestionBank";
 
-import UpcomingMocksAdmin
-from "./pages/admin/UpcomingMocksAdmin";
-import AdminPreviousMocks
-from "./pages/admin/AdminPreviousMocks";
+import UpcomingMocksAdmin from "./pages/admin/UpcomingMocksAdmin";
+import AdminPreviousMocks from "./pages/admin/AdminPreviousMocks";
 import PracticeTestPage from "./pages/mocktest/PracticeTestPage";
-import "./styles/theme.css"
+import "./styles/theme.css";
 
+function App() {
+  const location = useLocation();
 
-function App(){
+  // Pages where navbar should NOT appear
+  const hideNavbarRoutes = [
+    "/",
+    "/signup",
+    "/admin-login",
+    "/admin/dashboard",
+    "/question-bank",
+    "/admin/upcoming-mocks",
+    "/create-mock",
+    "/admin/previous-mocks",
+  ];
 
-const location = useLocation()
+  const isAdminPage =
+    location.pathname.startsWith("/admin") ||
+    location.pathname.startsWith("/mock-review");
 
-// Pages where navbar should NOT appear
-const hideNavbarRoutes = [
-   "/",
-  "/signup",
-  "/admin-login",
-  "/admin/dashboard",
-  "/question-bank",
-  "/admin/upcoming-mocks",
-  "/create-mock",
-  "/admin/previous-mocks"
+  const showNavbar =
+    !hideNavbarRoutes.includes(location.pathname) && !isAdminPage;
 
-]
+  return (
+    <div>
+      {/* Navbar only when logged pages */}
+      {showNavbar && <Navbar />}
 
-const isAdminPage =
-  location.pathname.startsWith("/admin") ||
-  location.pathname.startsWith("/mock-review");
+      <div
+        style={{
+          marginLeft: showNavbar ? "80px" : "0px",
+          padding: "20px",
+        }}
+      >
+        {showNavbar && <Topbar />}
 
-const showNavbar =
-  !hideNavbarRoutes.includes(
-    location.pathname
-  ) &&
-  !isAdminPage;
+        <Routes>
+          <Route path="/practice-test" element={<PracticeTest />} />
 
-return(
+          <Route path="/practice-test-page" element={<PracticeTestPage />} />
+          <Route
+            path="/admin/previous-mocks"
+            element={<AdminPreviousMocks />}
+          />
 
-<div>
+          <Route
+            path="/admin/upcoming-mocks"
+            element={<UpcomingMocksAdmin />}
+          />
 
-{/* Navbar only when logged pages */}
-{showNavbar && <Navbar />}
+          <Route path="/question-bank" element={<QuestionBank />} />
+          <Route path="/mock-review/:mockId" element={<MockReview />} />
 
-<div
-style={{
-marginLeft: showNavbar ? "80px" : "0px",
-padding:"20px"
-}}
->
- {showNavbar && <Topbar />}
+          <Route path="/mocktest/live" element={<LiveMocks />} />
 
-<Routes>
-<Route
-  path="/practice-test"
-  element={<PracticeTest />}
-/>
+          <Route path="/mocktest/previous" element={<PreviousMocks />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
 
-<Route
-  path="/practice-test-page"
-  element={<PracticeTestPage />}
-/>
-<Route
-  path="/admin/previous-mocks"
-  element={
-    <AdminPreviousMocks />
-  }
-/>
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
 
-  <Route
-  path="/admin/upcoming-mocks"
-  element={
-    <UpcomingMocksAdmin />
-  }
-/>
+          <Route path="/practice/dsa-coding" element={<DSACodingPage />} />
 
-  <Route
-  path="/question-bank"
-  element={<QuestionBank />}
-/>
-<Route
-  path="/mock-review/:mockId"
-  element={<MockReview />}
-/>
+          <Route path="/practice/dsa-coding/:id" element={<CodingIDEPage />} />
+          {/* Auth */}
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
 
-    <Route
-  path="/mocktest/live"
-  element={<LiveMocks />}
-/>
+          {/* Dashboard */}
+          <Route path="/dashboard" element={<Dashboard />} />
 
-<Route
-  path="/mocktest/previous"
-  element={<PreviousMocks />}
-/>
-    <Route
-path="/admin-login"
-element={<AdminLogin />}
-/>
+          {/* AI Chatbot */}
+          <Route path="/chatbot" element={<Chatbot />} />
 
-<Route
-path="/admin/dashboard"
-element={<AdminDashboard />}
-/>
+          {/* Resume Analyzer */}
+          <Route path="/resume" element={<ResumeAnalyzer />} />
 
-{/* Auth */}
-<Route path="/" element={<Login />} />
-<Route path="/signup" element={<Signup />} />
+          {/* Practice Hub */}
+          <Route path="/practice" element={<PracticeHome />} />
 
-{/* Dashboard */}
-<Route path="/dashboard" element={<Dashboard />} />
+          {/* Category Pages */}
+          <Route path="/practice/:category" element={<CategoryPage />} />
 
-{/* AI Chatbot */}
-<Route path="/chatbot" element={<Chatbot />} />
+          {/* Question Tables */}
+          <Route
+            path="/practice/questions/:collectionName"
+            element={<QuestionTable />}
+          />
 
-{/* Resume Analyzer */}
-<Route path="/resume" element={<ResumeAnalyzer />} />
+          {/* Question Attempt Page */}
+          <Route
+            path="/practice/question/:collectionName/:id"
+            element={<QuestionPage />}
+          />
 
-{/* Practice Hub */}
-<Route path="/practice" element={<PracticeHome />} />
+          {/* Coding Questions */}
+          <Route path="/practice/company" element={<CompanyList />} />
+          <Route path="/practice/company/:company" element={<CompanyPage />} />
+          <Route
+            path="/practice/coding/:company"
+            element={<CodingLinksPage />}
+          />
+          <Route
+            path="/practice/company/:company/aptitude"
+            element={<CompanyAptitudeTable />}
+          />
 
-{/* Category Pages */}
-<Route path="/practice/:category" element={<CategoryPage />} />
-
-{/* Question Tables */}
-<Route path="/practice/questions/:collectionName" element={<QuestionTable />} />
-
-{/* Question Attempt Page */}
-<Route path="/practice/question/:collectionName/:id" element={<QuestionPage />} />
-
-{/* Coding Questions */}
-<Route path="/practice/company" element={<CompanyList />} />
-<Route path="/practice/company/:company" element={<CompanyPage />} />
-<Route path="/practice/coding/:company" element={<CodingLinksPage />} />
-<Route path="/practice/company/:company/aptitude" element={<CompanyAptitudeTable />} />
-
-{/* Mock Test */}
-<Route path="/mocktest" element={<MockTestHome />} />
-<Route path="/create-mock" element={<CreateMock />} />
-<Route path="/mocktest/upcoming" element={<UpcomingMocks />} />
-<Route path="/practice-test" element={<PracticeTest />} />
-<Route path="/test/:mockId" element={<TestPage />} />
-
-
-</Routes>
-
-</div>
-
-</div>
-
-)
-
+          {/* Mock Test */}
+          <Route path="/mocktest" element={<MockTestHome />} />
+          <Route path="/create-mock" element={<CreateMock />} />
+          <Route path="/mocktest/upcoming" element={<UpcomingMocks />} />
+          <Route path="/practice-test" element={<PracticeTest />} />
+          <Route path="/test/:mockId" element={<TestPage />} />
+        </Routes>
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;
