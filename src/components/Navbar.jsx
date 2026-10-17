@@ -69,6 +69,14 @@ onClick={()=>navigate("/mocktest")}
   {open && "AI Assistant"}
 </button>
 
+<button
+  className={`nav-item ${isActive("/voice-interview") ? "active" : ""}`}
+  onClick={() => navigate("/voice-interview")}
+>
+  <span className="icon">🎙️</span>
+  {open && <span>Voice Interview</span>}
+</button>
+
 </div>
 
 

@@ -11,6 +11,7 @@ lerna-debug.log*
 
 node_modules
 Resume_fixes.md
+voice_interview.md
 dist
 dist-ssr
 *.local

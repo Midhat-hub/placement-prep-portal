@@ -21,10 +21,20 @@ class Config:
     
     # Groq settings
     GROQ_API_KEY = os.getenv('GROQ_API_KEY', '')
+    GROQ_MODEL = os.getenv('GROQ_MODEL', 'openai/gpt-oss-20b')
     RESUME_MODEL = os.getenv('RESUME_MODEL', 'qwen/qwen3.8-27b')
+
+    # Voice interview providers
+    OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '')
+    OPENAI_REALTIME_MODEL = os.getenv('OPENAI_REALTIME_MODEL', 'gpt-realtime')
+    DEEPGRAM_API_KEY = os.getenv('DEEPGRAM_API_KEY', '')
+
+    # Gemini Live settings
+    GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', '')
+    GEMINI_LIVE_MODEL = os.getenv('GEMINI_LIVE_MODEL', 'gemini-3.8-live')
     
     # CORS settings
-    CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:3000').split(',')
+    CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:3000,http://localhost:5173,http://127.0.0.1:5173').split(',')
     
     @staticmethod
     def init_app(app):

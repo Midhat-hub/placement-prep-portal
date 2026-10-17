@@ -15,6 +15,7 @@ import urllib.error
 from pathlib import Path
 
 from flask import request, jsonify
+from interview_routes import interview_bp
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -22,6 +23,7 @@ Config.init_app(app)
 
 app.register_blueprint(chatbot_bp)
 app.register_blueprint(coding_bp)
+app.register_blueprint(interview_bp)
 
 # Enable CORS
 CORS(app, resources={r"/api/*": {"origins": Config.CORS_ORIGINS}})
@@ -33,6 +35,25 @@ def allowed_file(filename):
     """Check if file extension is allowed"""
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in Config.ALLOWED_EXTENSIONS
+
+def safe_filename(original_filename):
+    """Return a safe filename that always preserves the original file extension.
+
+    werkzeug's secure_filename can drop the leading dot when the name consists
+    entirely of non-ASCII characters (e.g. 'résumé.pdf' → 'pdf' instead of
+    'resume.pdf'), which breaks extension-based dispatch later on.  We grab the
+    extension from the *original* name before sanitising it and always reattach
+    it to whatever secure_filename produces.
+    """
+    # Preserve the original extension (already validated by allowed_file)
+    ext = os.path.splitext(original_filename)[1].lower()  # e.g. '.pdf'
+    name = secure_filename(original_filename)
+    # If secure_filename lost the extension, patch it back on
+    if not name.lower().endswith(ext):
+        # Strip any stray extension that survived sanitisation, then add ours
+        base = os.path.splitext(name)[0] if name else 'resume'
+        name = (base or 'resume') + ext
+    return name
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
@@ -59,8 +80,8 @@ def upload_file():
         return jsonify({'error': 'Invalid file type. Only PDF and DOCX allowed'}), 400
     
     try:
-        # Save file securely
-        filename = secure_filename(file.filename)
+        # Save file securely while always keeping the correct extension
+        filename = safe_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
         
@@ -178,8 +199,8 @@ def full_analysis():
         return jsonify({'error': 'Invalid file type. Only PDF and DOCX allowed'}), 400
     
     try:
-        # Save and extract
-        filename = secure_filename(file.filename)
+        # Save and extract, always preserving the original extension
+        filename = safe_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
         
@@ -258,7 +279,7 @@ if __name__ == '__main__':
     print(f"CORS Origins: {Config.CORS_ORIGINS}")
     
     if not Config.GROQ_API_KEY:
-        print("\n⚠️  WARNING: GROQ_API_KEY not set. Please configure it in .env file")
+        print("\n WARNING: GROQ_API_KEY not set. Please configure it in .env file")
     
     app.run(
         host=Config.HOST,

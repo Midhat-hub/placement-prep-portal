@@ -50,6 +50,8 @@ import UpcomingMocksAdmin from "./pages/admin/UpcomingMocksAdmin";
 import AdminPreviousMocks from "./pages/admin/AdminPreviousMocks";
 import PracticeTestPage from "./pages/mocktest/PracticeTestPage";
 import "./styles/theme.css";
+import VoiceInterview from "./pages/interview/VoiceInterview";
+import "./styles/theme.css"
 
 function App() {
   const location = useLocation();
@@ -143,6 +145,11 @@ function App() {
             path="/practice/question/:collectionName/:id"
             element={<QuestionPage />}
           />
+{/* Voice Mock Interview */}
+<Route path="/voice-interview" element={<VoiceInterview />} />
+
+{/* Resume Analyzer */}
+<Route path="/resume" element={<ResumeAnalyzer />} />
 
           {/* Coding Questions */}
           <Route path="/practice/company" element={<CompanyList />} />

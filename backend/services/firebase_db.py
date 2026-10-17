@@ -74,3 +74,26 @@ def save_resume_summary(uid, overall_score, ats_score, detailed_sections, resume
         "created_at": firestore.SERVER_TIMESTAMP,
     }
     doc_ref.set(data, merge=True)
+
+
+def create_interview(uid, interview_data):
+    """Create a bounded voice interview session for the authenticated user."""
+    db = get_db()
+    doc_ref = db.collection('user_progress').document(uid).collection('interviews').document()
+    doc_ref.set(interview_data)
+    return doc_ref.id
+
+
+def get_interview(uid, interview_id):
+    """Read an interview only from the authenticated user's collection."""
+    doc_ref = get_db().collection('user_progress').document(uid).collection('interviews').document(interview_id)
+    snapshot = doc_ref.get()
+    if not snapshot.exists:
+        return None
+    return {'id': snapshot.id, **snapshot.to_dict()}
+
+
+def update_interview(uid, interview_id, updates):
+    """Update an interview inside the authenticated user's collection."""
+    doc_ref = get_db().collection('user_progress').document(uid).collection('interviews').document(interview_id)
+    doc_ref.update(updates)
