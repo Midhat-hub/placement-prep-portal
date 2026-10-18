@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
 import TypingIndicator from "./TypingIndicator";
+import { BotIcon } from "@/components/Icons";
 
 import { sendChatMessage } from "../../services/chatbotApi";
 
@@ -15,7 +16,7 @@ const INITIAL_MESSAGE = {
     id: "welcome",
     sender: "assistant",
     message:
-        "Hello! 👋 I'm your AI Placement Assistant. I can help you prepare for DSA, aptitude, DBMS, Operating Systems, OOP, Computer Networks, coding, technical interviews, HR interviews, resumes, and placements.",
+        "Hello! I'm your AI Placement Assistant. I can help you prepare for DSA, aptitude, DBMS, Operating Systems, OOP, Computer Networks, coding, technical interviews, HR interviews, resumes, and placements.",
     sources: []
 };
 
@@ -189,8 +190,8 @@ function ChatWindow() {
 
                 <div className="ai-chat-header-left">
 
-                    <div className="ai-avatar-large">
-                        🤖
+                    <div className="ai-avatar-large" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <BotIcon size={24} color="#ffffff" />
                     </div>
 
 
@@ -221,7 +222,7 @@ function ChatWindow() {
                     className="clear-chat-button"
                     onClick={handleClearChat}
                 >
-                    🗑 Clear
+                    Clear
                 </button>
 
             </div>
@@ -240,8 +241,8 @@ function ChatWindow() {
 
                     <div className="chat-welcome">
 
-                        <div className="chat-welcome-icon">
-                            ✨
+                        <div className="chat-welcome-icon" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <BotIcon size={32} color="#ffffff" />
                         </div>
 
                         <h2>
@@ -269,7 +270,7 @@ function ChatWindow() {
                                             )
                                         }
                                     >
-                                        💡 {suggestion}
+                                        {suggestion}
                                     </button>
 
                                 )

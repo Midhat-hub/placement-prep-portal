@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { BookOpenIcon, BotIcon } from "@/components/Icons";
 
 
 // =========================================================
@@ -43,7 +44,7 @@ function ChatMessage({
                             : "assistant"
                     }`}
                 >
-                    {isUser ? "You" : "AI"}
+                    {isUser ? "You" : <BotIcon size={18} color="#ffffff" />}
                 </div>
 
 
@@ -98,8 +99,10 @@ function ChatMessage({
                                     }
                                 >
 
-                                    📚
-                                    Knowledge used
+                                    <span style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                                        <BookOpenIcon size={14} />
+                                        Knowledge used
+                                    </span>
 
                                     {sourceCount > 0 &&
                                         ` · ${sourceCount} sources`

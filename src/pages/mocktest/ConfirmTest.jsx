@@ -4,6 +4,7 @@ export default function ConfirmTest({
   selectedQuestions,
   onBack,
   onCreateTest,
+  submitting,
 }) {
   const [title, setTitle] = useState("");
   const [time, setTime] = useState("");
@@ -40,10 +41,9 @@ export default function ConfirmTest({
       return;
     }
 
-
     const minStart = new Date(now.getTime());
     if (start < minStart) {
-      alert("Invalid Begin time");
+      alert("Invalid Begin time (cannot be in the past)");
       return;
     }
 
@@ -76,177 +76,169 @@ export default function ConfirmTest({
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Step 2: Confirm & Add Details</h2>
+    <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+      {/* Selected Questions Summary */}
+      <div className="card" style={{ padding: "20px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+          <h3 style={{ margin: 0, color: "var(--color-navy)" }}>
+            Selected Questions ({selectedQuestions.length})
+          </h3>
+          <span className="badge badge-success">Questions Confirmed</span>
+        </div>
 
-      {/* Selected Questions Review */}
-      <div
-        style={{
-          marginBottom: "30px",
-          padding: "15px",
-          backgroundColor: "#f9f9f9",
-          border: "1px solid #ddd",
-          borderRadius: "4px",
-        }}
-      >
-        <h3>Selected Questions ({selectedQuestions.length})</h3>
-        <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+        <div style={{ maxHeight: "200px", overflowY: "auto", display: "flex", flexDirection: "column", gap: "8px" }}>
           {selectedQuestions.map((q, i) => (
             <div
               key={q.question + i}
               style={{
-                marginBottom: "10px",
-                padding: "8px",
-                backgroundColor: "#fff",
-                border: "1px solid #e0e0e0",
-                borderRadius: "4px",
+                padding: "8px 12px",
+                borderRadius: "6px",
+                background: "var(--color-grey-bg)",
+                border: "1px solid var(--color-grey-border)",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                fontSize: "13px"
               }}
             >
-              <b>{i + 1}. {q.question}</b>
-              <span
-                style={{
-                  marginLeft: "10px",
-                  fontSize: "12px",
-                  color: "#666",
-                }}
-              >
-                ({q.subject})
+              <span style={{ fontWeight: 600, color: "var(--color-navy)" }}>
+                {i + 1}. {q.question}
+              </span>
+              <span className="badge badge-neutral" style={{ fontSize: "11px", textTransform: "uppercase" }}>
+                {q.subject || q.category}
               </span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Test Details */}
-      <h3>Test Details</h3>
+      {/* Form Details */}
+      <div className="card" style={{ padding: "28px" }}>
+        <h3 style={{ margin: "0 0 20px 0", color: "var(--color-navy)" }}>
+          Assessment Scheduling & Parameters
+        </h3>
 
-      <div style={{ marginBottom: "15px" }}>
-        <label>
-          <b>Test Title:</b>
-        </label>
-        <br />
-        <input
-          type="text"
-          placeholder="Enter test title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          style={{
-            padding: "10px",
-            width: "100%",
-            maxWidth: "400px",
-            marginTop: "5px",
-            borderRadius: "4px",
-            border: "1px solid #ccc",
-          }}
-        />
-      </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
+          <div className="form-group">
+            <label className="form-label">Test Title *</label>
+            <input
+              type="text"
+              placeholder="e.g., Campus Placement Aptitude Mock 2026"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              style={{
+                padding: "10px 14px",
+                borderRadius: "var(--radius-sm)",
+                border: "1.5px solid var(--color-grey-border)",
+                fontSize: "14px",
+                fontFamily: "var(--font-family)",
+              }}
+            />
+          </div>
 
-      <div style={{ marginBottom: "15px" }}>
-        <label>
-          <b>Time Limit (minutes):</b>
-        </label>
-        <br />
-        <input
-          type="number"
-          placeholder="Enter time limit"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-          style={{
-            padding: "10px",
-            width: "100%",
-            maxWidth: "200px",
-            marginTop: "5px",
-            borderRadius: "4px",
-            border: "1px solid #ccc",
-          }}
-        />
-      </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "16px" }}>
+            <div className="form-group">
+              <label className="form-label">Time Limit (Minutes) *</label>
+              <input
+                type="number"
+                placeholder="e.g., 30"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "var(--radius-sm)",
+                  border: "1.5px solid var(--color-grey-border)",
+                  fontSize: "14px",
+                }}
+              />
+            </div>
 
-      <div style={{ marginBottom: "30px" }}>
-        <label>
-          <b>Instructions:</b>
-        </label>
-        <br />
-        <textarea
-          placeholder="Enter test instructions"
-          value={instructions}
-          onChange={(e) => setInstructions(e.target.value)}
-          rows="5"
-          style={{
-            padding: "10px",
-            width: "100%",
-            maxWidth: "500px",
-            marginTop: "5px",
-            borderRadius: "4px",
-            border: "1px solid #ccc",
-          }}
-        />
-      </div>
+            <div className="form-group">
+              <label className="form-label">Test Date *</label>
+              <input
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "var(--radius-sm)",
+                  border: "1.5px solid var(--color-grey-border)",
+                  fontSize: "14px",
+                  color: "var(--color-grey-text)",
+                }}
+              />
+            </div>
+          </div>
 
-      <div style={{ marginBottom: "15px" }}>
-        <label><b>Test Date:</b></label>
-        <br />
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          style={{ padding: "10px", width: "200px", marginTop: "5px", borderRadius: "4px", border: "1px solid #ccc" }}
-        />
-      </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "16px" }}>
+            <div className="form-group">
+              <label className="form-label">Window Start Time *</label>
+              <input
+                type="time"
+                value={beginTime}
+                onChange={(e) => setBeginTime(e.target.value)}
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "var(--radius-sm)",
+                  border: "1.5px solid var(--color-grey-border)",
+                  fontSize: "14px",
+                }}
+              />
+            </div>
 
-      <div style={{ display: "flex", gap: "10px", marginBottom: "15px" }}>
-        <div>
-          <label><b>Begin Time:</b></label>
-          <br />
-          <input
-            type="time"
-            value={beginTime}
-            onChange={(e) => setBeginTime(e.target.value)}
-            style={{ padding: "10px", width: "160px", marginTop: "5px", borderRadius: "4px", border: "1px solid #ccc" }}
-          />
+            <div className="form-group">
+              <label className="form-label">Window End Time *</label>
+              <input
+                type="time"
+                value={endTime}
+                onChange={(e) => setEndTime(e.target.value)}
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "var(--radius-sm)",
+                  border: "1.5px solid var(--color-grey-border)",
+                  fontSize: "14px",
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Candidate Instructions</label>
+            <textarea
+              placeholder="e.g., All questions carry equal marks. No negative marking. Do not refresh the page."
+              value={instructions}
+              onChange={(e) => setInstructions(e.target.value)}
+              rows="4"
+              style={{
+                padding: "10px 14px",
+                borderRadius: "var(--radius-sm)",
+                border: "1.5px solid var(--color-grey-border)",
+                fontSize: "14px",
+                fontFamily: "var(--font-family)",
+              }}
+            />
+          </div>
+
+          {/* Action buttons */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "12px", paddingTop: "16px", borderTop: "1px solid var(--color-grey-border)" }}>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={onBack}
+            >
+              ← Back to Questions
+            </button>
+
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={handleCreate}
+              disabled={submitting}
+            >
+              {submitting ? "Publishing Test…" : "Publish Mock Assessment"}
+            </button>
+          </div>
         </div>
-        <div>
-          <label><b>End Time:</b></label>
-          <br />
-          <input
-            type="time"
-            value={endTime}
-            onChange={(e) => setEndTime(e.target.value)}
-            style={{ padding: "10px", width: "160px", marginTop: "5px", borderRadius: "4px", border: "1px solid #ccc" }}
-          />
-        </div>
-      </div>
-
-      {/* Navigation Buttons */}
-      <div style={{ display: "flex", gap: "10px" }}>
-        <button
-          onClick={onBack}
-          style={{
-            padding: "10px 20px",
-            cursor: "pointer",
-            backgroundColor: "#757575",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            fontSize: "16px",
-          }}
-        >
-          ← Back
-        </button>
-        <button
-          onClick={handleCreate}
-          style={{
-            padding: "10px 20px",
-            cursor: "pointer",
-            backgroundColor: "#4CAF50",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            fontSize: "16px",
-          }}
-        >
-          Create Test
-        </button>
       </div>
     </div>
   );

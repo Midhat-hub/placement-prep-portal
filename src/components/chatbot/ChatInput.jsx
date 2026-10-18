@@ -137,7 +137,7 @@ function ChatInput({
                 >
                     {disabled
                         ? "..."
-                        : "Send ➤"
+                        : "Send"
                     }
                 </button>
 

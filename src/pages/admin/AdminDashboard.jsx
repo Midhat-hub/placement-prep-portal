@@ -1,85 +1,84 @@
 import { useNavigate } from "react-router-dom";
+import {
+  SettingsIcon,
+  FileTextIcon,
+  CalendarIcon,
+  FolderIcon,
+  HelpCircleIcon
+} from "@/components/Icons";
 
 function AdminDashboard() {
-
   const navigate = useNavigate();
 
   const cards = [
     {
       title: "Create Mock Test",
-      icon: "📝",
-      route: "/create-mock"
+      desc: "Configure questions, schedule dates, and publish new mock tests",
+      icon: <FileTextIcon size={24} color="var(--color-navy)" />,
+      route: "/create-mock",
+      tag: "Action",
     },
-   {
-  title: "Upcoming Mocks",
-  icon: "📅",
-  route:
-    "/admin/upcoming-mocks"
-},
     {
-  title: "Previous Mocks",
-  icon: "📚",
-  route:
-    "/admin/previous-mocks"
-},
+      title: "Upcoming Mocks",
+      desc: "View and manage scheduled tests before they go live",
+      icon: <CalendarIcon size={24} color="var(--color-navy)" />,
+      route: "/admin/upcoming-mocks",
+      tag: "Scheduled",
+    },
+    {
+      title: "Previous Mocks",
+      desc: "Inspect completed mock tests and review questions",
+      icon: <FolderIcon size={24} color="var(--color-navy)" />,
+      route: "/admin/previous-mocks",
+      tag: "Archive",
+    },
     {
       title: "Question Bank",
-      icon: "❓",
-      route: "/question-bank"
-    }
+      desc: "Search and explore questions across DSA, Core, and Aptitude",
+      icon: <HelpCircleIcon size={24} color="var(--color-navy)" />,
+      route: "/question-bank",
+      tag: "Repository",
+    },
   ];
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="admin-page">
+      {/* Admin Hero Header */}
+      <div className="admin-hero">
+        <div className="admin-hero-icon">
+          <SettingsIcon size={28} color="var(--color-white)" />
+        </div>
+        <div>
+          <h1>Placement Office Administration</h1>
+          <p>Manage question repositories, configure mock assessments, and monitor evaluation sessions.</p>
+        </div>
+        <span className="admin-badge">Admin Workspace</span>
+      </div>
 
-      <h1
-        style={{
-          marginBottom: "30px",
-          color: "#003b63"
-        }}
-      >
-        Admin Dashboard
-      </h1>
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fit,minmax(260px,1fr))",
-          gap: "30px"
-        }}
-      >
+      {/* Admin Grid */}
+      <div className="admin-grid">
         {cards.map((card) => (
           <div
             key={card.title}
+            className="admin-card"
             onClick={() => navigate(card.route)}
-            style={{
-              background: "#fff",
-              borderRadius: "16px",
-              height: "180px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              cursor: "pointer",
-              boxShadow:
-                "0 2px 10px rgba(0,0,0,0.08)"
-            }}
           >
-            <div
-              style={{
-                fontSize: "40px",
-                marginBottom: "12px"
-              }}
-            >
-              {card.icon}
+            <div className="admin-card-icon">{card.icon}</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <h3>{card.title}</h3>
+              <p style={{ fontSize: "13px", color: "var(--color-grey-muted)", margin: 0 }}>
+                {card.desc}
+              </p>
             </div>
-
-            <h3>{card.title}</h3>
+            <span
+              className="badge badge-info"
+              style={{ marginTop: "auto" }}
+            >
+              {card.tag} →
+            </span>
           </div>
         ))}
       </div>
-
     </div>
   );
 }

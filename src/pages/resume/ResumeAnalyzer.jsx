@@ -4,6 +4,7 @@ import '../../index.css';
 import ResumeUploader from './ResumeUploader.jsx';
 import AnalysisResults from './AnalysisResults.jsx';
 import { auth } from '../../firebase/firebase';
+import { AlertTriangleIcon } from '@/components/Icons';
 
 // API base URL - can be configured via Vite environment variable
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -106,7 +107,10 @@ function ResumeAnalyzer() {
 
           {error && (
             <div className="error">
-              <h3>⚠️ Error</h3>
+              <h3 style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                <AlertTriangleIcon size={18} color="var(--color-red)" />
+                Error
+              </h3>
               <p>{error.message}</p>
             </div>
           )}

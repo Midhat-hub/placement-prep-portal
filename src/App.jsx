@@ -49,9 +49,8 @@ import QuestionBank from "./pages/admin/QuestionBank";
 import UpcomingMocksAdmin from "./pages/admin/UpcomingMocksAdmin";
 import AdminPreviousMocks from "./pages/admin/AdminPreviousMocks";
 import PracticeTestPage from "./pages/mocktest/PracticeTestPage";
-import "./styles/theme.css";
 import VoiceInterview from "./pages/interview/VoiceInterview";
-import "./styles/theme.css"
+import "./index.css";
 
 function App() {
   const location = useLocation();
@@ -82,8 +81,10 @@ function App() {
 
       <div
         style={{
-          marginLeft: showNavbar ? "80px" : "0px",
-          padding: "20px",
+          marginLeft: showNavbar ? "var(--sidebar-collapsed, 70px)" : "0px",
+          transition: "margin-left 0.25s cubic-bezier(0.4,0,0.2,1)",
+          minHeight: "100vh",
+          background: "var(--color-grey-bg)",
         }}
       >
         {showNavbar && <Topbar />}
@@ -145,11 +146,11 @@ function App() {
             path="/practice/question/:collectionName/:id"
             element={<QuestionPage />}
           />
-{/* Voice Mock Interview */}
-<Route path="/voice-interview" element={<VoiceInterview />} />
+          {/* Voice Mock Interview */}
+          <Route path="/voice-interview" element={<VoiceInterview />} />
 
-{/* Resume Analyzer */}
-<Route path="/resume" element={<ResumeAnalyzer />} />
+          {/* Resume Analyzer */}
+          <Route path="/resume" element={<ResumeAnalyzer />} />
 
           {/* Coding Questions */}
           <Route path="/practice/company" element={<CompanyList />} />

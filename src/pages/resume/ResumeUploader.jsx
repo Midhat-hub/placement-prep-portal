@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PaperclipIcon, CheckCircleIcon } from '@/components/Icons';
 
 function ResumeUploader({ file, onFileSelect, onRemoveFile }) {
   const [dragOver, setDragOver] = useState(false);
@@ -51,10 +52,12 @@ function ResumeUploader({ file, onFileSelect, onRemoveFile }) {
           onDrop={handleDrop}
           onClick={() => document.getElementById('fileInput').click()}
         >
-          <div className="upload-icon">📎</div>
+          <div className="upload-icon" style={{ display: "flex", justifyContent: "center", marginBottom: "4px" }}>
+            <PaperclipIcon size={32} color="var(--color-blue)" />
+          </div>
           <h3>Upload Your Resume</h3>
           <p>Drag and drop or click to browse</p>
-          <p style={{ fontSize: '0.9rem', marginTop: '10px', color: '#999' }}>
+          <p style={{ fontSize: '0.85rem', marginTop: '6px', color: '#94a3b8' }}>
             Supports PDF and DOCX (Max 16MB)
           </p>
           <input
@@ -67,8 +70,8 @@ function ResumeUploader({ file, onFileSelect, onRemoveFile }) {
         </div>
       ) : (
         <div className="file-info">
-          <div className="file-info-text">
-            <span>✅</span>
+          <div className="file-info-text" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <CheckCircleIcon size={16} color="var(--color-green)" />
             <span>{file.name}</span>
             <span style={{ color: '#666', fontSize: '0.9rem' }}>
               ({formatFileSize(file.size)})

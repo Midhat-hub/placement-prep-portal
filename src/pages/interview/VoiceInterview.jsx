@@ -5,6 +5,7 @@ import { auth } from "../../firebase/firebase"
 import ResumeUploader from "../resume/ResumeUploader"
 import InterviewFeedback from "./InterviewFeedback"
 import "../../styles/voiceInterview.css"
+import { BotIcon } from "@/components/Icons"
 
 const QUESTION_COUNTS = [5, 8, 10]
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api"
@@ -539,7 +540,9 @@ function InterviewRoom({ interviewId, onError }) {
       </div>
       <p className="voice-room-copy">The interviewer will speak first. Answer naturally; your finalized speech is transcribed for feedback.</p>
       <div className="voice-interviewer-card">
-        <div className="voice-interviewer-avatar" aria-hidden="true">🤖</div>
+        <div className="voice-interviewer-avatar" aria-hidden="true" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <BotIcon size={24} color="#ffffff" />
+        </div>
         <div>
           <span className="voice-interviewer-label">Interviewer</span>
           <p>{currentQuestion || "Your interviewer will ask the first question after the session connects."}</p>

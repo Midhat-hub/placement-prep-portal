@@ -193,12 +193,51 @@
 }
 
 .voice-start-button {
-  min-width: 160px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 170px;
+  padding: 13px 26px;
+  font-size: 15px;
   font-weight: 700;
+  font-family: inherit;
+  color: #ffffff;
+  background: linear-gradient(135deg, #052f3f 0%, #0a6b99 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(5, 47, 63, 0.25);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.01em;
+}
+
+.voice-start-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #073d52 0%, #0e82b8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(10, 107, 153, 0.35);
+  color: #ffffff;
+}
+
+.voice-start-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(10, 107, 153, 0.25);
+}
+
+.voice-start-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .voice-start-button span {
+  display: inline-block;
   margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+
+.voice-start-button:hover:not(:disabled) span {
+  transform: translateX(4px);
 }
 
 .voice-form-error {
@@ -353,11 +392,26 @@
 }
 
 .voice-end-button {
-  background: #9f1239;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #ffffff;
+  background: #dc2626;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.25);
+  transition: all 0.2s ease;
 }
 
 .voice-end-button:hover {
-  background: #be123c;
+  background: #b91c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.35);
 }
 
 .voice-feedback-overview,

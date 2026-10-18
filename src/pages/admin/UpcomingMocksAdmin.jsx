@@ -1,251 +1,131 @@
 import { useEffect, useState } from "react";
-
-import {
-  collection,
-  getDocs,
-  deleteDoc,
-  doc
-} from "firebase/firestore";
-
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
+import { CalendarIcon, ListOrderedIcon, ClockIcon } from "@/components/Icons";
 
 export default function UpcomingMocksAdmin() {
-
-  const [mocks, setMocks] =
-    useState([]);
-
-  const [loading, setLoading] =
-    useState(true);
+  const [mocks, setMocks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
-    loadMocks();
-
-  }, []);
-
-  const loadMocks =
-    async () => {
-
+    const loadMocks = async () => {
       try {
-
-        const snapshot =
-          await getDocs(
-            collection(
-              db,
-              "mockTests"
-            )
-          );
-
-        const now =
-          new Date();
-
+        const snapshot = await getDocs(collection(db, "mockTests"));
+        const now = new Date();
         const upcoming = [];
 
-        snapshot.forEach(
-          (mockDoc) => {
+        snapshot.forEach((mockDoc) => {
+          const data = mockDoc.data();
+          const start = data.startTime?.toDate();
 
-            const data =
-              mockDoc.data();
-
-            const start =
-              data.startTime?.toDate();
-
-            if (
-              start &&
-              now < start
-            ) {
-
-              upcoming.push({
-
-                id:
-                  mockDoc.id,
-
-                ...data
-
-              });
-
-            }
-
+          if (start && now < start) {
+            upcoming.push({
+              id: mockDoc.id,
+              ...data,
+            });
           }
-        );
+        });
 
         upcoming.sort(
-          (a, b) =>
-            a.startTime.seconds -
-            b.startTime.seconds
+          (a, b) => a.startTime.seconds - b.startTime.seconds
         );
 
         setMocks(upcoming);
-
-      }
-      catch (error) {
-
+      } catch (error) {
         console.error(error);
-
       }
-
       setLoading(false);
-
     };
 
-  const deleteMock =
-    async (id) => {
+    loadMocks();
+  }, []);
 
-      const confirmDelete =
-        window.confirm(
-          "Delete this mock?"
-        );
-
-      if (
-        !confirmDelete
-      )
-        return;
-
-      try {
-
-        await deleteDoc(
-          doc(
-            db,
-            "mockTests",
-            id
-          )
-        );
-
-        loadMocks();
-
-      }
-      catch (error) {
-
-        console.error(error);
-
-      }
-
-    };
-
-  if (loading) {
-
-    return (
-      <h2>
-        Loading...
-      </h2>
+  const deleteMock = async (id, title) => {
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete mock test "${title || id}"?`
     );
 
+    if (!confirmDelete) return;
+
+    try {
+      await deleteDoc(doc(db, "mockTests", id));
+      setMocks((prev) => prev.filter((m) => m.id !== id));
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete mock test.");
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="admin-page">
+        <div className="loading-state">
+          <div className="spinner" />
+          <span>Loading scheduled mocks…</span>
+        </div>
+      </div>
+    );
   }
 
   return (
+    <div className="admin-page">
+      {/* Header */}
+      <div className="admin-hero">
+        <div className="admin-hero-icon">
+          <CalendarIcon size={26} color="var(--color-white)" />
+        </div>
+        <div>
+          <h1>Upcoming Scheduled Mocks</h1>
+          <p>Review test parameters, countdowns, and manage scheduled assessments.</p>
+        </div>
+        <span className="admin-badge">{mocks.length} Scheduled</span>
+      </div>
 
-    <div
-      style={{
-        padding: "20px"
-      }}
-    >
+      {mocks.length === 0 ? (
+        <div className="empty-state">
+          <div className="empty-state-icon">
+            <CalendarIcon size={32} color="var(--color-grey-muted)" />
+          </div>
+          <p>No upcoming mocks scheduled. Use "Create Mock Test" to publish a new one.</p>
+        </div>
+      ) : (
+        mocks.map((mock) => (
+          <div key={mock.id} className="mock-card">
+            <div className="mock-card-info">
+              <div className="mock-card-title">{mock.title}</div>
+              <div className="mock-card-meta">
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>
+                  <ListOrderedIcon size={14} color="var(--color-grey-muted)" />
+                  {mock.questionCount} Questions
+                </span>
+                {mock.duration && (
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>
+                    <ClockIcon size={14} color="var(--color-grey-muted)" />
+                    {mock.duration} min
+                  </span>
+                )}
+                <span>
+                  Starts: {mock.startTime?.toDate().toLocaleString([], { dateStyle: "medium", timeStyle: "short" })}
+                </span>
+                <span>
+                  Ends: {mock.endTime?.toDate().toLocaleString([], { dateStyle: "medium", timeStyle: "short" })}
+                </span>
+              </div>
+            </div>
 
-      <h1>
-        Upcoming Mocks
-      </h1>
-
-      {
-        mocks.length === 0 &&
-        (
-          <p>
-            No upcoming mocks.
-          </p>
-        )
-      }
-
-      {
-        mocks.map(
-          (mock) => (
-
-            <div
-              key={mock.id}
-              style={{
-                background:
-                  "#fff",
-
-                padding:
-                  "20px",
-
-                marginBottom:
-                  "20px",
-
-                borderRadius:
-                  "12px",
-
-                boxShadow:
-                  "0 2px 8px rgba(0,0,0,.08)"
-              }}
-            >
-
-              <h3>
-                {mock.title}
-              </h3>
-
-              <p>
-                Questions:
-                {" "}
-                {
-                  mock.questionCount
-                }
-              </p>
-
-              <p>
-                Starts:
-                {" "}
-                {
-                  mock.startTime
-                    ?.toDate()
-                    .toLocaleString()
-                }
-              </p>
-
-              <p>
-                Ends:
-                {" "}
-                {
-                  mock.endTime
-                    ?.toDate()
-                    .toLocaleString()
-                }
-              </p>
-
+            <div className="mock-card-actions">
+              <span className="badge badge-info">Scheduled</span>
               <button
-                onClick={() =>
-                  deleteMock(
-                    mock.id
-                  )
-                }
-                style={{
-                  background:
-                    "#d32f2f",
-
-                  color:
-                    "white",
-
-                  border:
-                    "none",
-
-                  padding:
-                    "10px 15px",
-
-                  borderRadius:
-                    "6px",
-
-                  cursor:
-                    "pointer"
-                }}
+                className="btn btn-danger"
+                onClick={() => deleteMock(mock.id, mock.title)}
+                style={{ fontSize: "13px", padding: "8px 14px" }}
               >
                 Delete Mock
               </button>
-
             </div>
-
-          )
-        )
-      }
-
+          </div>
+        ))
+      )}
     </div>
-
   );
-
 }

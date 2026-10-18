@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 import { db, auth } from "@/firebase/firebase";
+import { SunIcon, MoonIcon, CheckCircleIcon, XCircleIcon } from "@/components/Icons";
 
 function CodingIDEPage() {
   const { id } = useParams();
@@ -244,7 +245,15 @@ function CodingIDEPage() {
             cursor: "pointer",
           }}
         >
-          {darkMode ? "☀ Light" : "🌙 Dark"}
+          {darkMode ? (
+            <span style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+              <SunIcon size={14} /> Light
+            </span>
+          ) : (
+            <span style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+              <MoonIcon size={14} /> Dark
+            </span>
+          )}
         </button>
       </div>
 
@@ -386,13 +395,13 @@ function CodingIDEPage() {
                 padding: "9px 18px",
                 borderRadius: "7px",
                 border: "none",
-                background: "#0f766e",
+                background: "var(--color-blue, #0a6b99)",
                 color: "white",
                 cursor: submitting ? "not-allowed" : "pointer",
                 fontWeight: "600",
               }}
             >
-              {submitting ? "Submitting..." : "Submit"}
+              {submitting ? "Submitting..." : "Submit Code"}
             </button>
           </div>
 
@@ -438,7 +447,10 @@ function CodingIDEPage() {
             >
               {result.status === "accepted" ? (
                 <>
-                  <strong>✓ Accepted</strong>
+                  <strong style={{ display: "inline-flex", alignItems: "center", gap: "6px", color: "#10b981" }}>
+                    <CheckCircleIcon size={16} color="#10b981" />
+                    Accepted
+                  </strong>
 
                   <div
                     style={{
@@ -451,7 +463,10 @@ function CodingIDEPage() {
                 </>
               ) : (
                 <>
-                  <strong>✗ {result.message || "Submission failed"}</strong>
+                  <strong style={{ display: "inline-flex", alignItems: "center", gap: "6px", color: "#ef4444" }}>
+                    <XCircleIcon size={16} color="#ef4444" />
+                    {result.message || "Submission failed"}
+                  </strong>
 
                   {result.failed_test && (
                     <div
