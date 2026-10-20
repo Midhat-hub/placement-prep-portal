@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { GoogleGenAI, Modality } from "@google/genai";
 import { Bot, Mic2, Square } from "lucide-react";
 import { apiError } from "../../services/api/client";
-import { endInterview, getGeminiToken, recordInterviewAnswer, recordInterviewQuestion } from "../../services/api/interviewApi";
+import { endInterview, getGeminiToken, getInterview, recordInterviewAnswer, recordInterviewQuestion } from "../../services/api/interviewApi";
 import InterviewFeedback, { InterviewFeedbackData } from "./InterviewFeedback";
 
 type RoomStatus = "idle" | "connecting" | "live" | "complete" | "error";
@@ -46,6 +46,7 @@ export default function InterviewRoom({ interviewId, onReset }: { interviewId: s
   const questionRecordedRef = useRef(false);
   const questionSavingRef = useRef(false);
   const answerSavingRef = useRef(false);
+  const finishingRef = useRef(false);
   const playbackTimeRef = useRef(0);
 
   function cleanup() {
@@ -79,7 +80,7 @@ export default function InterviewRoom({ interviewId, onReset }: { interviewId: s
       setTranscript("");
       questionRecordedRef.current = false;
       answerStartedRef.current = null;
-      if (result.questionCountReached) await finish();
+      if (result.questionCountReached) await finish(true);
     } catch (requestError) {
       fail(apiError(requestError, "Unable to save your answer."));
     } finally {
@@ -157,7 +158,11 @@ export default function InterviewRoom({ interviewId, onReset }: { interviewId: s
         callbacks: {
           onmessage: (event) => { void handleMessage(event as { serverContent?: Record<string, unknown> }); },
           onerror: (event) => fail(event.message || "The live interview connection failed."),
-          onclose: () => { if (geminiRef.current === live) fail("The live interview disconnected. Please restart the interview."); },
+          onclose: () => {
+            if (geminiRef.current === live && !finishingRef.current) {
+              fail("The live interview disconnected. Please restart the interview.");
+            }
+          },
         },
       });
       geminiRef.current = live;
@@ -181,15 +186,23 @@ export default function InterviewRoom({ interviewId, onReset }: { interviewId: s
     }
   }
 
-  async function finish() {
+  async function finish(answerAlreadySaved = false) {
+    if (finishingRef.current) return;
+    finishingRef.current = true;
+    setStatus("complete");
+    setError("");
     try {
-      await saveQuestion();
-      await saveAnswer();
+      if (!answerAlreadySaved) {
+        await saveQuestion();
+        await saveAnswer();
+      }
       const result = await endInterview(interviewId);
       cleanup();
-      setFeedback(result.interview);
-      setStatus("complete");
+      const completedInterview = result.interview || (await getInterview(interviewId)).interview;
+      if (!completedInterview) throw new Error("The completed interview feedback was not returned.");
+      setFeedback(completedInterview);
     } catch (requestError) {
+      finishingRef.current = false;
       fail(apiError(requestError, "Unable to complete the interview."));
     }
   }
@@ -200,5 +213,5 @@ export default function InterviewRoom({ interviewId, onReset }: { interviewId: s
     return <InterviewFeedback interview={feedback as unknown as InterviewFeedbackData} onReset={onReset} />;
   }
 
-  return <section className="panel interview-room"><div className="interview-room-heading"><div><p className="eyebrow">LIVE SESSION</p><h2>{status === "live" ? "Interview in progress" : "Ready to begin"}</h2></div><span className={`chip ${status === "live" ? "green" : "blue"}`}>{status}</span></div><p className="muted">Allow microphone access, then answer naturally. The interviewer will speak first.</p><div className="interviewer-card"><div className="feature-icon violet"><Bot size={22} /></div><div><strong>Interviewer</strong><p>{question || "Your first question will appear after the session connects."}</p></div></div>{transcript && <div className="interview-transcript"><span>Live transcript</span><p>{transcript}</p></div>}{error && <div className="alert error">{error}</div>}<div className="interview-room-actions">{status !== "live" && <button className="button primary" onClick={() => void start()} disabled={status === "connecting"}><Mic2 size={16} />{status === "connecting" ? "Connecting…" : "Begin interview"}</button>}{status === "live" && <button className="button danger" onClick={() => void finish()}><Square size={15} /> End interview</button>}</div></section>;
+  return <section className="panel interview-room"><div className="interview-room-heading"><div><p className="eyebrow">LIVE SESSION</p><h2>{status === "live" ? "Interview in progress" : status === "complete" ? "Preparing your feedback" : "Ready to begin"}</h2></div><span className={`chip ${status === "live" ? "green" : "blue"}`}>{status === "complete" ? "finalizing" : status}</span></div><p className="muted">{status === "complete" ? "Your final answer was saved. We are generating your question-wise feedback…" : "Allow microphone access, then answer naturally. The interviewer will speak first."}</p><div className="interviewer-card"><div className="feature-icon violet"><Bot size={22} /></div><div><strong>Interviewer</strong><p>{question || "Your first question will appear after the session connects."}</p></div></div>{transcript && <div className="interview-transcript"><span>Live transcript</span><p>{transcript}</p></div>}{error && <div className="alert error">{error}</div>}<div className="interview-room-actions">{status === "idle" && <button className="button primary" onClick={() => void start()}><Mic2 size={16} /> Begin interview</button>}{status === "connecting" && <button className="button primary" disabled><Mic2 size={16} /> Connecting…</button>}{status === "live" && <button className="button danger" onClick={() => void finish()}><Square size={15} /> End interview</button>}{status === "complete" && <p className="muted">Please wait…</p>}{status === "error" && <button className="button primary" onClick={() => void start()}><Mic2 size={16} /> Retry interview</button>}</div></section>;
 }

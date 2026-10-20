@@ -31,7 +31,7 @@ import MockReviewPage from "./features/mocktests/MockReviewPage";
 import PracticeMockConfigurePage from "./features/mocktests/PracticeMockConfigurePage";
 import PracticeMockPage from "./features/mocktests/PracticeMockPage";
 import ProfilePage from "./features/profile/ProfilePage";
-import { auth, db } from "./services/firebase/client";
+import { auth, authPersistenceReady, db } from "./services/firebase/client";
 import { api, apiError } from "./services/api/client";
 import { analyzeResume } from "./services/api/resumeApi";
 import { sendChatMessage } from "./services/api/chatbotApi";
@@ -62,7 +62,13 @@ function ClipboardIcon(props: React.ComponentProps<Icon>) { return <FileText {..
 
 function App() {
   const [user, setUser] = useState<User | null | undefined>(undefined);
-  useEffect(() => onAuthStateChanged(auth, setUser), []);
+  useEffect(() => {
+    let unsubscribe = () => {};
+    void authPersistenceReady.then(() => {
+      unsubscribe = onAuthStateChanged(auth, setUser);
+    }).catch(() => setUser(null));
+    return () => unsubscribe();
+  }, []);
   return <Routes>
     <Route path="/" element={<AuthPage mode="login" />} />
     <Route path="/signup" element={<AuthPage mode="signup" />} />
@@ -161,7 +167,7 @@ function AppShell({ user }: { user: User }) {
 function AuthPage({ mode }: { mode: "login" | "signup" | "admin" }) {
   const navigate = useNavigate(); const [email, setEmail] = useState(""); const [password, setPassword] = useState(""); const [loading, setLoading] = useState(false); const [error, setError] = useState("");
   const isAdmin = mode === "admin";
-  async function submit(e: FormEvent) { e.preventDefault(); setError(""); setLoading(true); try { if (mode === "signup") await createUserWithEmailAndPassword(auth, email, password); else { const credential = await signInWithEmailAndPassword(auth, email, password); if (isAdmin && credential.user.email !== "admin@placementportal.com") { await signOut(auth); throw new Error("Access denied. This account does not have administrator privileges."); } } navigate(isAdmin ? "/admin/dashboard" : "/dashboard"); } catch (err) { setError(err instanceof Error ? err.message : "Unable to sign in. Please try again."); } finally { setLoading(false); } }
+  async function submit(e: FormEvent) { e.preventDefault(); setError(""); setLoading(true); try { await authPersistenceReady; if (mode === "signup") await createUserWithEmailAndPassword(auth, email, password); else { const credential = await signInWithEmailAndPassword(auth, email, password); if (isAdmin && credential.user.email !== "admin@placementportal.com") { await signOut(auth); throw new Error("Access denied. This account does not have administrator privileges."); } } navigate(isAdmin ? "/admin/dashboard" : "/dashboard"); } catch (err) { setError(err instanceof Error ? err.message : "Unable to sign in. Please try again."); } finally { setLoading(false); } }
   return <div className="auth-page"><div className="auth-visual"><div className="auth-visual-content"><div className="brand-mark large">P</div><p className="eyebrow">THE PLACEMENT OS</p><h1>Build the career<br /><em>you’re ready for.</em></h1><p className="auth-intro">A focused workspace to practice deliberately, sharpen your story, and walk into every interview with confidence.</p><div className="auth-quote"><span>“</span><p>Preparation is not about doing more. It’s about knowing what to do next.</p></div><div className="auth-visual-footer"><span><ShieldCheck size={15} /> Secure Firebase authentication</span><span>© 2025 PrepPortal</span></div></div></div><div className="auth-form-panel"><div className="auth-form-wrap"><div className="auth-mobile-brand"><div className="brand-mark">P</div><strong>PrepPortal</strong></div><p className="eyebrow">{isAdmin ? "ADMIN PORTAL" : "WELCOME BACK"}</p><h2>{mode === "signup" ? "Create your workspace" : isAdmin ? "Sign in as an admin" : "Let’s get you ready."}</h2><p className="muted">{mode === "signup" ? "Start building your placement edge today." : "Enter your details to continue to PrepPortal."}</p>{error && <div className="alert error"><CircleHelp size={16} />{error}</div>}<form onSubmit={submit} className="auth-form"><label>Email address<input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" required autoComplete="email" /></label><label>Password<input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter your password" required minLength={6} autoComplete="current-password" /></label><button className="button primary full" disabled={loading}>{loading ? "Authenticating…" : isAdmin ? "Access admin portal" : mode === "signup" ? "Create account" : "Continue to dashboard"}<ArrowRight size={17} /></button></form><p className="auth-switch">{mode === "signup" ? "Already have an account?" : "New to PrepPortal?"} <button onClick={() => navigate(mode === "signup" ? "/" : "/signup")}>{mode === "signup" ? "Sign in" : "Create account"}</button></p>{!isAdmin && <button className="admin-link" onClick={() => navigate("/admin-login")}><ShieldCheck size={14} /> Placement team? Enter admin portal</button>}</div></div></div>;
 }
 
