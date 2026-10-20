@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
-  Activity, ArrowRight, BarChart3, BookOpen, Bot, BriefcaseBusiness, Check,
+  Activity, ArrowRight, BarChart3, BookOpen, Bot, BriefcaseBusiness, CalendarClock, Check,
   ChevronRight, CircleHelp, Clock3, Code2, FileText, Flame, GraduationCap,
   LayoutDashboard, LogOut, Menu, Mic2, Moon, MoreHorizontal, Play, Plus,
   Search, Send, Settings, ShieldCheck, Sparkles, Target, TrendingUp, Trophy,
@@ -46,6 +46,13 @@ const nav = [
   { label: "AI Buddy", icon: Bot, path: "/chatbot" },
   { label: "Voice interview", icon: Mic2, path: "/voice-interview" },
 ];
+const adminNav = [
+  { label: "Admin overview", icon: ShieldCheck, path: "/admin/dashboard" },
+  { label: "Question bank", icon: BookOpen, path: "/question-bank" },
+  { label: "Create mock", icon: Plus, path: "/create-mock" },
+  { label: "Upcoming mocks", icon: CalendarClock, path: "/admin/upcoming-mocks" },
+  { label: "Previous mocks", icon: Trophy, path: "/admin/previous-mocks" },
+];
 const practiceItems = [
   { title: "DSA & coding", detail: "Data structures, algorithms and timed challenges", icon: Code2, path: "/practice/dsa-coding", color: "blue" },
   { title: "Company prep", detail: "Targeted practice for your next shortlist", icon: BriefcaseBusiness, path: "/practice/company", color: "violet" },
@@ -62,8 +69,8 @@ function App() {
     <Route path="/admin-login" element={<AuthPage mode="admin" />} />
     <Route element={<Protected user={user} />}>
       <Route element={<AppShell user={user!} />}>
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/dashboard" element={user?.email === "admin@placementportal.com" ? <Navigate to="/admin/dashboard" replace /> : <DashboardPage />} />
+        <Route path="/profile" element={user?.email === "admin@placementportal.com" ? <Navigate to="/admin/dashboard" replace /> : <ProfilePage />} />
         <Route path="/practice" element={<PracticeHubPage />} />
         <Route path="/practice/dsa-coding" element={<DsaCodingPage />} />
         <Route path="/practice/dsa-coding/:id" element={<CodingIdePage />} />
@@ -80,10 +87,10 @@ function App() {
         <Route path="/practice-test" element={<PracticeMockConfigurePage />} />
         <Route path="/practice-test-page" element={<PracticeMockPage />} />
         <Route path="/test/:mockId" element={<MockTestPage />} />
-        <Route path="/question-bank" element={<QuestionBankPage />} />
+        <Route path="/question-bank" element={<AdminOnly user={user!}><QuestionBankPage /></AdminOnly>} />
         <Route path="/admin/dashboard" element={<AdminOnly user={user!}><AdminDashboardPage /></AdminOnly>} />
-        <Route path="/admin/upcoming-mocks" element={<AdminOnly user={user!}><MockListPage kind="upcoming" /></AdminOnly>} />
-        <Route path="/admin/previous-mocks" element={<AdminOnly user={user!}><MockListPage kind="previous" /></AdminOnly>} />
+        <Route path="/admin/upcoming-mocks" element={<AdminOnly user={user!}><MockListPage kind="upcoming" admin /></AdminOnly>} />
+        <Route path="/admin/previous-mocks" element={<AdminOnly user={user!}><MockListPage kind="previous" admin /></AdminOnly>} />
         <Route path="/create-mock" element={<AdminOnly user={user!}><CreateMockPage /></AdminOnly>} />
         <Route path="/practice/*" element={<Practice />} />
         <Route path="/resume" element={<ResumeAnalyzer />} />
@@ -108,8 +115,9 @@ function AdminOnly({ user, children }: { user: User; children: React.ReactNode }
 }
 
 function AppShell({ user }: { user: User }) {
+  const isAdmin = user.email === "admin@placementportal.com";
   const [open, setOpen] = useState(false);
-  const [profileName, setProfileName] = useState(user.displayName || "Student");
+  const [profileName, setProfileName] = useState(user.displayName || (isAdmin ? "Administrator" : "Student"));
   const [darkMode, setDarkMode] = useState(() => {
     const saved = window.localStorage.getItem("prepportal-theme");
     return saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -117,6 +125,7 @@ function AppShell({ user }: { user: User }) {
   const location = useLocation();
   const active = nav.find((item) => location.pathname === item.path || (item.path !== "/dashboard" && location.pathname.startsWith(item.path)));
   useEffect(() => {
+    if (isAdmin) return;
     let cancelled = false;
     async function loadProfileName() {
       try {
@@ -124,12 +133,12 @@ function AppShell({ user }: { user: User }) {
         const savedName = snapshot.data()?.name;
         if (!cancelled && typeof savedName === "string" && savedName.trim()) setProfileName(savedName.trim());
       } catch {
-        if (!cancelled) setProfileName(user.displayName || "Student");
+        if (!cancelled) setProfileName(user.displayName || (isAdmin ? "Administrator" : "Student"));
       }
     }
     void loadProfileName();
     return () => { cancelled = true; };
-  }, [location.pathname, user.displayName, user.uid]);
+  }, [isAdmin, location.pathname, user.displayName, user.uid]);
   useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? "dark" : "light";
     window.localStorage.setItem("prepportal-theme", darkMode ? "dark" : "light");
@@ -137,13 +146,13 @@ function AppShell({ user }: { user: User }) {
   return <div className="app-frame">
     <aside className={`sidebar ${open ? "sidebar-open" : ""}`}>
       <div className="sidebar-brand"><div className="brand-mark">P</div><div><strong>PrepPortal</strong><small>Placement OS</small></div><button className="icon-button mobile-only" onClick={() => setOpen(false)} aria-label="Close navigation"><X size={19} /></button></div>
-      <div className="workspace-label">WORKSPACE</div>
-      <nav>{nav.map((item) => <Link key={item.path} to={item.path} onClick={() => setOpen(false)} className={active?.path === item.path ? "nav-item active" : "nav-item"}><item.icon size={18} /><span>{item.label}</span>{active?.path === item.path && <span className="active-dot" />}</Link>)}</nav>
-      <div className="sidebar-bottom"><div className="upgrade-card"><Sparkles size={17} /><strong>Reach your next level</strong><p>Track your readiness and stay interview-ready.</p><Link to="/resume">View progress <ArrowRight size={13} /></Link></div><button className="profile-row" onClick={() => signOut(auth)}><span className="avatar">{(profileName || user.email || "S")[0].toUpperCase()}</span><span className="profile-copy"><strong>{profileName}</strong><small>{user.email}</small></span><LogOut size={16} /></button></div>
+      <div className="workspace-label">{isAdmin ? "ADMINISTRATION" : "WORKSPACE"}</div>
+      <nav>{(isAdmin ? adminNav : nav).map((item) => <Link key={item.path} to={item.path} onClick={() => setOpen(false)} className={active?.path === item.path ? "nav-item active" : "nav-item"}><item.icon size={18} /><span>{item.label}</span>{active?.path === item.path && <span className="active-dot" />}</Link>)}</nav>
+      <div className="sidebar-bottom">{!isAdmin && <div className="upgrade-card"><Sparkles size={17} /><strong>Reach your next level</strong><p>Track your readiness and stay interview-ready.</p><Link to="/resume">View progress <ArrowRight size={13} /></Link></div>}<button className="profile-row" onClick={() => signOut(auth)}><span className="avatar">{(profileName || user.email || "S")[0].toUpperCase()}</span><span className="profile-copy"><strong>{profileName}</strong><small>{user.email}</small></span><LogOut size={16} /></button></div>
     </aside>
     {open && <button className="drawer-backdrop mobile-only" onClick={() => setOpen(false)} aria-label="Close navigation" />}
     <main className="main-shell">
-      <header className="topbar"><button className="icon-button mobile-only" onClick={() => setOpen(true)} aria-label="Open navigation"><Menu size={21} /></button><div className="breadcrumbs"><span>Workspace</span><ChevronRight size={14} /><strong>{active?.label || "Overview"}</strong></div><div className="topbar-actions"><button className="icon-button" onClick={() => setDarkMode((value) => !value)} aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"} title={darkMode ? "Switch to light mode" : "Switch to dark mode"}>{darkMode ? <Sun size={18} /> : <Moon size={18} />}</button><Link className="topbar-user" to="/profile"><span className="avatar small">{(profileName || user.email || "S")[0].toUpperCase()}</span><span>{profileName}</span></Link></div></header>
+      <header className="topbar"><button className="icon-button mobile-only" onClick={() => setOpen(true)} aria-label="Open navigation"><Menu size={21} /></button><div className="breadcrumbs"><span>{isAdmin ? "Administration" : "Workspace"}</span><ChevronRight size={14} /><strong>{active?.label || (isAdmin ? "Admin overview" : "Overview")}</strong></div><div className="topbar-actions"><button className="icon-button" onClick={() => setDarkMode((value) => !value)} aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"} title={darkMode ? "Switch to light mode" : "Switch to dark mode"}>{darkMode ? <Sun size={18} /> : <Moon size={18} />}</button>{isAdmin ? <span className="topbar-user"><span className="avatar small">{(profileName || "A")[0].toUpperCase()}</span><span>{profileName}</span></span> : <Link className="topbar-user" to="/profile"><span className="avatar small">{(profileName || user.email || "S")[0].toUpperCase()}</span><span>{profileName}</span></Link>}</div></header>
       <div className="page-content"><Outlet /></div>
     </main>
   </div>;
