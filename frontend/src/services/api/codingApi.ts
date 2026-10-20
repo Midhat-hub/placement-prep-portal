@@ -7,6 +7,8 @@ export type CodingSubmission = {
 };
 
 export async function submitCode(payload: CodingSubmission) {
-  const response = await api.post("/api/coding/submit", payload);
+  const response = await api.post("/api/coding/submit", payload, {
+    timeout: 120000,
+  });
   return response.data;
 }

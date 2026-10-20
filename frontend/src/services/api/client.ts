@@ -19,6 +19,9 @@ api.interceptors.request.use(async (config) => {
 export function apiError(error: unknown, fallback: string): string {
   if (axios.isAxiosError(error)) {
     if (!error.response) {
+      if (error.code === "ECONNABORTED" || error.code === "ETIMEDOUT") {
+        return "The backend took too long to complete this request. Coding submissions can take up to two minutes; please try again if no result appears.";
+      }
       return `Cannot connect to the backend at ${API_BASE_URL}. Start the Flask server and try again.`;
     }
     return error.response?.data?.error || error.message || fallback;
