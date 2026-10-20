@@ -173,7 +173,7 @@ class ResumeAnalyzer:
             'projects': r'^\s*(projects|portfolio|notable projects|key projects|side projects)\s*$',
             'certifications': r'^\s*(certifications|certificates)\s*$',
             'achievements': r'^\s*(achievements|awards|honors)\s*$',
-            'leadership': r'^\s*(leadership|positions of responsibility)\s*$',
+            'leadership': r'^\s*(Leadership|Positions of responsibility|Leadership / Extra Curricular)\s*$',
         }
 
         lines = resume_text.splitlines()

@@ -134,6 +134,9 @@ ANSWER STYLE:
 - Use bullet points when appropriate.
 - For technical concepts, explain both the
   concept and its placement relevance when useful.
+- Always finish the response with a complete
+  sentence. Do not stop mid-sentence or leave
+  an unfinished list item.
 
 You are a placement preparation assistant,
 not a general-purpose search engine.
@@ -226,7 +229,7 @@ not contain enough information, say so clearly.
 
         temperature=0.3,
 
-        max_tokens=700
+        max_tokens=1200
     )
 
     # -----------------------------------------------------

@@ -34,7 +34,16 @@ class Config:
     GEMINI_LIVE_MODEL = os.getenv('GEMINI_LIVE_MODEL', 'gemini-3.8-live')
     
     # CORS settings
-    CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:3000,http://localhost:5173,http://127.0.0.1:5173').split(',')
+    CORS_ORIGINS = list(dict.fromkeys(
+        [origin.strip() for origin in os.getenv('CORS_ORIGINS', '').split(',') if origin.strip()]
+        + [
+            'http://localhost:3000',
+            'http://localhost:5173',
+            'http://localhost:5174',
+            'http://127.0.0.1:5173',
+            'http://127.0.0.1:5174',
+        ]
+    ))
     
     @staticmethod
     def init_app(app):

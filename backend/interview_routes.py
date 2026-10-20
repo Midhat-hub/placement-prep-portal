@@ -103,6 +103,31 @@ def _default_evaluation_result(summary='Interview evaluation completed.'):
     }
 
 
+def _normalise_question_feedback(conversation, raw_feedback):
+    feedback_by_number = {}
+    if isinstance(raw_feedback, list):
+        for item in raw_feedback:
+            if not isinstance(item, dict):
+                continue
+            try:
+                question_number = int(item.get('questionNumber'))
+            except (TypeError, ValueError):
+                continue
+            feedback_by_number[question_number] = item
+
+    normalised = []
+    for index, question in enumerate(conversation, start=1):
+        question_number = question.get('questionNumber') or index
+        item = feedback_by_number.get(question_number, {})
+        normalised.append({
+            'questionNumber': question_number,
+            'assessment': item.get('assessment') or 'This response was recorded but did not receive a separate evaluator assessment.',
+            'whatWasGood': item.get('whatWasGood') or 'Your response was captured for review.',
+            'whatCouldImprove': item.get('whatCouldImprove') or 'Review the recorded answer and add more specific detail, structure, or examples where appropriate.',
+        })
+    return normalised
+
+
 def _evaluate_interview(interview):
     conversation = interview.get('questions', [])
     answered_count = sum(1 for item in conversation if str(item.get('answer', '')).strip())
@@ -163,12 +188,14 @@ Evaluation payload:
             'completeness': result.get('completeness') or {'assessment': 'No completeness assessment returned.', 'missingPoints': []},
             'reasoning': result.get('reasoning') or {'assessment': 'No reasoning assessment returned.', 'strengths': [], 'areasToImprove': []},
             'communication': result.get('communication') or {'assessment': 'No communication assessment returned.', 'strengths': [], 'areasToImprove': []},
-            'questionFeedback': result.get('questionFeedback') or [],
+            'questionFeedback': _normalise_question_feedback(conversation, result.get('questionFeedback')),
             'recommendations': result.get('recommendations') or [],
         }
     except Exception:
         current_app.logger.exception('Interview evaluation generation failed; using fallback result')
-        return _default_evaluation_result('Interview evaluation is temporarily unavailable, but the interview was recorded successfully.')
+        fallback = _default_evaluation_result('Interview evaluation is temporarily unavailable, but the interview was recorded successfully.')
+        fallback['questionFeedback'] = _normalise_question_feedback(conversation, [])
+        return fallback
 
 
 def _extract_uploaded_resume():

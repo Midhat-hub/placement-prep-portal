@@ -44,3 +44,8 @@ export async function endInterview(interviewId: string) {
   const response = await api.post(`/api/interview/${interviewId}/end`);
   return response.data;
 }
+
+export async function getInterview(interviewId: string) {
+  const response = await api.get(`/api/interview/${interviewId}`);
+  return response.data;
+}

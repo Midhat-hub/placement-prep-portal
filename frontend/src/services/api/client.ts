@@ -18,6 +18,9 @@ api.interceptors.request.use(async (config) => {
 
 export function apiError(error: unknown, fallback: string): string {
   if (axios.isAxiosError(error)) {
+    if (!error.response) {
+      return `Cannot connect to the backend at ${API_BASE_URL}. Start the Flask server and try again.`;
+    }
     return error.response?.data?.error || error.message || fallback;
   }
   return error instanceof Error ? error.message : fallback;
